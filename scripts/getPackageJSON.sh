@@ -1,5 +1,4 @@
-rm -rf out
-mkdir out
+rm -rf out/*.json
 cd libs/express
 
 FMT="git show %H:package.json > ../../out/package.%cd.json"
