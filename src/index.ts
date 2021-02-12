@@ -20,20 +20,18 @@ async function diff(
     dir,
     trees: [git.TREE({ ref: hash1 }), git.TREE({ ref: hash2 })],
     map: async (filename, entries): Promise<DiffResult | undefined> => {
-      if (entries == null) {
+      if (filename == "." || entries == null) {
         return undefined;
       }
       const [A, B] = entries;
       // 型定義が誤っており、A,Bはnullになることがある
-      const Aoid = A && (await A.oid());
-      const Boid = B && (await B.oid());
       const type =
-        Aoid !== Boid
-          ? "modify"
-          : Aoid === undefined
+        A === null
           ? "add"
-          : Boid === undefined
+          : B === null
           ? "remove"
+          : (await A.oid()) !== (await B.oid())
+          ? "modify"
           : "equal";
       if (type == "equal") {
         return undefined;
