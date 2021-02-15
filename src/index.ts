@@ -1,57 +1,39 @@
 import fs from "fs";
 import path from "path";
+import childProcess from "child_process";
 
 import git from "isomorphic-git";
 import http from "isomorphic-git/http/node";
 
-type DiffResult = {
+type GitDiffResult = {
+  change: string;
   filename: string;
-  type: "modify" | "add" | "remove";
 };
 
-//https://isomorphic-git.org/docs/en/snippets#git-diff-name-status-commithash1-commithash2
-async function diff(
+function diff(
   dir: string,
   hash1: string,
   hash2: string
-): Promise<DiffResult[]> {
-  return await git.walk({
-    fs,
-    dir,
-    trees: [git.TREE({ ref: hash1 }), git.TREE({ ref: hash2 })],
-    map: async (filename, entries): Promise<DiffResult | undefined> => {
-      if (filename == "." || entries == null) {
-        return undefined;
-      }
-      const [A, B] = entries;
-      // 型定義が誤っており、A,Bはnullになることがある
-      const type =
-        A === null
-          ? "add"
-          : B === null
-          ? "remove"
-          : (await A.oid()) !== (await B.oid())
-          ? "modify"
-          : "equal";
-      if (type == "equal") {
-        return undefined;
-      }
-      return { filename, type };
-    },
+): Promise<GitDiffResult[]> {
+  return new Promise<GitDiffResult[]>((resolve) => {
+    const command = `cd ${dir} && git diff --raw ${hash1} ${hash2}`;
+    const diffBuffer = childProcess.execSync(command);
+    const diffs = diffBuffer.toString("utf-8").split("\n");
+    const result = diffs.map((diff) => {
+      const [change, filename] = diff.split(/\s/).slice(-2);
+      return { change, filename };
+    });
+    resolve(result);
   });
 }
 
 type Data = {
   url: string;
   containsTest: boolean;
-  diff: DiffResult[];
+  diff: GitDiffResult[];
 };
 
-async function getData(
-  dir: string,
-  url: string,
-  tags: string[]
-): Promise<Data[]> {
+function getData(dir: string, url: string, tags: string[]): Promise<Data[]> {
   const promises = [...new Array(tags.length - 1)].map(async (_, i) => {
     const diffs = await diff(dir, tags[i], tags[i + 1]);
     return {
@@ -61,7 +43,7 @@ async function getData(
         diffs.find((diff) => /test/.test(diff.filename)) !== undefined,
     };
   });
-  return await Promise.all(promises);
+  return Promise.all(promises);
 }
 
 const main = async () => {
