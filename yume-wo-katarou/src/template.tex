@@ -1,0 +1,69 @@
+\documentclass[twocolumn, a4paper, 9pt]{jarticle}
+
+\makeatletter
+\def\section{\@startsection{section}{1}{\z@}{2ex plus .2ex minus .2ex}%
+  {.5ex plus .2ex minus .2ex}{\large\bfseries}}
+\def\thesection{\arabic{section}.}
+\def\subsection{\@startsection{subsection}{1}{\z@}{.7ex plus .2ex minus .2ex}%
+  {.5ex plus .2ex minus .2ex}{\normalsize\bfseries}}
+\def\thesubsection{\arabic{section}.\arabic{subsection}}
+\def\thefootnote{\fnsymbol{footnote}}
+\makeatother
+
+% ipsj-kansai
+\setlength{\topmargin}{-10mm} % 15mm - 1in
+\setlength{\headheight}{5mm}
+\setlength{\headsep}{5mm}
+\setlength{\oddsidemargin}{-7mm} % 18mm - 1in
+\setlength{\evensidemargin}{-7mm} % 18mm - 1in
+\setlength{\textheight}{247mm} % 297 - 25(top) - 25(bottom)
+\setlength{\textwidth}{174mm} % 210 - 18*2
+\setlength{\columnsep}{7mm}
+
+\usepackage{fancyhdr}
+\pagestyle{empty}
+\thispagestyle{fancy}
+\rhead[]{\fontsize{9pt}{9pt} 研究の夢を語る会@SocSEL}
+\cfoot[]{}
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+\twocolumn[
+  \begin{center}
+    {
+      {\bf \Large タイトル \\} % 14.4pt
+      \vspace{0.5ex}
+    }
+    \vspace{1.5ex}
+    {
+      \fontsize{10.5pt}{10pt}
+      \begin{tabular}{c}
+        著者$^\dag$ \\
+        Taro Joho
+      \end{tabular}
+    }
+    \vspace{1.5ex}
+  \end{center}
+]
+
+
+%%%%%%%%%%%%%%%%%%%%
+\section{はじめに}
+%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%
+\section{手法}
+%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%
+\section{結果（期待する結果）}
+%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%
+\section{今後の課題}
+%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{ipsjunsrt}
+\bibliography{bibfile}
+
+\end{document}

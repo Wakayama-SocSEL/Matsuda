@@ -1,0 +1,22 @@
+{
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "ptex2pdf",
+      "tools": [
+        "ptex2pdf"
+      ]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "ptex2pdf",
+      "command": "docker-compose",
+      "args": [
+        "run",
+        "--rm",
+        "tex"
+      ]
+    }
+  ],
+  "latex-workshop.latex.outDir": "../dist"
+}

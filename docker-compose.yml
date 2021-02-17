@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  tex:
+    image: alpine-texlive-ja-python3
+    build: .
+    command: python3 build.py
+    volumes:
+      - .:/workdir
