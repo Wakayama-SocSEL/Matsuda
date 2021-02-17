@@ -9,7 +9,7 @@ def get_tex_paths() -> List[Path]:
     return [Path(f) for f in glob.glob("./*/src/*.tex")]
 
 
-def create_dist(tex_path: Path):
+def create_dist(tex_path: Path) -> Path:
     dist_path = tex_path.parent.parent / "dist"
     os.makedirs(dist_path, exist_ok=True)
     return dist_path
