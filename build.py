@@ -16,7 +16,15 @@ def create_dist(tex_path: Path) -> Path:
 
 
 def build_pdf(tex_path: Path, dist_path: Path) -> None:
-    command = f"ptex2pdf -l -output-directory \"{dist_path.resolve()}\" \"{tex_path.resolve()}\""
+    command = " ".join([
+        "ptex2pdf",
+        "-l",
+        "-ot",
+        '"-halt-on-error"',
+        "-output-directory",
+        f'"{dist_path.resolve()}"',
+        f'"{tex_path.resolve()}"'
+    ])
     print(command)
     subprocess.call(command, shell=True)
 
