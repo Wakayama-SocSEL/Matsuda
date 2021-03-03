@@ -15,6 +15,15 @@ def create_dist(tex_path: Path) -> Path:
     return dist_path
 
 
+def convert_tex(tex_path: Path, dist_path: Path) -> Path:
+    converted_tex_path = dist_path / tex_path.name
+    with open(tex_path.resolve(), 'r') as source, \
+            open(converted_tex_path.resolve(), 'w') as target:
+        converted_tex = source.read().replace('、', '，').replace('。', '．')
+        target.write(converted_tex)
+    return converted_tex_path
+
+
 def build_pdf(tex_path: Path, dist_path: Path) -> None:
     command = " ".join([
         "ptex2pdf",
@@ -31,4 +40,6 @@ def build_pdf(tex_path: Path, dist_path: Path) -> None:
 
 for tex_path in get_tex_paths():
     dist_path = create_dist(tex_path)
-    build_pdf(tex_path, dist_path)
+    temp_path = convert_tex(tex_path, dist_path)
+    build_pdf(temp_path, dist_path)
+    os.remove(temp_path.resolve())
