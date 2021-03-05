@@ -1,2 +1,2 @@
-*/dist/*.log
-*/dist/*.aux
+*/dist/*
+!*/dist/*.pdf

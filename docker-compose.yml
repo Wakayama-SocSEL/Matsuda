@@ -6,4 +6,5 @@ services:
     build: .
     command: python3 build.py
     volumes:
+      - .latexmkrc:/root/.latexmkrc
       - .:/workdir

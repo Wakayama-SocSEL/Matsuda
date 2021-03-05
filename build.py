@@ -3,43 +3,33 @@ import glob
 import subprocess
 from pathlib import Path
 from typing import List
+from distutils.dir_util import copy_tree, remove_tree
 
 
 def get_tex_paths() -> List[Path]:
     return [Path(f) for f in glob.glob("./*/src/*.tex")]
 
 
-def create_dist(tex_path: Path) -> Path:
-    dist_path = tex_path.parent.parent / "dist"
-    os.makedirs(dist_path, exist_ok=True)
-    return dist_path
+def convert_tex(tex_path: Path) -> None:
+    with open(tex_path, 'r+') as f:
+        converted = f.read().replace('、', '，').replace('。', '．')
+        f.seek(0)
+        f.write(converted)
 
 
-def convert_tex(tex_path: Path, dist_path: Path) -> Path:
-    converted_tex_path = dist_path / tex_path.name
-    with open(tex_path.resolve(), 'r') as source, \
-            open(converted_tex_path.resolve(), 'w') as target:
-        converted_tex = source.read().replace('、', '，').replace('。', '．')
-        target.write(converted_tex)
-    return converted_tex_path
+def build_pdf(tex_path: Path) -> None:
+    command = f"latexmk {tex_path.name}"
+    subprocess.call(command, cwd=tex_path.parent, shell=True)
 
 
-def build_pdf(tex_path: Path, dist_path: Path) -> None:
-    command = " ".join([
-        "ptex2pdf",
-        "-l",
-        "-ot",
-        '"-halt-on-error"',
-        "-output-directory",
-        f'"{dist_path.resolve()}"',
-        f'"{tex_path.resolve()}"'
-    ])
-    print(command)
-    subprocess.call(command, shell=True)
+def copy_src_to_dist(src_path: Path, dist_path: Path) -> None:
+    if os.path.exists(dist_path):
+        remove_tree(str(dist_path))
+    copy_tree(str(src_path), str(dist_path))
 
 
 for tex_path in get_tex_paths():
-    dist_path = create_dist(tex_path)
-    temp_path = convert_tex(tex_path, dist_path)
-    build_pdf(temp_path, dist_path)
-    os.remove(temp_path.resolve())
+    dist_tex_path = tex_path.parent.parent / 'dist' / tex_path.name
+    copy_src_to_dist(tex_path.parent, dist_tex_path.parent)
+    convert_tex(dist_tex_path)
+    build_pdf(dist_tex_path)
