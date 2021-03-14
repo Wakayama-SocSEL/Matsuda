@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { exec } from "child_process";
+import semver from "semver";
 
 async function command(command: string, cwd: string = ".") {
   return new Promise<string>((resolve, reject) => {
@@ -9,6 +10,28 @@ async function command(command: string, cwd: string = ".") {
       else resolve(stdout.toString());
     });
   });
+}
+
+type Package = {
+  version: string;
+};
+
+async function getHashs(dir: string): Promise<string[]> {
+  // pkg_commits.csv内のコミットに置き換え可能？
+  const gitLogResult = await command(`git log --reverse --pretty="%H"`, dir);
+  return gitLogResult.split("\n");
+}
+
+async function getPackages(hashs: string[], dir: string): Promise<Package[]> {
+  const pkgs: Package[] = [];
+  for (const [i, hash] of hashs.entries()) {
+    console.log(`${i + 1}/${hashs.length}:`);
+    try {
+      const pkg = await command(`git show ${hash}:package.json`, dir);
+      pkgs.push(JSON.parse(pkg));
+    } catch (e) {}
+  }
+  return pkgs;
 }
 
 const main = async () => {
@@ -22,16 +45,14 @@ const main = async () => {
     if (!fs.existsSync(dir)) {
       await command(`git clone ${url}.git ${dir}`);
     }
-    // pkg_commits.csv内のコミットに置き換え可能？
-    const gitLogResult = await command(`git log --reverse --pretty="%H"`, dir);
-    const hashs = gitLogResult.split("\n");
-    for (const [i, hash] of hashs.entries()) {
-      process.stdout.write(`${i + 1}/${hashs.length}:`);
-      try {
-        const pkg = await command(`git show ${hash}:package.json`, dir);
-        console.log(JSON.parse(pkg).version);
-      } catch (e) {
-        console.error(e.toString().trim());
+    const hashs = await getHashs(dir);
+    const pkgs = await getPackages(hashs, dir);
+    for (const [i] of pkgs.entries()) {
+      if (i == 0) continue;
+      const [prevV, nextV] = [pkgs[i - 1].version, pkgs[i].version];
+      const isValid = semver.valid(prevV) && semver.valid(nextV);
+      if (isValid && semver.gt(prevV, nextV)) {
+        console.log(nextV);
       }
     }
   }
