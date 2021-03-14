@@ -1,50 +1,14 @@
 import fs from "fs";
 import path from "path";
-import childProcess from "child_process";
+import { exec } from "child_process";
 
-import git from "isomorphic-git";
-import http from "isomorphic-git/http/node";
-
-type GitDiff = {
-  change: string;
-  filename: string;
-};
-
-function diff(dir: string, hash1: string, hash2: string): Promise<GitDiff[]> {
-  return new Promise<GitDiff[]>((resolve) => {
-    const command = `cd ${dir} && git diff --raw ${hash1} ${hash2}`;
-    const diffBuffer = childProcess.execSync(command);
-    const diffs = diffBuffer.toString("utf-8").trim().split("\n");
-    const result = diffs.map((diff) => {
-      const [change, filename] = diff.split(/\s/).slice(-2);
-      return { change, filename };
+async function command(command: string, cwd: string = ".") {
+  return new Promise<string>((resolve, reject) => {
+    exec(command, { cwd }, (error, stdout) => {
+      if (error) reject(error);
+      else resolve(stdout.toString());
     });
-    resolve(result);
   });
-}
-
-type Data = {
-  compareUrl: string;
-  containsTest: boolean;
-  diffs: GitDiff[];
-};
-
-function getData(dir: string, url: string, tags: string[]): Promise<Data[]> {
-  const promises = [...new Array(tags.length - 1)].map(async (_, i) => {
-    const diffs = await diff(dir, tags[i], tags[i + 1]);
-    const compareUrl = `${url}/compare/${tags[i]}...${tags[i + 1]}`;
-    const containsTest =
-      diffs.find((diff) => {
-        return /test/.test(diff.filename) && diff.change;
-      }) !== undefined;
-    console.log(compareUrl, containsTest);
-    return {
-      compareUrl,
-      diffs,
-      containsTest,
-    };
-  });
-  return Promise.all(promises);
 }
 
 const main = async () => {
@@ -53,17 +17,23 @@ const main = async () => {
     "https://github.com/npm/node-semver",
   ];
   for (const url of urls) {
-    const repo = url.split("/").pop()!;
-    const dir = path.join(process.cwd(), "libs", repo);
+    const name = url.split("/").pop()!;
+    const dir = path.join(process.cwd(), "libs", name);
     if (!fs.existsSync(dir)) {
-      await git.clone({ fs, http, dir, url: `${url}.git` });
+      await command(`git clone ${url}.git ${dir}`);
     }
-    const tags = await git.listTags({ fs, dir });
-    const result = await getData(dir, url, tags);
-    fs.writeFileSync(
-      `./output/${repo}.json`,
-      JSON.stringify({ result }, null, 2)
-    );
+    // pkg_commits.csv内のコミットに置き換え可能？
+    const gitLogResult = await command(`git log --reverse --pretty="%H"`, dir);
+    const hashs = gitLogResult.split("\n");
+    for (const [i, hash] of hashs.entries()) {
+      process.stdout.write(`${i + 1}/${hashs.length}:`);
+      try {
+        const pkg = await command(`git show ${hash}:package.json`, dir);
+        console.log(JSON.parse(pkg).version);
+      } catch (e) {
+        console.error(e.toString().trim());
+      }
+    }
   }
 };
 
