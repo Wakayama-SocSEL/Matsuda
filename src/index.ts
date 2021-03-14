@@ -22,22 +22,31 @@ async function getHashs(dir: string): Promise<string[]> {
   return gitLogResult.split("\n");
 }
 
-async function getPackages(hashs: string[], dir: string): Promise<Package[]> {
-  const pkgs: Package[] = [];
+async function getPackages(
+  hashs: string[],
+  dir: string
+): Promise<[string, Package][]> {
+  const pkgs: [string, Package][] = [];
   for (const [i, hash] of hashs.entries()) {
     console.log(`${i + 1}/${hashs.length}:`);
     try {
       const pkg = await command(`git show ${hash}:package.json`, dir);
-      pkgs.push(JSON.parse(pkg));
+      pkgs.push([hash, JSON.parse(pkg)]);
     } catch (e) {}
   }
   return pkgs;
 }
 
+function isUpdated(prev: string, next: string): boolean {
+  const isValid = semver.valid(prev) && semver.valid(next);
+  if (isValid && semver.gt(prev, next)) return false;
+  return prev != next;
+}
+
 const main = async () => {
   const urls = [
-    "https://github.com/expressjs/express",
     "https://github.com/npm/node-semver",
+    //"https://github.com/expressjs/express",
   ];
   for (const url of urls) {
     const name = url.split("/").pop()!;
@@ -49,10 +58,10 @@ const main = async () => {
     const pkgs = await getPackages(hashs, dir);
     for (const [i] of pkgs.entries()) {
       if (i == 0) continue;
-      const [prevV, nextV] = [pkgs[i - 1].version, pkgs[i].version];
-      const isValid = semver.valid(prevV) && semver.valid(nextV);
-      if (isValid && semver.gt(prevV, nextV)) {
-        console.log(nextV);
+      const [_, prevPkg] = pkgs[i - 1];
+      const [nextHash, nextPkg] = pkgs[i];
+      if (isUpdated(prevPkg.version, nextPkg.version)) {
+        console.log(nextHash, nextPkg.version);
       }
     }
   }
