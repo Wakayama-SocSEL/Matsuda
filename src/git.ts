@@ -12,7 +12,7 @@ export type Commit = {
 
 export async function clone(url: string, dir: string): Promise<void> {
   if (!fs.existsSync(dir)) {
-    await run(`git clone ${url}.git ${dir}`);
+    await run(`git clone ${url} ${dir}`);
   }
 }
 
