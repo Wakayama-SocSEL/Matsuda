@@ -22,19 +22,37 @@ async function getHashs(dir: string): Promise<string[]> {
   return gitLogResult.split("\n");
 }
 
-async function getPackages(
+async function getPackage(hash: string, dir: string): Promise<Package | null> {
+  try {
+    const pkg = await command(`git show ${hash}:package.json`, dir);
+    return JSON.parse(pkg) as Package;
+  } catch (e) {
+    return null;
+  }
+}
+
+type Commit = {
+  hash: string;
+  pkg: Package;
+};
+
+async function getUniqueVersionCommits(
   hashs: string[],
   dir: string
-): Promise<[string, Package][]> {
-  const pkgs: [string, Package][] = [];
+): Promise<Commit[]> {
+  const commits: Commit[] = [];
   for (const [i, hash] of hashs.entries()) {
-    console.log(`${i + 1}/${hashs.length}:`);
-    try {
-      const pkg = await command(`git show ${hash}:package.json`, dir);
-      pkgs.push([hash, JSON.parse(pkg)]);
-    } catch (e) {}
+    console.log(`${i + 1}/${hashs.length}`);
+    const pkg = await getPackage(hash, dir);
+    if (pkg == null) continue;
+    const isFirstCommitOrUpdated =
+      commits.length == 0 ||
+      isUpdated(commits[commits.length - 1].pkg.version, pkg.version);
+    if (isFirstCommitOrUpdated) {
+      commits.push({ hash, pkg });
+    }
   }
-  return pkgs;
+  return commits;
 }
 
 function isUpdated(prev: string, next: string): boolean {
@@ -45,8 +63,8 @@ function isUpdated(prev: string, next: string): boolean {
 
 const main = async () => {
   const urls = [
-    "https://github.com/npm/node-semver",
-    //"https://github.com/expressjs/express",
+    "https://github.com/expressjs/express",
+    //"https://github.com/npm/node-semver",
   ];
   for (const url of urls) {
     const name = url.split("/").pop()!;
@@ -55,14 +73,9 @@ const main = async () => {
       await command(`git clone ${url}.git ${dir}`);
     }
     const hashs = await getHashs(dir);
-    const pkgs = await getPackages(hashs, dir);
-    for (const [i] of pkgs.entries()) {
-      if (i == 0) continue;
-      const [_, prevPkg] = pkgs[i - 1];
-      const [nextHash, nextPkg] = pkgs[i];
-      if (isUpdated(prevPkg.version, nextPkg.version)) {
-        console.log(nextHash, nextPkg.version);
-      }
+    const commits = await getUniqueVersionCommits(hashs, dir);
+    for (const commit of commits) {
+      console.log(commit.hash, commit.pkg.version);
     }
   }
 };
