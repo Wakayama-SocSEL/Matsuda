@@ -19,7 +19,8 @@ export async function parallelPromiseAll<T>(
   let cursor = 0;
   const processes = Array.from({ length: concurrency }).map(async () => {
     while (true) {
-      console.log(`${cursor}/${tasks.length}`);
+      const progress = Math.floor((cursor * 100) / tasks.length);
+      process.stdout.write(`${cursor}/${tasks.length}(${progress}%)\r`);
       if (cursor >= tasks.length) return;
       results[cursor] = await tasks[cursor]();
       cursor++;
