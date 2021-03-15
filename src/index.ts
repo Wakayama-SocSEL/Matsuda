@@ -1,7 +1,18 @@
+import fs from "fs";
 import path from "path";
 import * as git from "./git";
 
-const main = async () => {
+function output(filename: string, commits: git.Commit[]) {
+  const results: { [key: string]: string } = {};
+  for (const commit of commits) {
+    if (commit.pkg && commit.pkg.version) {
+      results[commit.pkg.version] = commit.hash;
+    }
+  }
+  fs.writeFileSync(filename, JSON.stringify(results));
+}
+
+async function main() {
   const urls = [
     "https://github.com/npm/node-semver",
     "https://github.com/expressjs/express",
@@ -12,10 +23,8 @@ const main = async () => {
     await git.clone(url, dir);
     const hashs = await git.getHashs(dir);
     const commits = await git.getCommits(hashs, dir);
-    for (const commit of commits) {
-      console.log(commit.hash, commit.pkg?.version);
-    }
+    output(`./output/${name}.json`, commits);
   }
-};
+}
 
 main();

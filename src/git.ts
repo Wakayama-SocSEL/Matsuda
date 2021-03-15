@@ -1,11 +1,11 @@
 import fs from "fs";
 import { run, parallelPromiseAll } from "./utils";
 
-type Package = {
+export type Package = {
   version: string;
 };
 
-type Commit = {
+export type Commit = {
   hash: string;
   pkg: Package | null;
 };
