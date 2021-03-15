@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { exec } from "child_process";
 import semver from "semver";
+import { parallelPromiseAll } from "./utils";
 
 async function command(command: string, cwd: string = ".") {
   return new Promise<string>((resolve, reject) => {
@@ -19,7 +20,7 @@ type Package = {
 async function getHashs(dir: string): Promise<string[]> {
   // pkg_commits.csv内のコミットに置き換え可能？
   const gitLogResult = await command(`git log --reverse --pretty="%H"`, dir);
-  return gitLogResult.split("\n");
+  return gitLogResult.trim().split("\n");
 }
 
 async function getPackage(hash: string, dir: string): Promise<Package | null> {
@@ -33,26 +34,17 @@ async function getPackage(hash: string, dir: string): Promise<Package | null> {
 
 type Commit = {
   hash: string;
-  pkg: Package;
+  pkg: Package | null;
 };
 
-async function getUniqueVersionCommits(
-  hashs: string[],
-  dir: string
-): Promise<Commit[]> {
-  const commits: Commit[] = [];
-  for (const [i, hash] of hashs.entries()) {
-    console.log(`${i + 1}/${hashs.length}`);
-    const pkg = await getPackage(hash, dir);
-    if (pkg == null) continue;
-    const isFirstCommitOrUpdated =
-      commits.length == 0 ||
-      isUpdated(commits[commits.length - 1].pkg.version, pkg.version);
-    if (isFirstCommitOrUpdated) {
-      commits.push({ hash, pkg });
-    }
-  }
-  return commits;
+async function getCommits(hashs: string[], dir: string): Promise<Commit[]> {
+  const tasks = hashs.map((hash) => {
+    return async () => {
+      const pkg = await getPackage(hash, dir);
+      return { hash, pkg };
+    };
+  });
+  return parallelPromiseAll<Commit>(tasks, 10);
 }
 
 function isUpdated(prev: string, next: string): boolean {
@@ -63,8 +55,8 @@ function isUpdated(prev: string, next: string): boolean {
 
 const main = async () => {
   const urls = [
-    "https://github.com/expressjs/express",
-    //"https://github.com/npm/node-semver",
+    "https://github.com/npm/node-semver",
+    //"https://github.com/expressjs/express",
   ];
   for (const url of urls) {
     const name = url.split("/").pop()!;
@@ -73,9 +65,9 @@ const main = async () => {
       await command(`git clone ${url}.git ${dir}`);
     }
     const hashs = await getHashs(dir);
-    const commits = await getUniqueVersionCommits(hashs, dir);
+    const commits = await getCommits(hashs, dir);
     for (const commit of commits) {
-      console.log(commit.hash, commit.pkg.version);
+      console.log(commit.hash, commit.pkg?.version);
     }
   }
 };
