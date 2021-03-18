@@ -3,14 +3,14 @@ import path from "path";
 import * as git from "./git";
 import { safeWriteFileSync } from "./utils";
 
-type Json = {
-  [key: string]: string;
+type Json<T> = {
+  [key: string]: T;
 };
 
 async function outputCommitJson(filepath: string, dir: string) {
   const hashs = await git.getHashs(dir);
   const commits = await git.getCommits(hashs, dir);
-  const results: Json = {};
+  const results: Json<string> = {};
   for (const commit of commits) {
     if (commit.pkg && commit.pkg.version && !(commit.pkg.version in results)) {
       results[commit.pkg.version] = commit.hash;
@@ -20,12 +20,20 @@ async function outputCommitJson(filepath: string, dir: string) {
   console.log("output:", filepath);
 }
 
-// TODO: 実行結果を保存
-async function outputTestJson(filepath: string, commits: Json, dir: string) {
-  for (const [version, hash] of Object.entries(commits)) {
-    const result = await git.runTest(hash, dir);
-    console.log(version, hash, result.ok);
+async function outputTestJson(
+  filepath: string,
+  commits: Json<string>,
+  dir: string
+) {
+  const results: Json<git.TestResult> = {};
+  for (const [index, commit] of Object.entries(commits).entries()) {
+    const [version, hash] = commit;
+    results[version] = await git.runTest(hash, dir);
+    const progress = `(${index + 1}/${Object.keys(commits).length})`;
+    process.stdout.write(`${progress} ${version}\r`);
   }
+  safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
+  console.log("output: ", filepath);
 }
 
 async function main() {
@@ -37,7 +45,7 @@ async function main() {
       await git.clone(`https://github.com/${repo}.git`, dir);
     }
     // リポジトリを最新版にリセット
-    await git.reset(dir)
+    await git.reset(dir);
     // バージョンとコミットハッシュのセットを出力
     const commitsJsonPath = `./output/${repo}/commits.json`;
     if (!fs.existsSync(commitsJsonPath)) {

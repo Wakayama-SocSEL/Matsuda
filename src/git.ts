@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import { run, parallelPromiseAll } from "./utils";
 
 export type Package = {
@@ -49,20 +51,22 @@ export async function getCommits(
   return parallelPromiseAll<Commit>(tasks, 10);
 }
 
-type RunTestResult = {
+export type TestResult = {
   ok: boolean;
   err?: string;
 };
 
-export async function runTest(
-  hash: string,
-  dir: string
-): Promise<RunTestResult> {
+export async function runTest(hash: string, dir: string): Promise<TestResult> {
+  await run(`git reset ${hash} --hard`, dir);
+  const nodeModules = path.join(dir, "node_modules");
+  await fs.rmdirSync(nodeModules, { recursive: true });
   try {
-    await run(`git reset ${hash} --hard`, dir);
-    await run(`npm install && npm run test`, dir);
+    await run(`npm ci`, dir);
+  } catch (e) {}
+  try {
+    await run(`npm test`, dir);
     return { ok: true };
   } catch (e) {
-    return { ok: false, err: `${e.message}` };
+    return { ok: false, err: `${e}` };
   }
 }
