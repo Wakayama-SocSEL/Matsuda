@@ -36,6 +36,8 @@ async function main() {
     if (!fs.existsSync(dir)) {
       await git.clone(`https://github.com/${repo}.git`, dir);
     }
+    // リポジトリを最新版にリセット
+    await git.reset(dir)
     // バージョンとコミットハッシュのセットを出力
     const commitsJsonPath = `./output/${repo}/commits.json`;
     if (!fs.existsSync(commitsJsonPath)) {

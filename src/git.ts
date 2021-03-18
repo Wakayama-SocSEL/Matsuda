@@ -13,6 +13,10 @@ export async function clone(url: string, dir: string): Promise<void> {
   await run(`git clone ${url} ${dir}`);
 }
 
+export async function reset(dir: string): Promise<void> {
+  await run(`git reset origin/master --hard`, dir);
+}
+
 export async function getHashs(dir: string): Promise<string[]> {
   // pkg_commits.csv内のコミットに置き換え可能？
   const command = `git log --reverse --date-order --pretty="%H"`;
