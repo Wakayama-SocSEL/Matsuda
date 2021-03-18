@@ -1,4 +1,3 @@
-import fs from "fs";
 import { run, parallelPromiseAll } from "./utils";
 
 export type Package = {
@@ -11,9 +10,7 @@ export type Commit = {
 };
 
 export async function clone(url: string, dir: string): Promise<void> {
-  if (!fs.existsSync(dir)) {
-    await run(`git clone ${url} ${dir}`);
-  }
+  await run(`git clone ${url} ${dir}`);
 }
 
 export async function getHashs(dir: string): Promise<string[]> {
@@ -46,4 +43,22 @@ export async function getCommits(
     };
   });
   return parallelPromiseAll<Commit>(tasks, 10);
+}
+
+type RunTestResult = {
+  ok: boolean;
+  err?: string;
+};
+
+export async function runTest(
+  hash: string,
+  dir: string
+): Promise<RunTestResult> {
+  try {
+    await run(`git reset ${hash} --hard`, dir);
+    await run(`npm install && npm run test`, dir);
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, err: `${e.message}` };
+  }
 }

@@ -34,7 +34,7 @@ export async function parallelPromiseAll<T>(
 export function safeWriteFileSync(filepath: string, data: string) {
   const dir = path.dirname(filepath);
   if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
+    fs.mkdirSync(dir, { recursive: true });
   }
   fs.writeFileSync(filepath, data);
 }
