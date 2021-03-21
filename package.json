@@ -1,6 +1,11 @@
 {
+  "name": "survey",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "docker": "docker build -t runner ./runner",
+    "start": "yarn docker && ts-node src/index.ts",
     "format": "prettier . -w"
   },
   "devDependencies": {
