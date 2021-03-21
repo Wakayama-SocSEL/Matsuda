@@ -23,12 +23,15 @@ export async function parallelPromiseAll<T>(
 ): Promise<T[]> {
   const results: T[] = [];
   let cursor = 0;
+  let completed = 0;
+  showProgress(cursor, tasks.length);
   const processes = Array.from({ length: concurrency }).map(async () => {
     while (true) {
-      cursor++;
-      if (cursor > tasks.length) return;
-      showProgress(cursor - 1, tasks.length);
-      results[cursor - 1] = await tasks[cursor - 1]();
+      const index = cursor++;
+      if (index >= tasks.length) return;
+      results[index] = await tasks[index]();
+      completed++;
+      showProgress(completed, tasks.length);
     }
   });
   await Promise.all(processes);
