@@ -54,11 +54,16 @@ export type TestResult = {
   err?: string;
 };
 
-export async function runTest(url: string, hash: string): Promise<TestResult> {
-  try {
-    await run(`docker run --rm runner ${url} ${hash}`);
-    return { ok: true };
-  } catch (e) {
-    return { ok: false, err: `${e}` };
-  }
+export async function runTests(url: string, hashs: string[]): Promise<TestResult[]> {
+  const tasks = hashs.map(hash => {
+    return async () => {
+      try {
+        await run(`docker run --rm runner ${url} ${hash}`);
+        return { url, hash, ok: true };
+      } catch (e) {
+        return { url, hash, ok: false, err: `${e}` };
+      }
+    }
+  })
+  return parallelPromiseAll<TestResult>(tasks, 5)
 }

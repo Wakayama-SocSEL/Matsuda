@@ -25,13 +25,7 @@ async function outputTestJson(
   url: string,
   commits: Json<string>
 ) {
-  const results: Json<git.TestResult> = {};
-  for (const [index, commit] of Object.entries(commits).entries()) {
-    const [version, hash] = commit;
-    results[version] = await git.runTest(url, hash);
-    const progress = `(${index + 1}/${Object.keys(commits).length})`;
-    process.stdout.write(`${progress} ${version}\r`);
-  }
+  const results = await git.runTests(url, Object.values(commits));
   safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
   console.log("output: ", filepath);
 }
