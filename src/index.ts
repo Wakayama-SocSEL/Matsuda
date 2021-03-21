@@ -22,13 +22,13 @@ async function outputCommitJson(filepath: string, dir: string) {
 
 async function outputTestJson(
   filepath: string,
-  commits: Json<string>,
-  dir: string
+  url: string,
+  commits: Json<string>
 ) {
   const results: Json<git.TestResult> = {};
   for (const [index, commit] of Object.entries(commits).entries()) {
     const [version, hash] = commit;
-    results[version] = await git.runTest(hash, dir);
+    results[version] = await git.runTest(url, hash);
     const progress = `(${index + 1}/${Object.keys(commits).length})`;
     process.stdout.write(`${progress} ${version}\r`);
   }
@@ -40,9 +40,10 @@ async function main() {
   const repos = ["npm/node-semver"];
   for (const repo of repos) {
     const dir = path.join(process.cwd(), "libs", repo);
+    const url = `https://github.com/${repo}.git`;
     // リポジトリのクローン
     if (!fs.existsSync(dir)) {
-      await git.clone(`https://github.com/${repo}.git`, dir);
+      await git.clone(url, dir);
     }
     // リポジトリを最新版にリセット
     await git.reset(dir);
@@ -55,7 +56,7 @@ async function main() {
     const commits = JSON.parse(fs.readFileSync(commitsJsonPath, "utf-8"));
     const testJsonPath = `./output/${repo}/test.json`;
     if (!fs.existsSync(testJsonPath)) {
-      await outputTestJson(testJsonPath, commits, dir);
+      await outputTestJson(testJsonPath, url, commits);
     }
   }
 }

@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import { run, parallelPromiseAll } from "./utils";
 
 export type Package = {
@@ -56,15 +54,9 @@ export type TestResult = {
   err?: string;
 };
 
-export async function runTest(hash: string, dir: string): Promise<TestResult> {
-  await run(`git reset ${hash} --hard`, dir);
-  const nodeModules = path.join(dir, "node_modules");
-  await fs.rmdirSync(nodeModules, { recursive: true });
+export async function runTest(url: string, hash: string): Promise<TestResult> {
   try {
-    await run(`npm ci`, dir);
-  } catch (e) {}
-  try {
-    await run(`npm test`, dir);
+    await run(`docker run --rm runner ${url} ${hash}`);
     return { ok: true };
   } catch (e) {
     return { ok: false, err: `${e}` };
