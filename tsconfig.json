@@ -5,6 +5,7 @@
     "lib": ["es2020", "dom"],
     "strict": true,
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noEmit": true
   }
 }
