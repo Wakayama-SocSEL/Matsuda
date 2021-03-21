@@ -29,22 +29,20 @@ export async function getRepoInfos(repos: RepoName[]): Promise<RepoInfo[]> {
 }
 
 export type TestResult = {
+  version: string;
   ok: boolean;
   err?: string;
 };
 
-export async function runTests(
-  repo: RepoName,
-  hashs: string[]
-): Promise<TestResult[]> {
-  const tasks = hashs.map((hash) => {
+export async function runTests(repoInfo: RepoInfo): Promise<TestResult[]> {
+  const tasks = Object.entries(repoInfo.versions).map(([version, hash]) => {
     return async () => {
       try {
-        const command = `docker run --rm runner ./runTest.sh https://github.com/${repo}.git ${hash}`;
+        const command = `docker run --rm runner ./runTest.sh https://github.com/${repoInfo.repo}.git ${hash}`;
         await run(command);
-        return { ok: true };
+        return { version, ok: true };
       } catch (e) {
-        return { ok: false, err: `${e}` };
+        return { version, ok: false, err: `${e}` };
       }
     };
   });

@@ -11,20 +11,17 @@ async function outputRepoInfos(repos: git.RepoName[]) {
     const filepath = getRepoInfoPath(repo);
     return !fs.existsSync(filepath);
   });
-  const versions = await git.getRepoInfos(filteredRepos);
-  for (const version of versions) {
-    const filepath = getRepoInfoPath(version.repo);
-    safeWriteFileSync(filepath, JSON.stringify(version, null, 2));
+  const repoInfos = await git.getRepoInfos(filteredRepos);
+  for (const repoInfo of repoInfos) {
+    const filepath = getRepoInfoPath(repoInfo.repo);
+    safeWriteFileSync(filepath, JSON.stringify(repoInfo, null, 2));
     console.log("output:", filepath);
   }
 }
 
 async function outputTest(repoInfo: git.RepoInfo) {
   const filepath = `./output/${repoInfo.repo}/testResults.json`;
-  const results = await git.runTests(
-    repoInfo.repo,
-    Object.values(repoInfo.versions)
-  );
+  const results = await git.runTests(repoInfo);
   safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
   console.log("output: ", filepath);
 }
