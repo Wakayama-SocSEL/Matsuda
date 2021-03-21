@@ -40,6 +40,6 @@ export function safeWriteFileSync(filepath: string, data: string) {
 }
 
 export function readJson<T>(filepath: string): T {
-  const content = fs.readFileSync(filepath, 'utf-8')
-  return JSON.parse(content)
+  const content = fs.readFileSync(filepath, "utf-8");
+  return JSON.parse(content);
 }
