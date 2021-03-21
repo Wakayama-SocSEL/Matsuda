@@ -36,17 +36,33 @@ export async function getPackage(
   }
 }
 
-export async function getCommits(
-  hashs: string[],
-  dir: string
-): Promise<Commit[]> {
-  const tasks = hashs.map((hash) => {
+export type RepoName = `${string}/${string}`
+
+export type RepoInfo = {
+  repo: `${string}/${string}`
+  versions: {
+    [name: string]: string;
+  }
+};
+
+export async function getRepoInfos(repos: RepoName[]): Promise<RepoInfo[]> {
+  const tasks = repos.map((repo) => {
     return async () => {
-      const pkg = await getPackage(hash, dir);
-      return { hash, pkg };
+      const results = (
+        await run(`docker run --rm runner ./getRepoInfo.sh https://github.com/${repo}.git`)
+      )
+        .split("\n")
+        .map((raw) => raw.split(" "));
+      const repoInfo: RepoInfo = { repo, versions: {} };
+      for (const [name, hash] of results) {
+        if (!(name in repoInfo.versions)) {
+          repoInfo.versions[name] = hash;
+        }
+      }
+      return repoInfo;
     };
   });
-  return parallelPromiseAll<Commit>(tasks, 10);
+  return parallelPromiseAll<RepoInfo>(tasks, 5);
 }
 
 export type TestResult = {

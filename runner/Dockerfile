@@ -1,6 +1,5 @@
 FROM node:14-slim
-RUN apt update && apt install -y git
+RUN apt update && apt install -y git jq
 WORKDIR /workdir
-COPY ./runTest.sh ./
-RUN chmod +x ./runTest.sh
-ENTRYPOINT ["./runTest.sh"]
+COPY . .
+RUN chmod +x ./*.sh
