@@ -24,7 +24,7 @@ export async function parallelPromiseAll<T>(
   const results: T[] = [];
   let cursor = 0;
   let completed = 0;
-  showProgress(cursor, tasks.length);
+  showProgress(completed, tasks.length);
   const processes = Array.from({ length: concurrency }).map(async () => {
     while (true) {
       const index = cursor++;
