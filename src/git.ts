@@ -3,20 +3,20 @@ import { run, parallelPromiseAll } from "./utils";
 export type RepoName = `${string}/${string}`;
 
 export type RepoInfo = {
-  repo: RepoName;
+  repoName: RepoName;
   versions: {
     [name: string]: string;
   };
 };
 
-export async function getRepoInfos(repos: RepoName[]): Promise<RepoInfo[]> {
-  const tasks = repos.map((repo) => {
+export async function getRepoInfos(repoNames: RepoName[]): Promise<RepoInfo[]> {
+  const tasks = repoNames.map((repoName) => {
     return async () => {
-      const command = `docker run --rm runner ./getRepoInfo.sh https://github.com/${repo}.git`;
+      const command = `docker run --rm runner ./getRepoInfo.sh ${repoName}`;
       const results = (await run(command))
         .split("\n")
         .map((raw) => raw.split(" "));
-      const repoInfo: RepoInfo = { repo, versions: {} };
+      const repoInfo: RepoInfo = { repoName, versions: {} };
       for (const [name, hash] of results) {
         if (!(name in repoInfo.versions)) {
           repoInfo.versions[name] = hash;
@@ -38,7 +38,7 @@ export async function runTests(repoInfo: RepoInfo): Promise<TestResult[]> {
   const tasks = Object.entries(repoInfo.versions).map(([version, hash]) => {
     return async () => {
       try {
-        const command = `docker run --rm runner ./runTest.sh ${repoInfo.repo} ${hash}`;
+        const command = `docker run --rm runner ./runTest.sh ${repoInfo.repoName} ${hash}`;
         await run(command);
         return { version, ok: true };
       } catch (e) {
