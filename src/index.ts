@@ -1,10 +1,6 @@
 import fs from "fs";
 import * as git from "./git";
-import { safeWriteFileSync } from "./utils";
-
-type Json<T> = {
-  [key: string]: T;
-};
+import { readJson, safeWriteFileSync } from "./utils";
 
 async function outputRepoInfos(repos: git.RepoName[]) {
   function getFilepath(repo: git.RepoName) {
@@ -22,19 +18,24 @@ async function outputRepoInfos(repos: git.RepoName[]) {
   }
 }
 
-async function outputTestJson(
-  filepath: string,
-  url: string,
-  commits: Json<string>
+async function outputTest(
+  repoInfo: git.RepoInfo
 ) {
-  const results = await git.runTests(url, Object.values(commits));
+  const filepath = `./output/${repoInfo.repo}/testResults.json`
+  const results = await git.runTests(repoInfo.repo, Object.values(repoInfo.versions));
   safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
   console.log("output: ", filepath);
 }
 
 async function main() {
   const repoNames: git.RepoName[] = ["npm/node-semver"];
+  // 各リポジトリで並列実行
   await outputRepoInfos(repoNames)
+  for (const repoName of repoNames) {
+    const repoInfo = readJson<git.RepoInfo>(`./output/${repoName}/repoInfo.json`)
+    //  各バージョンで並列実行
+    await outputTest(repoInfo)
+  }
 }
 
 main();

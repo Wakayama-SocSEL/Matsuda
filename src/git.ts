@@ -70,14 +70,14 @@ export type TestResult = {
   err?: string;
 };
 
-export async function runTests(url: string, hashs: string[]): Promise<TestResult[]> {
+export async function runTests(repo: RepoName, hashs: string[]): Promise<TestResult[]> {
   const tasks = hashs.map(hash => {
     return async () => {
       try {
-        await run(`docker run --rm runner ${url} ${hash}`);
-        return { url, hash, ok: true };
+        await run(`docker run --rm runner https://github.com/${repo}.git ${hash}`);
+        return { ok: true };
       } catch (e) {
-        return { url, hash, ok: false, err: `${e}` };
+        return { ok: false, err: `${e}` };
       }
     }
   })
