@@ -2,17 +2,18 @@ import fs from "fs";
 import * as git from "./git";
 import { readJson, safeWriteFileSync } from "./utils";
 
+function getRepoInfoPath(repo: git.RepoName) {
+  return `./output/${repo}/repoInfo.json`;
+}
+
 async function outputRepoInfos(repos: git.RepoName[]) {
-  function getFilepath(repo: git.RepoName) {
-    return `./output/${repo}/repoInfo.json`;
-  }
   const filteredRepos = repos.filter((repo) => {
-    const filepath = getFilepath(repo);
+    const filepath = getRepoInfoPath(repo);
     return !fs.existsSync(filepath);
   });
   const versions = await git.getRepoInfos(filteredRepos);
   for (const version of versions) {
-    const filepath = getFilepath(version.repo);
+    const filepath = getRepoInfoPath(version.repo);
     safeWriteFileSync(filepath, JSON.stringify(version, null, 2));
     console.log("output:", filepath);
   }
@@ -33,9 +34,7 @@ async function main() {
   // 各リポジトリで並列実行
   await outputRepoInfos(repoNames);
   for (const repoName of repoNames) {
-    const repoInfo = readJson<git.RepoInfo>(
-      `./output/${repoName}/repoInfo.json`
-    );
+    const repoInfo = readJson<git.RepoInfo>(getRepoInfoPath(repoName));
     //  各バージョンで並列実行
     await outputTest(repoInfo);
   }

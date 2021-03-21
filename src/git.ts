@@ -12,11 +12,8 @@ export type RepoInfo = {
 export async function getRepoInfos(repos: RepoName[]): Promise<RepoInfo[]> {
   const tasks = repos.map((repo) => {
     return async () => {
-      const results = (
-        await run(
-          `docker run --rm runner ./getRepoInfo.sh https://github.com/${repo}.git`
-        )
-      )
+      const command = `docker run --rm runner ./getRepoInfo.sh https://github.com/${repo}.git`;
+      const results = (await run(command))
         .split("\n")
         .map((raw) => raw.split(" "));
       const repoInfo: RepoInfo = { repo, versions: {} };
@@ -43,9 +40,8 @@ export async function runTests(
   const tasks = hashs.map((hash) => {
     return async () => {
       try {
-        await run(
-          `docker run --rm runner https://github.com/${repo}.git ${hash}`
-        );
+        const command = `docker run --rm runner ./runTest.sh https://github.com/${repo}.git ${hash}`;
+        await run(command);
         return { ok: true };
       } catch (e) {
         return { ok: false, err: `${e}` };
