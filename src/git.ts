@@ -3,7 +3,7 @@ import { run, parallelPromiseAll } from "./utils";
 export type RepoName = `${string}/${string}`;
 
 export type RepoInfo = {
-  repo: `${string}/${string}`;
+  repo: RepoName;
   versions: {
     [name: string]: string;
   };

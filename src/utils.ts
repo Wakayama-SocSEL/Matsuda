@@ -11,6 +11,11 @@ export async function run(command: string, cwd: string = "."): Promise<string> {
   });
 }
 
+function showProgress(point: number, all: number) {
+  const progress = Math.floor((point * 100) / all);
+  process.stdout.write(`${point}/${all}(${progress}%)\r`);
+}
+
 // https://qiita.com/rithmety/items/9bc7111c14033fe491f2
 export async function parallelPromiseAll<T>(
   tasks: (() => Promise<T>)[],
@@ -20,11 +25,10 @@ export async function parallelPromiseAll<T>(
   let cursor = 0;
   const processes = Array.from({ length: concurrency }).map(async () => {
     while (true) {
-      const progress = Math.floor((cursor * 100) / tasks.length);
-      process.stdout.write(`${cursor}/${tasks.length}(${progress}%)\r`);
-      if (cursor >= tasks.length) return;
-      results[cursor] = await tasks[cursor]();
       cursor++;
+      if (cursor > tasks.length) return;
+      showProgress(cursor - 1, tasks.length);
+      results[cursor - 1] = await tasks[cursor - 1]();
     }
   });
   await Promise.all(processes);
