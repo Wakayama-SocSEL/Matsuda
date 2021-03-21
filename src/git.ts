@@ -38,7 +38,7 @@ export async function runTests(repoInfo: RepoInfo): Promise<TestResult[]> {
   const tasks = Object.entries(repoInfo.versions).map(([version, hash]) => {
     return async () => {
       try {
-        const command = `docker run --rm runner ./runTest.sh https://github.com/${repoInfo.repo}.git ${hash}`;
+        const command = `docker run --rm runner ./runTest.sh ${repoInfo.repo} ${hash}`;
         await run(command);
         return { version, ok: true };
       } catch (e) {

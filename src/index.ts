@@ -26,8 +26,12 @@ async function outputTest(repoInfo: git.RepoInfo) {
   console.log("output: ", filepath);
 }
 
+type Input = {
+  repoNames: git.RepoName[];
+};
+
 async function main() {
-  const repoNames: git.RepoName[] = ["npm/node-semver"];
+  const { repoNames } = readJson<Input>("runner/input.json");
   // 各リポジトリで並列実行
   await outputRepoInfos(repoNames);
   for (const repoName of repoNames) {
