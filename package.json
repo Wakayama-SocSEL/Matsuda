@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "ts-node src/index.ts",
-    "format": "prettier ./src ./*.json -w"
+    "format": "prettier . -w"
   },
   "devDependencies": {
     "@types/node": "^14.14.11",
