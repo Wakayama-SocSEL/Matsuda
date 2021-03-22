@@ -4,8 +4,8 @@ import childProcess from "child_process";
 
 export async function run(command: string, cwd: string = "."): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    childProcess.exec(command, { cwd }, (error, stdout) => {
-      if (error) reject(error);
+    childProcess.exec(`bash -c "${command}" 2>&1`, { cwd }, (error, stdout) => {
+      if (error) reject(stdout.toString());
       else resolve(stdout.toString());
     });
   });
