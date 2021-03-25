@@ -2,7 +2,7 @@ import * as git from "./git";
 import { run } from "./utils";
 
 function dockerRun(command: string): Promise<string> {
-  return run(`docker run --rm runner ${command}`);
+  return run(`docker run --rm kazuki-m/runner ${command}`);
 }
 
 export async function getRepoInfo(repoName: git.RepoName): Promise<string[][]> {

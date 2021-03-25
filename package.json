@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "docker": "docker build -t runner ./runner",
+    "docker": "docker build -t kazuki-m/runner ./runner",
     "start": "yarn docker && ts-node src/index.ts",
     "format": "prettier . -w"
   },

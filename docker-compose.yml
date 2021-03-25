@@ -3,6 +3,7 @@ version: "3"
 services:
   main:
     build: .
+    image: kazuki-m/main
     working_dir: /code
     volumes:
       - .:/code
