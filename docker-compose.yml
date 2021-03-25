@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  main:
+    build: .
+    working_dir: /code
+    volumes:
+      - .:/code
+      - /var/run/docker.sock:/var/run/docker.sock
