@@ -10,7 +10,10 @@ export type RepoInfo = {
   };
 };
 
-export async function getRepoInfos(repoNames: RepoName[]): Promise<RepoInfo[]> {
+export async function getRepoInfos(
+  repoNames: RepoName[],
+  concurrency: number
+): Promise<RepoInfo[]> {
   const tasks = repoNames.map((repoName) => {
     return async () => {
       const results = await docker.getRepoInfo(repoName);
@@ -23,7 +26,7 @@ export async function getRepoInfos(repoNames: RepoName[]): Promise<RepoInfo[]> {
       return repoInfo;
     };
   });
-  return parallelPromiseAll<RepoInfo>(tasks, 5);
+  return parallelPromiseAll<RepoInfo>(tasks, concurrency);
 }
 
 export type TestResult = {
@@ -32,7 +35,10 @@ export type TestResult = {
   err?: string;
 };
 
-export async function runTests(repoInfo: RepoInfo): Promise<TestResult[]> {
+export async function runTests(
+  repoInfo: RepoInfo,
+  concurrency: number
+): Promise<TestResult[]> {
   const tasks = Object.entries(repoInfo.versions).map(([version, hash]) => {
     return async () => {
       try {
@@ -43,5 +49,5 @@ export async function runTests(repoInfo: RepoInfo): Promise<TestResult[]> {
       }
     };
   });
-  return parallelPromiseAll<TestResult>(tasks, 5);
+  return parallelPromiseAll<TestResult>(tasks, concurrency);
 }
