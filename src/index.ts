@@ -1,9 +1,12 @@
 import fs from "fs";
+import path from "path";
 import * as git from "./git";
 import { readJson, safeWriteFileSync } from "./utils";
 
+const outputDir = path.join(process.cwd(), "output", `${+new Date()}`);
+
 function getRepoInfoPath(repoName: git.RepoName) {
-  return `./output/${repoName}/repoInfo.json`;
+  return path.join(outputDir, repoName, "repoInfo.json");
 }
 
 async function outputRepoInfos(repos: git.RepoName[], concurrency: number) {
@@ -20,7 +23,7 @@ async function outputRepoInfos(repos: git.RepoName[], concurrency: number) {
 }
 
 async function outputTest(repoInfo: git.RepoInfo, concurrency: number) {
-  const filepath = `./output/${repoInfo.repoName}/testResults.json`;
+  const filepath = path.join(outputDir, repoInfo.repoName, "testResults.json");
   const results = await git.runTests(repoInfo, concurrency);
   safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
   console.log("output: ", filepath);
