@@ -1,3 +1,5 @@
+import ProgressBar from "progress";
+
 import * as docker from "./docker";
 import { parallelPromiseAll } from "./utils";
 
@@ -12,6 +14,7 @@ export type RepoInfo = {
 
 export async function getRepoInfos(
   repoNames: RepoName[],
+  bar: ProgressBar,
   concurrency: number
 ): Promise<RepoInfo[]> {
   const tasks = repoNames.map((repoName) => {
@@ -26,7 +29,7 @@ export async function getRepoInfos(
       return repoInfo;
     };
   });
-  return parallelPromiseAll<RepoInfo>(tasks, concurrency);
+  return parallelPromiseAll<RepoInfo>(tasks, bar, concurrency);
 }
 
 export type TestResult = {
@@ -37,6 +40,7 @@ export type TestResult = {
 
 export async function runTests(
   repoInfo: RepoInfo,
+  bar: ProgressBar,
   concurrency: number
 ): Promise<TestResult[]> {
   const tasks = Object.entries(repoInfo.versions).map(([version, hash]) => {
@@ -49,5 +53,5 @@ export async function runTests(
       }
     };
   });
-  return parallelPromiseAll<TestResult>(tasks, concurrency);
+  return parallelPromiseAll<TestResult>(tasks, bar, concurrency);
 }

@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import childProcess from "child_process";
+import ProgressBar from "progress";
 
 export async function run(command: string, cwd: string = "."): Promise<string> {
   return new Promise<string>((resolve, reject) => {
@@ -11,30 +12,21 @@ export async function run(command: string, cwd: string = "."): Promise<string> {
   });
 }
 
-function showProgress(point: number, all: number) {
-  const progress = Math.floor((point * 100) / all);
-  process.stdout.write(`${point}/${all}(${progress}%)\r`);
-}
-
 // https://qiita.com/rithmety/items/9bc7111c14033fe491f2
 export async function parallelPromiseAll<T>(
   tasks: (() => Promise<T>)[],
+  bar: ProgressBar,
   concurrency: number
 ): Promise<T[]> {
   const results: T[] = [];
   let cursor = 0;
-  let completed = 0;
-  // タスクが無いときはNaN%になるため表示しない
-  if (tasks.length != 0) {
-    showProgress(completed, tasks.length);
-  }
+  bar.tick(0);
   const processes = Array.from({ length: concurrency }).map(async () => {
     while (true) {
       const index = cursor++;
       if (index >= tasks.length) return;
       results[index] = await tasks[index]();
-      completed++;
-      showProgress(completed, tasks.length);
+      bar.tick();
     }
   });
   await Promise.all(processes);

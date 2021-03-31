@@ -1,5 +1,6 @@
-import fs from "fs";
 import path from "path";
+import ProgressBar, { ProgressBarOptions } from "progress";
+
 import * as git from "./git";
 import { readJson, safeWriteFileSync } from "./utils";
 
@@ -9,24 +10,27 @@ function getRepoInfoPath(repoName: git.RepoName) {
   return path.join(outputDir, repoName, "repoInfo.json");
 }
 
-async function outputRepoInfos(repos: git.RepoName[], concurrency: number) {
-  const filteredRepos = repos.filter((repo) => {
-    const filepath = getRepoInfoPath(repo);
-    return !fs.existsSync(filepath);
-  });
-  const repoInfos = await git.getRepoInfos(filteredRepos, concurrency);
+async function outputRepoInfos(
+  repoNames: git.RepoName[],
+  bar: ProgressBar,
+  concurrency: number
+) {
+  const repoInfos = await git.getRepoInfos(repoNames, bar, concurrency);
   for (const repoInfo of repoInfos) {
     const filepath = getRepoInfoPath(repoInfo.repoName);
     safeWriteFileSync(filepath, JSON.stringify(repoInfo, null, 2));
-    console.log("output:", filepath);
   }
+  return repoInfos;
 }
 
-async function outputTest(repoInfo: git.RepoInfo, concurrency: number) {
+async function outputTest(
+  repoInfo: git.RepoInfo,
+  bar: ProgressBar,
+  concurrency: number
+) {
   const filepath = path.join(outputDir, repoInfo.repoName, "testResults.json");
-  const results = await git.runTests(repoInfo, concurrency);
+  const results = await git.runTests(repoInfo, bar, concurrency);
   safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
-  console.log("output: ", filepath);
 }
 
 type Input = {
@@ -41,15 +45,32 @@ function parseArgv(argv: string[]) {
   };
 }
 
+function createProgressBar(label: string, options: ProgressBarOptions) {
+  return new ProgressBar(
+    `${label} [:bar] :current/:total(:percent) :etas`,
+    options
+  );
+}
+
 async function main() {
   const { repoNames } = readJson<Input>("runner/input.json");
   const { arg1, arg2 } = parseArgv(process.argv);
+
   // 各リポジトリで並列実行
-  await outputRepoInfos(repoNames, arg1);
-  for (const repoName of repoNames) {
-    const repoInfo = readJson<git.RepoInfo>(getRepoInfoPath(repoName));
+  const bar1 = createProgressBar("outputRepoInfos", {
+    total: repoNames.length,
+  });
+  const repoInfos = await outputRepoInfos(repoNames, bar1, arg1);
+
+  const totalVersions = repoInfos
+    .map((info) => Object.keys(info.versions).length)
+    .reduce((prev, curr) => prev + curr, 0);
+  const bar2 = createProgressBar("outputTests", {
+    total: totalVersions,
+  });
+  for (const repoInfo of repoInfos) {
     //  各バージョンで並列実行
-    await outputTest(repoInfo, arg2);
+    await outputTest(repoInfo, bar2, arg2);
   }
 }
 
