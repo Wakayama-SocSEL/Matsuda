@@ -4,7 +4,8 @@ WORKDIR /workdir
 
 COPY ./input.json .
 RUN jq -r '.repoNames[]' ./input.json |\
-  xargs -i bash -c "git clone https://github.com/{}.git repos/{} && echo wait 1s && sleep 1"
+  xargs -i bash -c "git clone https://github.com/{}.git repos/{} && echo wait 1s && sleep 1";\
+  exit 0
 
 COPY . .
 RUN chmod +x ./*.sh
