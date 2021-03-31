@@ -7,7 +7,10 @@ function dockerRun(command: string): Promise<string> {
 
 export async function getRepoInfo(repoName: git.RepoName): Promise<string[][]> {
   const result = await dockerRun(`./getRepoInfo.sh ${repoName}`);
-  return result.split("\n").map((raw) => raw.split(" "));
+  return result
+    .trim()
+    .split("\n")
+    .map((raw) => raw.split(" "));
 }
 
 export async function runTest(
