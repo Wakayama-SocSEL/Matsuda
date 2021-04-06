@@ -20,7 +20,8 @@ async function outputRepoInfos(
     const filepath = getRepoInfoPath(repoInfo.repoName);
     safeWriteFileSync(filepath, JSON.stringify(repoInfo, null, 2));
   }
-  return repoInfos;
+  // リポジトリがクローン出来なかったなどエラーが起きたものを除外
+  return repoInfos.filter((info): info is git.RepoInfo => "versions" in info);
 }
 
 async function outputTest(

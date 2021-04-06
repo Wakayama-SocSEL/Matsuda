@@ -12,24 +12,35 @@ export type RepoInfo = {
   };
 };
 
+export type RepoError = {
+  repoName: RepoName;
+  err: string;
+};
+
+export type GetRepoInfoResult = RepoInfo | RepoError;
+
 export async function getRepoInfos(
   repoNames: RepoName[],
   bar: ProgressBar,
   concurrency: number
-): Promise<RepoInfo[]> {
+): Promise<GetRepoInfoResult[]> {
   const tasks = repoNames.map((repoName) => {
     return async () => {
-      const results = await docker.getRepoInfo(repoName);
-      const repoInfo: RepoInfo = { repoName, versions: {} };
-      for (const [name, hash] of results) {
-        if (!(name in repoInfo.versions)) {
-          repoInfo.versions[name] = hash;
+      try {
+        const results = await docker.getRepoInfo(repoName);
+        const repoInfo: RepoInfo = { repoName, versions: {} };
+        for (const [name, hash] of results) {
+          if (!(name in repoInfo.versions)) {
+            repoInfo.versions[name] = hash;
+          }
         }
+        return repoInfo;
+      } catch (err) {
+        return { repoName, err };
       }
-      return repoInfo;
     };
   });
-  return parallelPromiseAll<RepoInfo>(tasks, bar, concurrency);
+  return parallelPromiseAll<GetRepoInfoResult>(tasks, bar, concurrency);
 }
 
 export type TestResult = {
