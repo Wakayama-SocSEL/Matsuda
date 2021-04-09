@@ -1,41 +1,42 @@
 import path from "path";
 import ProgressBar, { ProgressBarOptions } from "progress";
 
-import * as git from "./git";
+import * as runner from "./runner";
+import { RepoName, RepoInfo } from "./types";
 import { readJson, safeWriteFileSync } from "./utils";
 
 const outputDir = path.join(process.cwd(), "output", `${+new Date()}`);
 
-function getRepoInfoPath(repoName: git.RepoName) {
+function getRepoInfoPath(repoName: RepoName) {
   return path.join(outputDir, repoName, "repoInfo.json");
 }
 
 async function outputRepoInfos(
-  repoNames: git.RepoName[],
+  repoNames: RepoName[],
   bar: ProgressBar,
   concurrency: number
 ) {
-  const repoInfos = await git.getRepoInfos(repoNames, bar, concurrency);
+  const repoInfos = await runner.getRepoInfos(repoNames, bar, concurrency);
   for (const repoInfo of repoInfos) {
     const filepath = getRepoInfoPath(repoInfo.repoName);
     safeWriteFileSync(filepath, JSON.stringify(repoInfo, null, 2));
   }
   // リポジトリがクローン出来なかったなどエラーが起きたものを除外
-  return repoInfos.filter((info): info is git.RepoInfo => "versions" in info);
+  return repoInfos.filter((info): info is RepoInfo => "versions" in info);
 }
 
 async function outputTest(
-  repoInfo: git.RepoInfo,
+  repoInfo: RepoInfo,
   bar: ProgressBar,
   concurrency: number
 ) {
   const filepath = path.join(outputDir, repoInfo.repoName, "testResults.json");
-  const results = await git.runTests(repoInfo, bar, concurrency);
+  const results = await runner.runTests(repoInfo, bar, concurrency);
   safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
 }
 
 type Input = {
-  repoNames: git.RepoName[];
+  repoNames: RepoName[];
 };
 
 function parseArgv(argv: string[]) {
