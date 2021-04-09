@@ -1,3 +1,4 @@
+import fs from "fs";
 import path from "path";
 
 import ProgressBar from "progress";
@@ -10,6 +11,7 @@ import {
   parallelPromiseAll,
   safeWriteFileSync,
   outputDir,
+  readJson,
 } from "./utils";
 
 function dockerRun(command: string): Promise<string> {
@@ -26,13 +28,18 @@ async function getRepoInfo(repoName: RepoName): Promise<string[][]> {
 
 export type GetRepoInfoResult = RepoInfo | RepoError;
 
-export async function getRepoInfos(
+export async function outputRepoInfos(
   repoNames: RepoName[],
   bar: ProgressBar,
   concurrency: number
 ): Promise<GetRepoInfoResult[]> {
   const tasks = repoNames.map((repoName) => {
     return async () => {
+      // repoInfo.jsonが取得済みであれば読み込んで返す
+      const filepath = path.join(outputDir, repoName, "repoInfo.json");
+      if (fs.existsSync(filepath)) {
+        return readJson<RepoInfo | RepoError>(filepath);
+      }
       try {
         const results = await getRepoInfo(repoName);
         const repoInfo: RepoInfo = { repoName, versions: {} };
@@ -41,9 +48,12 @@ export async function getRepoInfos(
             repoInfo.versions[name] = hash;
           }
         }
+        safeWriteFileSync(filepath, JSON.stringify(repoInfo, null, 2));
         return repoInfo;
       } catch (err) {
-        return { repoName, err };
+        const repoError: RepoError = { repoName, err };
+        safeWriteFileSync(filepath, JSON.stringify(repoError, null, 2));
+        return repoError;
       }
     };
   });

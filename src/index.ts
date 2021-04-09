@@ -1,30 +1,10 @@
-import path from "path";
-
 import ProgressBar, { ProgressBarOptions } from "progress";
 import dotenv from "dotenv";
 dotenv.config();
 
 import * as runner from "./runner";
 import { RepoName, RepoInfo } from "./types";
-import { outputDir, readJson, safeWriteFileSync } from "./utils";
-
-function getRepoInfoPath(repoName: RepoName) {
-  return path.join(outputDir, repoName, "repoInfo.json");
-}
-
-async function outputRepoInfos(
-  repoNames: RepoName[],
-  bar: ProgressBar,
-  concurrency: number
-) {
-  const repoInfos = await runner.getRepoInfos(repoNames, bar, concurrency);
-  for (const repoInfo of repoInfos) {
-    const filepath = getRepoInfoPath(repoInfo.repoName);
-    safeWriteFileSync(filepath, JSON.stringify(repoInfo, null, 2));
-  }
-  // リポジトリがクローン出来なかったなどエラーが起きたものを除外
-  return repoInfos.filter((info): info is RepoInfo => "versions" in info);
-}
+import { readJson } from "./utils";
 
 type Input = {
   repoNames: RepoName[];
@@ -52,7 +32,11 @@ async function main() {
   const bar1 = createProgressBar("outputRepoInfos", {
     total: repoNames.length,
   });
-  const repoInfos = await outputRepoInfos(repoNames, bar1, arg1);
+  const repoInfoResult = await runner.outputRepoInfos(repoNames, bar1, arg1);
+  // RepoErrorを除去してRepoInfo[]にキャストする
+  const repoInfos = repoInfoResult.filter(
+    (info): info is RepoInfo => !("err" in info)
+  );
 
   const totalVersions = repoInfos
     .map((info) => Object.keys(info.versions).length)
