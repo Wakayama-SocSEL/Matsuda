@@ -35,6 +35,7 @@ export async function outputRepoInfos(
 ): Promise<GetRepoInfoResult[]> {
   const tasks = repoNames.map((repoName) => {
     return async () => {
+      bar.tick({ label: repoName });
       // repoInfo.jsonが取得済みであれば読み込んで返す
       const filepath = path.join(outputDir, repoName, "repoInfo.json");
       if (fs.existsSync(filepath)) {
@@ -57,7 +58,7 @@ export async function outputRepoInfos(
       }
     };
   });
-  return parallelPromiseAll<GetRepoInfoResult>(tasks, bar, concurrency);
+  return parallelPromiseAll<GetRepoInfoResult>(tasks, concurrency);
 }
 
 export async function outputStatuses(
@@ -66,6 +67,7 @@ export async function outputStatuses(
 ): Promise<void> {
   const results: { [version: string]: any } = {};
   for (const [version, hash] of Object.entries(repoInfo.versions)) {
+    bar.tick({ label: `${repoInfo.repoName}@${version}` });
     const response = await axios.get(
       `https://api.github.com/repos/${repoInfo.repoName}/commits/${hash}/status`,
       {
@@ -79,7 +81,6 @@ export async function outputStatuses(
       headers: response.headers,
       data: response.data,
     };
-    bar.tick();
     await sleep(0.5);
   }
   const filepath = path.join(outputDir, repoInfo.repoName, "repoStatus.json");

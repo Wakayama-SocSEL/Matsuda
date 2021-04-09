@@ -19,8 +19,11 @@ function parseArgv(argv: string[]) {
 
 function createProgressBar(label: string, options: ProgressBarOptions) {
   return new ProgressBar(
-    `${label} [:bar] :current/:total(:percent) :etas`,
-    options
+    `${label}\t[:bar] :label :current/:total(:percent) :etas`,
+    {
+      width: 20,
+      ...options,
+    }
   );
 }
 
