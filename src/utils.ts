@@ -12,6 +12,14 @@ export async function run(command: string, cwd: string = "."): Promise<string> {
   });
 }
 
+export function sleep(seconds: number) {
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, seconds * 1000);
+  });
+}
+
 // https://qiita.com/rithmety/items/9bc7111c14033fe491f2
 export async function parallelPromiseAll<T>(
   tasks: (() => Promise<T>)[],
@@ -45,3 +53,5 @@ export function readJson<T>(filepath: string): T {
   const content = fs.readFileSync(filepath, "utf-8");
   return JSON.parse(content);
 }
+
+export const outputDir = path.join(process.cwd(), "output");

@@ -1,7 +1,16 @@
+import path from "path";
+
 import ProgressBar from "progress";
+import axios from "axios";
 
 import { RepoName, RepoInfo, RepoError } from "./types";
-import { run, parallelPromiseAll } from "./utils";
+import {
+  run,
+  sleep,
+  parallelPromiseAll,
+  safeWriteFileSync,
+  outputDir,
+} from "./utils";
 
 function dockerRun(command: string): Promise<string> {
   return run(`docker run --rm kazuki-m/runner ${command}`);
@@ -41,30 +50,28 @@ export async function getRepoInfos(
   return parallelPromiseAll<GetRepoInfoResult>(tasks, bar, concurrency);
 }
 
-async function runTest(repoName: RepoName, hash: string): Promise<string> {
-  return dockerRun(`./runTest.sh ${repoName} ${hash}`);
-}
-
-export type RunTestResult = {
-  version: string;
-  ok: boolean;
-  err?: string;
-};
-
-export async function runTests(
+export async function outputStatuses(
   repoInfo: RepoInfo,
-  bar: ProgressBar,
-  concurrency: number
-): Promise<RunTestResult[]> {
-  const tasks = Object.entries(repoInfo.versions).map(([version, hash]) => {
-    return async () => {
-      try {
-        await runTest(repoInfo.repoName, hash);
-        return { version, ok: true };
-      } catch (e) {
-        return { version, ok: false, err: `${e}` };
+  bar: ProgressBar
+): Promise<void> {
+  const results: { [version: string]: any } = {};
+  for (const [version, hash] of Object.entries(repoInfo.versions)) {
+    const response = await axios.get(
+      `https://api.github.com/repos/${repoInfo.repoName}/commits/${hash}/status`,
+      {
+        headers: {
+          authorization: `token ${process.env.GH_TOKEN}`,
+        },
       }
+    );
+    results[version] = {
+      status: response.status,
+      headers: response.headers,
+      data: response.data,
     };
-  });
-  return parallelPromiseAll<RunTestResult>(tasks, bar, concurrency);
+    bar.tick();
+    await sleep(0.5);
+  }
+  const filepath = path.join(outputDir, repoInfo.repoName, "repoStatus.json");
+  safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
 }
