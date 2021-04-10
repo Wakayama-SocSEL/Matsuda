@@ -34,8 +34,7 @@ export async function outputRepoInfos(
   concurrency: number
 ): Promise<GetRepoInfoResult[]> {
   const tasks = repoNames.map((repoName) => {
-    return async () => {
-      bar.tick({ label: repoName });
+    const task = async () => {
       // repoInfo.jsonが取得済みであれば読み込んで返す
       const filepath = path.join(outputDir, repoName, "repoInfo.json");
       if (fs.existsSync(filepath)) {
@@ -57,6 +56,11 @@ export async function outputRepoInfos(
         return repoError;
       }
     };
+    return async () => {
+      const result = await task();
+      bar.tick({ label: repoName });
+      return result;
+    };
   });
   return parallelPromiseAll<GetRepoInfoResult>(tasks, concurrency);
 }
@@ -68,7 +72,6 @@ export async function outputStatuses(
   const results: { [version: string]: any } = {};
   const octokit = new Octokit({ auth: process.env.GH_TOKEN });
   for (const [version, ref] of Object.entries(repoInfo.versions)) {
-    bar.tick({ label: `${repoInfo.repoName}@${version}` });
     const [owner, repo] = repoInfo.repoName.split("/");
     const response = await octokit.request(
       "GET /repos/{owner}/{repo}/commits/{ref}/status",
@@ -76,6 +79,7 @@ export async function outputStatuses(
     );
     results[version] = response;
     await sleep(0.5);
+    bar.tick({ label: `${repoInfo.repoName}@${version}` });
   }
   const filepath = path.join(outputDir, repoInfo.repoName, "repoStatus.json");
   safeWriteFileSync(filepath, JSON.stringify(results, null, 2));

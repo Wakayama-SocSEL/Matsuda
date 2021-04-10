@@ -18,13 +18,15 @@ function parseArgv(argv: string[]) {
 }
 
 function createProgressBar(label: string, options: ProgressBarOptions) {
-  return new ProgressBar(
+  const bar = new ProgressBar(
     `${label}\t[:bar] :label :current/:total(:percent) :etas`,
     {
       width: 20,
       ...options,
     }
   );
+  bar.tick(0, { label: "starting..." });
+  return bar;
 }
 
 async function main() {
