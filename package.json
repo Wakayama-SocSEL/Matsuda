@@ -17,7 +17,7 @@
     "typescript": "^4.1.2"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "@octokit/core": "^3.4.0",
     "dotenv": "^8.2.0",
     "progress": "^2.0.3",
     "semver": "^7.3.4"

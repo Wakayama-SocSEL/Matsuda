@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 import ProgressBar from "progress";
-import axios from "axios";
+import { Octokit } from "@octokit/core";
 
 import { RepoName, RepoInfo, RepoError } from "./types";
 import {
@@ -66,21 +66,15 @@ export async function outputStatuses(
   bar: ProgressBar
 ): Promise<void> {
   const results: { [version: string]: any } = {};
-  for (const [version, hash] of Object.entries(repoInfo.versions)) {
+  const octokit = new Octokit({ auth: process.env.GH_TOKEN });
+  for (const [version, ref] of Object.entries(repoInfo.versions)) {
     bar.tick({ label: `${repoInfo.repoName}@${version}` });
-    const response = await axios.get(
-      `https://api.github.com/repos/${repoInfo.repoName}/commits/${hash}/status`,
-      {
-        headers: {
-          authorization: `token ${process.env.GH_TOKEN}`,
-        },
-      }
+    const [owner, repo] = repoInfo.repoName.split("/");
+    const response = await octokit.request(
+      "GET /repos/{owner}/{repo}/commits/{ref}/status",
+      { owner, repo, ref }
     );
-    results[version] = {
-      status: response.status,
-      headers: response.headers,
-      data: response.data,
-    };
+    results[version] = response;
     await sleep(0.5);
   }
   const filepath = path.join(outputDir, repoInfo.repoName, "repoStatus.json");
