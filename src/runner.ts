@@ -72,7 +72,10 @@ export async function getRepoStatus(
   // repoStatus.jsonが取得済みであれば読み込んで返す
   const filepath = path.join(outputDir, repoInfo.repoName, "repoStatus.json");
   if (fs.existsSync(filepath)) {
-    return readJson<RepoStatus>(filepath);
+    const repoStatus = readJson<RepoStatus>(filepath);
+    const versionsCount = Object.keys(repoInfo.versions).length;
+    bar.tick(versionsCount, { label: repoInfo.repoName });
+    return repoStatus;
   }
   const results: RepoStatus = {};
   const octokit = new Octokit({ auth: process.env.GH_TOKEN });
