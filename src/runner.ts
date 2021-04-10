@@ -4,7 +4,7 @@ import path from "path";
 import ProgressBar from "progress";
 import { Octokit } from "@octokit/core";
 
-import { RepoName, RepoInfo, RepoError } from "./types";
+import { RepoName, RepoInfo, RepoError, RepoStatus } from "./types";
 import {
   run,
   sleep,
@@ -68,8 +68,13 @@ export async function outputRepoInfos(
 export async function outputStatuses(
   repoInfo: RepoInfo,
   bar: ProgressBar
-): Promise<void> {
-  const results: { [version: string]: any } = {};
+): Promise<RepoStatus> {
+  // repoStatus.jsonが取得済みであれば読み込んで返す
+  const filepath = path.join(outputDir, repoInfo.repoName, "repoStatus.json");
+  if (fs.existsSync(filepath)) {
+    return readJson<RepoStatus>(filepath);
+  }
+  const results: RepoStatus = {};
   const octokit = new Octokit({ auth: process.env.GH_TOKEN });
   for (const [version, ref] of Object.entries(repoInfo.versions)) {
     const [owner, repo] = repoInfo.repoName.split("/");
@@ -81,6 +86,6 @@ export async function outputStatuses(
     await sleep(0.5);
     bar.tick({ label: `${repoInfo.repoName}@${version}` });
   }
-  const filepath = path.join(outputDir, repoInfo.repoName, "repoStatus.json");
   safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
+  return results;
 }

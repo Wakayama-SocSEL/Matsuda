@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import * as runner from "./runner";
-import { RepoName, RepoInfo } from "./types";
+import { RepoName, RepoInfo, RepoStatus } from "./types";
 import { readJson } from "./utils";
 
 type Input = {
@@ -52,9 +52,11 @@ async function main() {
   const bar2 = createProgressBar("outputStatses", {
     total: getTotalVersions(repoInfos),
   });
+  const statuses: RepoStatus[] = [];
   for (const repoInfo of repoInfos) {
     //  各バージョンで実行
-    await runner.outputStatuses(repoInfo, bar2);
+    const status = await runner.outputStatuses(repoInfo, bar2);
+    statuses.push(status);
   }
 }
 
