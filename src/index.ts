@@ -29,6 +29,12 @@ function createProgressBar(label: string, options: ProgressBarOptions) {
   return bar;
 }
 
+function getTotalVersions(repoInfos: RepoInfo[]) {
+  return repoInfos
+    .map((info) => Object.keys(info.versions).length)
+    .reduce((prev, curr) => prev + curr, 0);
+}
+
 async function main() {
   const { repoNames } = readJson<Input>("runner/input.json");
   const { arg1 } = parseArgv(process.argv);
@@ -43,11 +49,8 @@ async function main() {
     (info): info is RepoInfo => !("err" in info)
   );
 
-  const totalVersions = repoInfos
-    .map((info) => Object.keys(info.versions).length)
-    .reduce((prev, curr) => prev + curr, 0);
-  const bar2 = createProgressBar("outputTests", {
-    total: totalVersions,
+  const bar2 = createProgressBar("outputStatses", {
+    total: getTotalVersions(repoInfos),
   });
   for (const repoInfo of repoInfos) {
     //  各バージョンで実行
