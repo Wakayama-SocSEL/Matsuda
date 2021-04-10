@@ -28,7 +28,7 @@ async function getRepoInfo(repoName: RepoName): Promise<string[][]> {
 
 export type GetRepoInfoResult = RepoInfo | RepoError;
 
-export async function outputRepoInfos(
+export async function getRepoInfos(
   repoNames: RepoName[],
   bar: ProgressBar,
   concurrency: number
@@ -65,7 +65,7 @@ export async function outputRepoInfos(
   return parallelPromiseAll<GetRepoInfoResult>(tasks, concurrency);
 }
 
-export async function outputStatuses(
+export async function getRepoStatus(
   repoInfo: RepoInfo,
   bar: ProgressBar
 ): Promise<RepoStatus> {

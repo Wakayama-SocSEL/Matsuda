@@ -19,7 +19,7 @@ function parseArgv(argv: string[]) {
 
 function createProgressBar(label: string, options: ProgressBarOptions) {
   const bar = new ProgressBar(
-    `${label}\t[:bar] :label :current/:total(:percent) :etas`,
+    `${label} [:bar] :label :current/:total(:percent) :etas`,
     {
       width: 20,
       ...options,
@@ -40,22 +40,22 @@ async function main() {
   const { arg1 } = parseArgv(process.argv);
 
   // 各リポジトリで並列実行
-  const bar1 = createProgressBar("outputRepoInfos", {
+  const bar1 = createProgressBar("step1", {
     total: repoNames.length,
   });
-  const repoInfoResult = await runner.outputRepoInfos(repoNames, bar1, arg1);
+  const repoInfoResult = await runner.getRepoInfos(repoNames, bar1, arg1);
   // RepoErrorを除去してRepoInfo[]にキャストする
   const repoInfos = repoInfoResult.filter(
     (info): info is RepoInfo => !("err" in info)
   );
 
-  const bar2 = createProgressBar("outputStatses", {
+  const bar2 = createProgressBar("step2", {
     total: getTotalVersions(repoInfos),
   });
   const statuses: RepoStatus[] = [];
   for (const repoInfo of repoInfos) {
     //  各バージョンで実行
-    const status = await runner.outputStatuses(repoInfo, bar2);
+    const status = await runner.getRepoStatus(repoInfo, bar2);
     statuses.push(status);
   }
 }
