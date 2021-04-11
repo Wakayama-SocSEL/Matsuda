@@ -85,6 +85,8 @@ export async function getRepoStatus(
       "GET /repos/{owner}/{repo}/commits/{ref}/status",
       { owner, repo, ref }
     );
+    // リポジトリ名が変更されている場合は、レスポンスに含まれるリポジトリ名を2度目以降のリクエストで使う
+    repoInfo.repoName = response.data.repository.full_name as RepoName;
     results[version] = response;
     await sleep(0.5);
     bar.tick({ label: `${repoInfo.repoName}@${version}` });
