@@ -89,7 +89,9 @@ export async function getRepoStatus(
     repoInfo.repoName = response.data.repository.full_name as RepoName;
     results[version] = response;
     await sleep(0.5);
-    bar.tick({ label: `${repoInfo.repoName}@${version}` });
+    bar.tick({
+      label: `${repoInfo.repoName}@${version}(${response.headers["x-ratelimit-used"]})`,
+    });
   }
   safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
   return results;
