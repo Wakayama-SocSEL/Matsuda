@@ -58,6 +58,9 @@ async function main() {
     const status = await runner.getRepoStatus(repoInfo, bar2);
     statuses.push(status);
   }
+
+  console.log("step3 creating output.json");
+  await runner.outputResult(statuses);
 }
 
 main();

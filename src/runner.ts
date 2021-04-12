@@ -96,3 +96,57 @@ export async function getRepoStatus(
   safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
   return results;
 }
+
+type Result = {
+  [key: string]: any;
+};
+
+function getStateCount(repoStatus: RepoStatus, state: string) {
+  return Object.values(repoStatus).filter(
+    (status) => status.data.state == state
+  ).length;
+}
+
+export async function outputResult(repoStatuses: RepoStatus[]) {
+  const results: Result[] = [];
+  for (const repoStatus of repoStatuses) {
+    const successCount = getStateCount(repoStatus, "success");
+    const failureCount = getStateCount(repoStatus, "failure");
+    const pendingCount = getStateCount(repoStatus, "pending");
+    const versionCount = Object.keys(repoStatus).length;
+    const runCount = successCount + failureCount;
+    const result: Result = {
+      repoName: "",
+      count: {
+        versions: versionCount,
+        run: runCount,
+      },
+      rate: {
+        total: {
+          success: successCount / versionCount,
+          failure: failureCount / versionCount,
+          pending: pendingCount / versionCount,
+        },
+        run: {
+          success: successCount / runCount,
+          failure: failureCount / runCount,
+        },
+      },
+      states: {
+        success: 0,
+        failure: 0,
+        pending: 0,
+      },
+    };
+    for (const status of Object.values(repoStatus)) {
+      result.repoName = status.data.repository.full_name;
+      result.states[status.data.state] += 1;
+    }
+    results.push(result);
+  }
+  const filepath = path.join(outputDir, "result.json");
+  safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
+  await run(
+    `yarn json2csv -i ./output/result.json -o ./output/result.csv --flatten-objects`
+  );
+}
