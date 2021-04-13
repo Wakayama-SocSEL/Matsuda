@@ -6,5 +6,6 @@ jq -s -R 'split("\n") |
   map(select(.[25] == "1")) |
   sort_by(.[-1]) |
   reverse |
+  .[:'$1'] |
   { repoNames: map(.[7]) }'\
   ../dataset/pkg_repositories.csv > input.json
