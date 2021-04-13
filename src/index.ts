@@ -11,9 +11,10 @@ type Input = {
 };
 
 function parseArgv(argv: string[]) {
-  const [_, __, arg1] = argv;
+  const [_, __, arg1, arg2] = argv;
   return {
     arg1: parseInt(arg1) || 5,
+    arg2: parseInt(arg2) || 5,
   };
 }
 
@@ -36,14 +37,15 @@ function getTotalVersions(repoInfos: RepoInfo[]) {
 }
 
 async function main() {
-  const { repoNames } = readJson<Input>("runner/input.json");
-  const { arg1 } = parseArgv(process.argv);
+  const { arg1, arg2 } = parseArgv(process.argv);
+  const input = readJson<Input>("runner/input.json");
+  const repoNames = input.repoNames.slice(0, arg1);
 
   // 各リポジトリで並列実行
   const bar1 = createProgressBar("step1", {
     total: repoNames.length,
   });
-  const repoInfoResult = await runner.getRepoInfos(repoNames, bar1, arg1);
+  const repoInfoResult = await runner.getRepoInfos(repoNames, bar1, arg2);
   // RepoErrorを除去してRepoInfo[]にキャストする
   const repoInfos = repoInfoResult.filter(
     (info): info is RepoInfo => !("err" in info)
