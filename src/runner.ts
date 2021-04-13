@@ -113,19 +113,19 @@ export async function outputResult(repoStatuses: RepoStatus[]) {
     const successCount = getStateCount(repoStatus, "success");
     const failureCount = getStateCount(repoStatus, "failure");
     const pendingCount = getStateCount(repoStatus, "pending");
-    const versionCount = Object.keys(repoStatus).length;
+    const totalCount = Object.keys(repoStatus).length;
     const runCount = successCount + failureCount;
     const result: Result = {
       repoName: "",
       count: {
-        versions: versionCount,
+        total: totalCount,
         run: runCount,
       },
       rate: {
         total: {
-          success: successCount / versionCount,
-          failure: failureCount / versionCount,
-          pending: pendingCount / versionCount,
+          success: successCount / totalCount,
+          failure: failureCount / totalCount,
+          pending: pendingCount / totalCount,
         },
         run: {
           success: successCount / runCount,
