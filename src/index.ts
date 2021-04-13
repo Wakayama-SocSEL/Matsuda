@@ -23,6 +23,7 @@ function createProgressBar(label: string, options: ProgressBarOptions) {
     `${label} [:bar] :label :current/:total(:percent) :etas\n`,
     {
       width: 20,
+      stream: process.stdout,
       ...options,
     }
   );
