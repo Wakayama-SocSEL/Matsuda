@@ -20,7 +20,7 @@ function parseArgv(argv: string[]) {
 
 function createProgressBar(label: string, options: ProgressBarOptions) {
   const bar = new ProgressBar(
-    `${label} [:bar] :label :current/:total(:percent) :etas`,
+    `${label} [:bar] :label :current/:total(:percent) :etas\n`,
     {
       width: 20,
       ...options,
