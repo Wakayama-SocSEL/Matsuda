@@ -4,7 +4,13 @@ import path from "path";
 import ProgressBar from "progress";
 import { Octokit } from "@octokit/core";
 
-import { RepoName, RepoInfo, RepoError, RepoStatus } from "./types";
+import {
+  RepoName,
+  RepoInfo,
+  RepoError,
+  RepoStatus,
+  DatasetRepository,
+} from "./types";
 import {
   run,
   sleep,
@@ -29,20 +35,24 @@ async function getRepoInfo(repoName: RepoName): Promise<string[][]> {
 export type GetRepoInfoResult = RepoInfo | RepoError;
 
 export async function getRepoInfos(
-  repoNames: RepoName[],
+  repos: DatasetRepository[],
   bar: ProgressBar,
   concurrency: number
 ): Promise<GetRepoInfoResult[]> {
-  const tasks = repoNames.map((repoName) => {
+  const tasks = repos.map((repo) => {
     const task = async () => {
       // repoInfo.jsonが取得済みであれば読み込んで返す
-      const filepath = path.join(outputDir, repoName, "repoInfo.json");
+      const filepath = path.join(
+        outputDir,
+        repo.nameWithOwner,
+        "repoInfo.json"
+      );
       if (fs.existsSync(filepath)) {
         return readJson<RepoInfo | RepoError>(filepath);
       }
       try {
-        const results = await getRepoInfo(repoName);
-        const repoInfo: RepoInfo = { repoName, versions: {} };
+        const results = await getRepoInfo(repo.nameWithOwner);
+        const repoInfo: RepoInfo = { repo, versions: {} };
         for (const [name, hash] of results) {
           if (!(name in repoInfo.versions)) {
             repoInfo.versions[name] = hash;
@@ -51,14 +61,14 @@ export async function getRepoInfos(
         safeWriteFileSync(filepath, JSON.stringify(repoInfo, null, 2));
         return repoInfo;
       } catch (err) {
-        const repoError: RepoError = { repoName, err };
+        const repoError: RepoError = { repo, err };
         safeWriteFileSync(filepath, JSON.stringify(repoError, null, 2));
         return repoError;
       }
     };
     return async () => {
       const result = await task();
-      bar.tick({ label: repoName });
+      bar.tick({ label: repo.nameWithOwner });
       return result;
     };
   });
@@ -70,27 +80,32 @@ export async function getRepoStatus(
   bar: ProgressBar
 ): Promise<RepoStatus> {
   // repoStatus.jsonが取得済みであれば読み込んで返す
-  const filepath = path.join(outputDir, repoInfo.repoName, "repoStatus.json");
+  const filepath = path.join(
+    outputDir,
+    repoInfo.repo.nameWithOwner,
+    "repoStatus.json"
+  );
   if (fs.existsSync(filepath)) {
     const repoStatus = readJson<RepoStatus>(filepath);
     const versionsCount = Object.keys(repoInfo.versions).length;
-    bar.tick(versionsCount, { label: repoInfo.repoName });
+    bar.tick(versionsCount, { label: repoInfo.repo.nameWithOwner });
     return repoStatus;
   }
   const results: RepoStatus = {};
   const octokit = new Octokit({ auth: process.env.GH_TOKEN });
   for (const [version, ref] of Object.entries(repoInfo.versions)) {
-    const [owner, repo] = repoInfo.repoName.split("/");
+    const [owner, repo] = repoInfo.repo.nameWithOwner.split("/");
     const response = await octokit.request(
       "GET /repos/{owner}/{repo}/commits/{ref}/status",
       { owner, repo, ref }
     );
     // リポジトリ名が変更されている場合は、レスポンスに含まれるリポジトリ名を2度目以降のリクエストで使う
-    repoInfo.repoName = response.data.repository.full_name as RepoName;
+    repoInfo.repo.nameWithOwner = response.data.repository
+      .full_name as RepoName;
     results[version] = response;
     await sleep(0.5);
     bar.tick({
-      label: `${repoInfo.repoName}@${version}(${response.headers["x-ratelimit-used"]})`,
+      label: `${repoInfo.repo.nameWithOwner}@${version}(${response.headers["x-ratelimit-used"]})`,
     });
   }
   safeWriteFileSync(filepath, JSON.stringify(results, null, 2));

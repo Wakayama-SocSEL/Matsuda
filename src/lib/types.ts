@@ -3,14 +3,14 @@ import { Octokit } from "@octokit/core";
 export type RepoName = `${string}/${string}`;
 
 export type RepoInfo = {
-  repoName: RepoName;
+  repo: DatasetRepository;
   versions: {
     [name: string]: string;
   };
 };
 
 export type RepoError = {
-  repoName: RepoName;
+  repo: DatasetRepository;
   err: string;
 };
 

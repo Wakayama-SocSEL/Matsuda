@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import * as runner from "./lib/runner";
-import { RepoName, RepoInfo, RepoStatus, DatasetRepository } from "./lib/types";
+import { RepoInfo, RepoStatus, DatasetRepository } from "./lib/types";
 import { createProgressBar, readJson } from "./lib/utils";
 
 function parseArgv(argv: string[]) {
@@ -22,13 +22,13 @@ function getTotalVersions(repoInfos: RepoInfo[]) {
 async function main() {
   const { arg1, arg2 } = parseArgv(process.argv);
   const inputs = readJson<DatasetRepository[]>("runner/inputs.json");
-  const repoNames = inputs.slice(0, arg1).map((input) => input.nameWithOwner);
+  const repositories = inputs.slice(0, arg1);
 
   // 各リポジトリで並列実行
   const bar1 = createProgressBar("step1", {
-    total: repoNames.length,
+    total: repositories.length,
   });
-  const repoInfoResult = await runner.getRepoInfos(repoNames, bar1, arg2);
+  const repoInfoResult = await runner.getRepoInfos(repositories, bar1, arg2);
   // RepoErrorを除去してRepoInfo[]にキャストする
   const repoInfos = repoInfoResult.filter(
     (info): info is RepoInfo => !("err" in info)
