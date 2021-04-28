@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import * as runner from "./runner";
-import { RepoName, RepoInfo, RepoStatus } from "./types";
-import { createProgressBar, readJson } from "./utils";
+import * as runner from "./lib/runner";
+import { RepoName, RepoInfo, RepoStatus } from "./lib/types";
+import { createProgressBar, readJson } from "./lib/utils";
 
 type Input = {
   repoNames: RepoName[];
