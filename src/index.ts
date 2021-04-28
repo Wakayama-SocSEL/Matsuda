@@ -1,10 +1,9 @@
-import ProgressBar, { ProgressBarOptions } from "progress";
 import dotenv from "dotenv";
 dotenv.config();
 
 import * as runner from "./runner";
 import { RepoName, RepoInfo, RepoStatus } from "./types";
-import { readJson } from "./utils";
+import { createProgressBar, readJson } from "./utils";
 
 type Input = {
   repoNames: RepoName[];
@@ -16,19 +15,6 @@ function parseArgv(argv: string[]) {
     arg1: parseInt(arg1) || 5,
     arg2: parseInt(arg2) || 5,
   };
-}
-
-function createProgressBar(label: string, options: ProgressBarOptions) {
-  const bar = new ProgressBar(
-    `${label} [:bar] :label :current/:total(:percent) :etas\n`,
-    {
-      width: 20,
-      stream: process.stdout,
-      ...options,
-    }
-  );
-  bar.tick(0, { label: "starting..." });
-  return bar;
 }
 
 function getTotalVersions(repoInfos: RepoInfo[]) {

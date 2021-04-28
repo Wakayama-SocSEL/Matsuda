@@ -2,6 +2,8 @@ import fs from "fs";
 import path from "path";
 import childProcess from "child_process";
 
+import ProgressBar, { ProgressBarOptions } from "progress";
+
 export async function run(command: string, cwd: string = "."): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     childProcess.exec(`bash -c "${command}" 2>&1`, { cwd }, (error, stdout) => {
@@ -51,3 +53,16 @@ export function readJson<T>(filepath: string): T {
 }
 
 export const outputDir = path.join(process.cwd(), "output");
+
+export function createProgressBar(label: string, options: ProgressBarOptions) {
+  const bar = new ProgressBar(
+    `${label} [:bar] :label :current/:total(:percent) :etas\n`,
+    {
+      width: 20,
+      stream: process.stdout,
+      ...options,
+    }
+  );
+  bar.tick(0, { label: "starting..." });
+  return bar;
+}

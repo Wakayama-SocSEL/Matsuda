@@ -23,7 +23,7 @@ export type RepoStatus = {
 };
 
 // pkg_repositories.csv
-type DatasetRepository = {
+export type DatasetRepository = {
   npm_pkg: string;
   nameWithOwner: string;
   hasTestScript: string;
