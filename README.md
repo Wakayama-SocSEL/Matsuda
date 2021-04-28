@@ -16,6 +16,5 @@ $ docker-compose run --rm main yarn start
 
 ```sh
 $ mv path/to/dataset ./dataset
-$ ls -1 *.csv | sed "s/\.csv//g" | xargs -i sqlite -csv dataset.db ".import {}.csv {}"
 $ docker-compose run --rm -w /code/runner main ./getInput.sh
 ```
