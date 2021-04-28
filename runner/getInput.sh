@@ -17,4 +17,4 @@ FROM pkg_repositories
   ORDER BY npms_score DESC
 "
 
-sqlite3 ../dataset/dataset.db -json "$QUERY" > input.json
+sqlite3 ../dataset/dataset.db -json "$QUERY" > inputs.json

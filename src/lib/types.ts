@@ -25,7 +25,7 @@ export type RepoStatus = {
 // pkg_repositories.csv
 export type DatasetRepository = {
   npm_pkg: string;
-  nameWithOwner: string;
+  nameWithOwner: RepoName;
   hasTestScript: string;
   npms_score: number;
 };

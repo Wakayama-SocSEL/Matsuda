@@ -2,12 +2,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import * as runner from "./lib/runner";
-import { RepoName, RepoInfo, RepoStatus } from "./lib/types";
+import { RepoName, RepoInfo, RepoStatus, DatasetRepository } from "./lib/types";
 import { createProgressBar, readJson } from "./lib/utils";
-
-type Input = {
-  repoNames: RepoName[];
-};
 
 function parseArgv(argv: string[]) {
   const [_, __, arg1, arg2] = argv;
@@ -25,8 +21,8 @@ function getTotalVersions(repoInfos: RepoInfo[]) {
 
 async function main() {
   const { arg1, arg2 } = parseArgv(process.argv);
-  const input = readJson<Input>("runner/input.json");
-  const repoNames = input.repoNames.slice(0, arg1);
+  const inputs = readJson<DatasetRepository[]>("runner/inputs.json");
+  const repoNames = inputs.slice(0, arg1).map((input) => input.nameWithOwner);
 
   // 各リポジトリで並列実行
   const bar1 = createProgressBar("step1", {
