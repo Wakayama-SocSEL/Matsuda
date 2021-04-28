@@ -76,6 +76,15 @@ export async function getRepoInfos(
   return parallelPromiseAll<GetRepoInfoResult>(tasks, concurrency);
 }
 
+function getOwnerAndRepo(repoResult: RepoResult) {
+  const nameWithOwner: RepoName =
+    Object.values(repoResult.apiResponses).length > 0
+      ? Object.values(repoResult.apiResponses)[0].data.repository.full_name
+      : repoResult.repo.nameWithOwner;
+  const [owner, repo] = nameWithOwner.split("/");
+  return { owner, repo };
+}
+
 export async function getRepoResult(
   repoInfo: RepoInfo,
   bar: ProgressBar
@@ -95,7 +104,7 @@ export async function getRepoResult(
   const result: RepoResult = { repo: repoInfo.repo, apiResponses: {} };
   const octokit = new Octokit({ auth: process.env.GH_TOKEN });
   for (const [version, ref] of Object.entries(repoInfo.versions)) {
-    const [owner, repo] = repoInfo.repo.nameWithOwner.split("/");
+    const { owner, repo } = getOwnerAndRepo(result);
     const response = await octokit.request(
       "GET /repos/{owner}/{repo}/commits/{ref}/status",
       { owner, repo, ref }
