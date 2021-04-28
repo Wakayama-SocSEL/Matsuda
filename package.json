@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "docker": "docker build -t kazuki-m/runner ./runner",
-    "start": "yarn && ts-node src/index.ts",
+    "analysis": "yarn && ts-node src/analysis.ts",
+    "experiment": "yarn && ts-node src/experiment.ts",
     "format": "prettier . -w"
   },
   "devDependencies": {
