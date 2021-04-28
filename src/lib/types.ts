@@ -18,8 +18,13 @@ type PromiseType<T extends Promise<any>> = T extends Promise<infer P>
   ? P
   : never;
 
-export type RepoStatus = {
+export type ApiResponses = {
   [version: string]: PromiseType<ReturnType<Octokit["request"]>>;
+};
+
+export type RepoResult = {
+  repo: DatasetRepository;
+  apiResponses: ApiResponses;
 };
 
 // pkg_repositories.csv

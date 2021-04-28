@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import * as runner from "./lib/runner";
-import { RepoInfo, RepoStatus, DatasetRepository } from "./lib/types";
+import { RepoInfo, DatasetRepository, RepoResult } from "./lib/types";
 import { createProgressBar, readJson } from "./lib/utils";
 
 function parseArgv(argv: string[]) {
@@ -37,15 +37,15 @@ async function main() {
   const bar2 = createProgressBar("step2", {
     total: getTotalVersions(repoInfos),
   });
-  const statuses: RepoStatus[] = [];
+  const results: RepoResult[] = [];
   for (const repoInfo of repoInfos) {
     //  各バージョンで実行
-    const status = await runner.getRepoStatus(repoInfo, bar2);
-    statuses.push(status);
+    const result = await runner.getRepoResult(repoInfo, bar2);
+    results.push(result);
   }
 
   console.log("step3 creating output.json");
-  await runner.outputResult(statuses);
+  await runner.outputResult(results);
 }
 
 main();

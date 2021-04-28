@@ -8,8 +8,9 @@ import {
   RepoName,
   RepoInfo,
   RepoError,
-  RepoStatus,
+  RepoResult,
   DatasetRepository,
+  ApiResponses,
 } from "./types";
 import {
   run,
@@ -75,23 +76,23 @@ export async function getRepoInfos(
   return parallelPromiseAll<GetRepoInfoResult>(tasks, concurrency);
 }
 
-export async function getRepoStatus(
+export async function getRepoResult(
   repoInfo: RepoInfo,
   bar: ProgressBar
-): Promise<RepoStatus> {
+): Promise<RepoResult> {
   // repoStatus.jsonが取得済みであれば読み込んで返す
   const filepath = path.join(
     outputDir,
     repoInfo.repo.nameWithOwner,
-    "repoStatus.json"
+    "repoResult.json"
   );
   if (fs.existsSync(filepath)) {
-    const repoStatus = readJson<RepoStatus>(filepath);
+    const repoStatus = readJson<RepoResult>(filepath);
     const versionsCount = Object.keys(repoInfo.versions).length;
     bar.tick(versionsCount, { label: repoInfo.repo.nameWithOwner });
     return repoStatus;
   }
-  const results: RepoStatus = {};
+  const result: RepoResult = { repo: repoInfo.repo, apiResponses: {} };
   const octokit = new Octokit({ auth: process.env.GH_TOKEN });
   for (const [version, ref] of Object.entries(repoInfo.versions)) {
     const [owner, repo] = repoInfo.repo.nameWithOwner.split("/");
@@ -99,64 +100,59 @@ export async function getRepoStatus(
       "GET /repos/{owner}/{repo}/commits/{ref}/status",
       { owner, repo, ref }
     );
-    // リポジトリ名が変更されている場合は、レスポンスに含まれるリポジトリ名を2度目以降のリクエストで使う
-    repoInfo.repo.nameWithOwner = response.data.repository
-      .full_name as RepoName;
-    results[version] = response;
+    result.apiResponses[version] = response;
     await sleep(0.5);
     bar.tick({
       label: `${repoInfo.repo.nameWithOwner}@${version}(${response.headers["x-ratelimit-used"]})`,
     });
   }
-  safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
-  return results;
+  safeWriteFileSync(filepath, JSON.stringify(result, null, 2));
+  return result;
 }
 
 type Result = {
   [key: string]: any;
 };
 
-function getStateCount(repoStatus: RepoStatus, state: string) {
-  return Object.values(repoStatus).filter(
-    (status) => status.data.state == state
-  ).length;
+type State = "success" | "failure" | "pending";
+
+function getStateCount(reponses: ApiResponses, state: State) {
+  return Object.values(reponses).filter((status) => status.data.state == state)
+    .length;
 }
 
-export async function outputResult(repoStatuses: RepoStatus[]) {
+function createData(stateCounts: { [state in State]: number }, state: State) {
+  const { success, failure, pending } = stateCounts;
+  const run = success + failure;
+  const total = run + pending;
+  return {
+    count: stateCounts[state],
+    total: {
+      rate: stateCounts[state] / total,
+    },
+    run: {
+      rate: stateCounts[state] / run,
+    },
+  };
+}
+
+export async function outputResult(repoResults: RepoResult[]) {
   const results: Result[] = [];
-  for (const repoStatus of repoStatuses) {
-    const successCount = getStateCount(repoStatus, "success");
-    const failureCount = getStateCount(repoStatus, "failure");
-    const pendingCount = getStateCount(repoStatus, "pending");
-    const totalCount = Object.keys(repoStatus).length;
-    const runCount = successCount + failureCount;
+  for (const repoResult of repoResults) {
+    const { repo, apiResponses } = repoResult;
+    const stateCounts = {
+      success: getStateCount(apiResponses, "success"),
+      failure: getStateCount(apiResponses, "failure"),
+      pending: getStateCount(apiResponses, "pending"),
+    };
     const result: Result = {
-      repoName: "",
-      count: {
-        total: totalCount,
-        run: runCount,
-      },
-      rate: {
-        total: {
-          success: successCount / totalCount,
-          failure: failureCount / totalCount,
-          pending: pendingCount / totalCount,
-        },
-        run: {
-          success: successCount / runCount,
-          failure: failureCount / runCount,
-        },
-      },
-      states: {
-        success: 0,
-        failure: 0,
-        pending: 0,
+      repo,
+      data: {
+        success: createData(stateCounts, "success"),
+        failure: createData(stateCounts, "failure"),
+        pending: createData(stateCounts, "pending"),
       },
     };
-    for (const status of Object.values(repoStatus)) {
-      result.repoName = status.data.repository.full_name;
-      result.states[status.data.state] += 1;
-    }
     results.push(result);
   }
   const filepath = path.join(outputDir, "result.json");
