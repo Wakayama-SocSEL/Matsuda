@@ -10,6 +10,7 @@
     "format": "prettier . -w"
   },
   "devDependencies": {
+    "@types/json2csv": "^5.0.1",
     "@types/node": "^14.14.11",
     "@types/progress": "^2.0.3",
     "@types/semver": "^7.3.4",

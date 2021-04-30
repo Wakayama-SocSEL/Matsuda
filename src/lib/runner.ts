@@ -19,6 +19,7 @@ import {
   safeWriteFileSync,
   outputDir,
   readJson,
+  convertJsonToCSV,
 } from "./utils";
 
 function dockerRun(command: string): Promise<string> {
@@ -164,9 +165,12 @@ export async function outputResult(repoResults: RepoResult[]) {
     };
     results.push(result);
   }
-  const filepath = path.join(outputDir, "result.json");
-  safeWriteFileSync(filepath, JSON.stringify(results, null, 2));
-  await run(
-    `yarn json2csv -i ./output/result.json -o ./output/result.csv --flatten-objects`
+  safeWriteFileSync(
+    path.join(outputDir, "analysis_result.json"),
+    JSON.stringify(results, null, 2)
+  );
+  safeWriteFileSync(
+    path.join(outputDir, "analysis_result.csv"),
+    convertJsonToCSV(results)
   );
 }

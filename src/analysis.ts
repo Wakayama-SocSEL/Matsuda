@@ -44,7 +44,7 @@ async function main() {
     results.push(result);
   }
 
-  console.log("step3 creating output.json");
+  console.log("step3 creating result files");
   await runner.outputResult(results);
 }
 
