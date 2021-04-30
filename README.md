@@ -16,5 +16,6 @@ $ docker-compose run --rm main yarn start
 
 ```sh
 $ mv path/to/dataset ./dataset
+$ docker-compose run --rm main ./scripts/initDB.sh
 $ docker-compose run --rm main ./scripts/createInput.sh
 ```

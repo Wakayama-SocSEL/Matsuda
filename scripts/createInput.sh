@@ -1,4 +1,5 @@
 #!/bin/sh
 
-./scripts/createDB.sh
-sqlite3 ./dataset/dataset.db -json < ./scripts/sql/inputs.sql > ./runner/inputs.json
+sqlite3 ./dataset/dataset.db -json \
+  < ./scripts/sql/inputs.sql \
+  > ./runner/inputs.json
