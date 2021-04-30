@@ -71,7 +71,7 @@ export function createProgressBar(label: string, options: ProgressBarOptions) {
 export function convertJsonToCSV(json: any) {
   transforms.flatten;
   const parser = new Parser({
-    transforms: [transforms.flatten()],
+    transforms: [transforms.flatten({ separator: "_" })],
   });
   return parser.parse(json);
 }

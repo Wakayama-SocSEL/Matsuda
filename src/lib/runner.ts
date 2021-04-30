@@ -156,8 +156,8 @@ export async function outputResult(repoResults: RepoResult[]) {
       pending: getStateCount(apiResponses, "pending"),
     };
     const result: Result = {
-      repo,
-      data: {
+      repo_: repo,
+      data_: {
         success: createData(stateCounts, "success"),
         failure: createData(stateCounts, "failure"),
         pending: createData(stateCounts, "pending"),
