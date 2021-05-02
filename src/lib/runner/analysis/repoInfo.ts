@@ -1,14 +1,18 @@
 import fs from "fs";
 import path from "path";
 
-import { dockerRun } from "./dockerRun";
 import { RepoName, RepoInfo, RepoError, DatasetRepository } from "./types";
 import {
   outputDir,
   readJson,
   safeWriteFileSync,
   parallelPromiseAll,
+  run,
 } from "../../utils";
+
+export function dockerRun(command: string): Promise<string> {
+  return run(`docker run --rm kazuki-m/runner-analysis ${command}`);
+}
 
 async function getRepoInfo(repoName: RepoName): Promise<string[][]> {
   const result = await dockerRun(`./getRepoInfo.sh ${repoName}`);
