@@ -28,7 +28,11 @@ async function main() {
   const bar1 = createProgressBar("step1", {
     total: repositories.length,
   });
-  const repoInfoResult = await runner.getRepoInfos(repositories, bar1, arg2);
+  const repoInfoResult = await runner.analysis.getRepoInfos(
+    repositories,
+    bar1,
+    arg2
+  );
   // RepoErrorを除去してRepoInfo[]にキャストする
   const repoInfos = repoInfoResult.filter(
     (info): info is RepoInfo => !("err" in info)
@@ -40,12 +44,12 @@ async function main() {
   const results: RepoResult[] = [];
   for (const repoInfo of repoInfos) {
     //  各バージョンで実行
-    const result = await runner.getRepoResult(repoInfo, bar2);
+    const result = await runner.analysis.getRepoResult(repoInfo, bar2);
     results.push(result);
   }
 
   console.log("step3 creating result files");
-  await runner.outputResult(results);
+  await runner.analysis.outputResult(results);
 }
 
 main();
