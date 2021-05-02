@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 import { dockerRun } from "./dockerRun";
-import { RepoName, RepoInfo, RepoError, DatasetRepository } from "../../types";
+import { RepoName, RepoInfo, RepoError, DatasetRepository } from "./types";
 import {
   outputDir,
   readJson,

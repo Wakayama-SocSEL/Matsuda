@@ -3,7 +3,7 @@ import fs from "fs";
 
 import { Octokit } from "@octokit/core";
 
-import { RepoResult, RepoName, RepoInfo } from "../../types";
+import { RepoResult, RepoName, RepoInfo } from "./types";
 import { outputDir, readJson, sleep, safeWriteFileSync } from "../../utils";
 
 function getOwnerAndRepo(repoResult: RepoResult) {

@@ -2,7 +2,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import * as runner from "./lib/runner";
-import { RepoInfo, DatasetRepository, RepoResult } from "./lib/types";
+import {
+  RepoInfo,
+  DatasetRepository,
+  RepoResult,
+} from "./lib/runner/analysis/types";
 import { createProgressBar, readJson } from "./lib/utils";
 
 function parseArgv(argv: string[]) {

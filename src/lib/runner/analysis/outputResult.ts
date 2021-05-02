@@ -1,6 +1,6 @@
 import path from "path";
 
-import { ApiResponses, RepoResult } from "../../types";
+import { ApiResponses, RepoResult } from "./types";
 import { safeWriteFileSync, outputDir, convertJsonToCSV } from "../../utils";
 
 type State = "success" | "failure" | "pending";
