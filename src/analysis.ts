@@ -25,7 +25,7 @@ function getTotalVersions(repoInfos: RepoInfo[]) {
 
 async function main() {
   const { arg1, arg2 } = parseArgv(process.argv);
-  const inputs = readJson<DatasetRepository[]>("runner/inputs.json");
+  const inputs = readJson<DatasetRepository[]>("runner-analysis/inputs.json");
   const repositories = inputs.slice(0, arg1);
 
   // 各リポジトリで並列実行
