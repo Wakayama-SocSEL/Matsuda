@@ -1,0 +1,3702 @@
+[
+  {
+    "repo_": {
+      "npm_pkg": "uuid",
+      "nameWithOwner": "kelektiv/node-uuid",
+      "hasTestScript": "1",
+      "npms_score": "0.9365171821421499"
+    },
+    "data_": {
+      "success": {
+        "count": 24,
+        "total": {
+          "rate": 0.5581395348837209
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 19,
+        "total": {
+          "rate": 0.4418604651162791
+        },
+        "run": {
+          "rate": 0.7916666666666666
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "es6-promise",
+      "nameWithOwner": "stefanpenner/es6-promise",
+      "hasTestScript": "1",
+      "npms_score": "0.9197364681974844"
+    },
+    "data_": {
+      "success": {
+        "count": 31,
+        "total": {
+          "rate": 0.6739130434782609
+        },
+        "run": {
+          "rate": 0.9393939393939394
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.043478260869565216
+        },
+        "run": {
+          "rate": 0.06060606060606061
+        }
+      },
+      "pending": {
+        "count": 13,
+        "total": {
+          "rate": 0.2826086956521739
+        },
+        "run": {
+          "rate": 0.3939393939393939
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "acorn",
+      "nameWithOwner": "acornjs/acorn",
+      "hasTestScript": "1",
+      "npms_score": "0.9084750820287657"
+    },
+    "data_": {
+      "success": {
+        "count": 79,
+        "total": {
+          "rate": 0.7596153846153846
+        },
+        "run": {
+          "rate": 0.9875
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.009615384615384616
+        },
+        "run": {
+          "rate": 0.0125
+        }
+      },
+      "pending": {
+        "count": 24,
+        "total": {
+          "rate": 0.23076923076923078
+        },
+        "run": {
+          "rate": 0.3
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "postcss-loader",
+      "nameWithOwner": "postcss/postcss-loader",
+      "hasTestScript": "1",
+      "npms_score": "0.903241439575496"
+    },
+    "data_": {
+      "success": {
+        "count": 62,
+        "total": {
+          "rate": 0.9841269841269841
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.015873015873015872
+        },
+        "run": {
+          "rate": 0.016129032258064516
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "joi",
+      "nameWithOwner": "hapijs/joi",
+      "hasTestScript": "1",
+      "npms_score": "0.9010259339300382"
+    },
+    "data_": {
+      "success": {
+        "count": 211,
+        "total": {
+          "rate": 0.8865546218487395
+        },
+        "run": {
+          "rate": 0.9295154185022027
+        }
+      },
+      "failure": {
+        "count": 16,
+        "total": {
+          "rate": 0.06722689075630252
+        },
+        "run": {
+          "rate": 0.07048458149779736
+        }
+      },
+      "pending": {
+        "count": 11,
+        "total": {
+          "rate": 0.046218487394957986
+        },
+        "run": {
+          "rate": 0.048458149779735685
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "cross-spawn",
+      "nameWithOwner": "moxystudio/node-cross-spawn",
+      "hasTestScript": "1",
+      "npms_score": "0.90003783555059"
+    },
+    "data_": {
+      "success": {
+        "count": 48,
+        "total": {
+          "rate": 0.8888888888888888
+        },
+        "run": {
+          "rate": 0.8888888888888888
+        }
+      },
+      "failure": {
+        "count": 6,
+        "total": {
+          "rate": 0.1111111111111111
+        },
+        "run": {
+          "rate": 0.1111111111111111
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "boom",
+      "nameWithOwner": "hapijs/boom",
+      "hasTestScript": "1",
+      "npms_score": "0.8986482296504711"
+    },
+    "data_": {
+      "success": {
+        "count": 81,
+        "total": {
+          "rate": 0.9101123595505618
+        },
+        "run": {
+          "rate": 0.9529411764705882
+        }
+      },
+      "failure": {
+        "count": 4,
+        "total": {
+          "rate": 0.0449438202247191
+        },
+        "run": {
+          "rate": 0.047058823529411764
+        }
+      },
+      "pending": {
+        "count": 4,
+        "total": {
+          "rate": 0.0449438202247191
+        },
+        "run": {
+          "rate": 0.047058823529411764
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "jsonfile",
+      "nameWithOwner": "jprichardson/node-jsonfile",
+      "hasTestScript": "1",
+      "npms_score": "0.8931535593394644"
+    },
+    "data_": {
+      "success": {
+        "count": 22,
+        "total": {
+          "rate": 0.88
+        },
+        "run": {
+          "rate": 0.9166666666666666
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.08
+        },
+        "run": {
+          "rate": 0.08333333333333333
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.04
+        },
+        "run": {
+          "rate": 0.041666666666666664
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "ms",
+      "nameWithOwner": "zeit/ms",
+      "hasTestScript": "1",
+      "npms_score": "0.8904368621000167"
+    },
+    "data_": {
+      "success": {
+        "count": 7,
+        "total": {
+          "rate": 0.3684210526315789
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 12,
+        "total": {
+          "rate": 0.631578947368421
+        },
+        "run": {
+          "rate": 1.7142857142857142
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "url-loader",
+      "nameWithOwner": "webpack-contrib/url-loader",
+      "hasTestScript": "1",
+      "npms_score": "0.8900812043109424"
+    },
+    "data_": {
+      "success": {
+        "count": 14,
+        "total": {
+          "rate": 0.4375
+        },
+        "run": {
+          "rate": 0.9333333333333333
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.03125
+        },
+        "run": {
+          "rate": 0.06666666666666667
+        }
+      },
+      "pending": {
+        "count": 17,
+        "total": {
+          "rate": 0.53125
+        },
+        "run": {
+          "rate": 1.1333333333333333
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "vinyl",
+      "nameWithOwner": "gulpjs/vinyl",
+      "hasTestScript": "1",
+      "npms_score": "0.8891208280688425"
+    },
+    "data_": {
+      "success": {
+        "count": 5,
+        "total": {
+          "rate": 0.16129032258064516
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 26,
+        "total": {
+          "rate": 0.8387096774193549
+        },
+        "run": {
+          "rate": 5.2
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "pify",
+      "nameWithOwner": "sindresorhus/pify",
+      "hasTestScript": "1",
+      "npms_score": "0.8868071587568348"
+    },
+    "data_": {
+      "success": {
+        "count": 10,
+        "total": {
+          "rate": 0.8333333333333334
+        },
+        "run": {
+          "rate": 0.8333333333333334
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.16666666666666666
+        },
+        "run": {
+          "rate": 0.16666666666666666
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "globby",
+      "nameWithOwner": "sindresorhus/globby",
+      "hasTestScript": "1",
+      "npms_score": "0.8839920501793121"
+    },
+    "data_": {
+      "success": {
+        "count": 27,
+        "total": {
+          "rate": 0.9
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 3,
+        "total": {
+          "rate": 0.1
+        },
+        "run": {
+          "rate": 0.1111111111111111
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "nodemailer",
+      "nameWithOwner": "nodemailer/nodemailer",
+      "hasTestScript": "1",
+      "npms_score": "0.8838735192448669"
+    },
+    "data_": {
+      "success": {
+        "count": 169,
+        "total": {
+          "rate": 0.6954732510288066
+        },
+        "run": {
+          "rate": 0.9337016574585635
+        }
+      },
+      "failure": {
+        "count": 12,
+        "total": {
+          "rate": 0.04938271604938271
+        },
+        "run": {
+          "rate": 0.06629834254143646
+        }
+      },
+      "pending": {
+        "count": 62,
+        "total": {
+          "rate": 0.2551440329218107
+        },
+        "run": {
+          "rate": 0.3425414364640884
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "invariant",
+      "nameWithOwner": "zertosh/invariant",
+      "hasTestScript": "1",
+      "npms_score": "0.8778456323670596"
+    },
+    "data_": {
+      "success": {
+        "count": 8,
+        "total": {
+          "rate": 0.6153846153846154
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 5,
+        "total": {
+          "rate": 0.38461538461538464
+        },
+        "run": {
+          "rate": 0.625
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "ora",
+      "nameWithOwner": "sindresorhus/ora",
+      "hasTestScript": "1",
+      "npms_score": "0.8776423306704437"
+    },
+    "data_": {
+      "success": {
+        "count": 27,
+        "total": {
+          "rate": 0.7941176470588235
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 7,
+        "total": {
+          "rate": 0.20588235294117646
+        },
+        "run": {
+          "rate": 0.25925925925925924
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "http-errors",
+      "nameWithOwner": "jshttp/http-errors",
+      "hasTestScript": "1",
+      "npms_score": "0.8770410301635958"
+    },
+    "data_": {
+      "success": {
+        "count": 22,
+        "total": {
+          "rate": 0.8148148148148148
+        },
+        "run": {
+          "rate": 0.8461538461538461
+        }
+      },
+      "failure": {
+        "count": 4,
+        "total": {
+          "rate": 0.14814814814814814
+        },
+        "run": {
+          "rate": 0.15384615384615385
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.037037037037037035
+        },
+        "run": {
+          "rate": 0.038461538461538464
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "del",
+      "nameWithOwner": "sindresorhus/del",
+      "hasTestScript": "1",
+      "npms_score": "0.8769807800420442"
+    },
+    "data_": {
+      "success": {
+        "count": 22,
+        "total": {
+          "rate": 0.9166666666666666
+        },
+        "run": {
+          "rate": 0.9565217391304348
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.041666666666666664
+        },
+        "run": {
+          "rate": 0.043478260869565216
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.041666666666666664
+        },
+        "run": {
+          "rate": 0.043478260869565216
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "through",
+      "nameWithOwner": "dominictarr/through",
+      "hasTestScript": "1",
+      "npms_score": "0.8758073424161721"
+    },
+    "data_": {
+      "success": {
+        "count": 23,
+        "total": {
+          "rate": 0.696969696969697
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 10,
+        "total": {
+          "rate": 0.30303030303030304
+        },
+        "run": {
+          "rate": 0.43478260869565216
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "depd",
+      "nameWithOwner": "dougwilson/nodejs-depd",
+      "hasTestScript": "1",
+      "npms_score": "0.8740735831294395"
+    },
+    "data_": {
+      "success": {
+        "count": 17,
+        "total": {
+          "rate": 1
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "cors",
+      "nameWithOwner": "expressjs/cors",
+      "hasTestScript": "1",
+      "npms_score": "0.8737772109089113"
+    },
+    "data_": {
+      "success": {
+        "count": 27,
+        "total": {
+          "rate": 0.7941176470588235
+        },
+        "run": {
+          "rate": 0.9310344827586207
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.058823529411764705
+        },
+        "run": {
+          "rate": 0.06896551724137931
+        }
+      },
+      "pending": {
+        "count": 5,
+        "total": {
+          "rate": 0.14705882352941177
+        },
+        "run": {
+          "rate": 0.1724137931034483
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "hoist-non-react-statics",
+      "nameWithOwner": "mridgway/hoist-non-react-statics",
+      "hasTestScript": "1",
+      "npms_score": "0.8730830655755895"
+    },
+    "data_": {
+      "success": {
+        "count": 33,
+        "total": {
+          "rate": 0.9705882352941176
+        },
+        "run": {
+          "rate": 0.9705882352941176
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.029411764705882353
+        },
+        "run": {
+          "rate": 0.029411764705882353
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "he",
+      "nameWithOwner": "mathiasbynens/he",
+      "hasTestScript": "1",
+      "npms_score": "0.8728774247940942"
+    },
+    "data_": {
+      "success": {
+        "count": 5,
+        "total": {
+          "rate": 0.18518518518518517
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 22,
+        "total": {
+          "rate": 0.8148148148148148
+        },
+        "run": {
+          "rate": 4.4
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "reselect",
+      "nameWithOwner": "reactjs/reselect",
+      "hasTestScript": "1",
+      "npms_score": "0.8723519908611429"
+    },
+    "data_": {
+      "success": {
+        "count": 15,
+        "total": {
+          "rate": 0.5357142857142857
+        },
+        "run": {
+          "rate": 0.8823529411764706
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.07142857142857142
+        },
+        "run": {
+          "rate": 0.11764705882352941
+        }
+      },
+      "pending": {
+        "count": 11,
+        "total": {
+          "rate": 0.39285714285714285
+        },
+        "run": {
+          "rate": 0.6470588235294118
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "strip-ansi",
+      "nameWithOwner": "chalk/strip-ansi",
+      "hasTestScript": "1",
+      "npms_score": "0.8705387340285204"
+    },
+    "data_": {
+      "success": {
+        "count": 15,
+        "total": {
+          "rate": 0.7894736842105263
+        },
+        "run": {
+          "rate": 0.8333333333333334
+        }
+      },
+      "failure": {
+        "count": 3,
+        "total": {
+          "rate": 0.15789473684210525
+        },
+        "run": {
+          "rate": 0.16666666666666666
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.05263157894736842
+        },
+        "run": {
+          "rate": 0.05555555555555555
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "bytes",
+      "nameWithOwner": "visionmedia/bytes.js",
+      "hasTestScript": "1",
+      "npms_score": "0.8677732153362526"
+    },
+    "data_": {
+      "success": {
+        "count": 6,
+        "total": {
+          "rate": 0.375
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 10,
+        "total": {
+          "rate": 0.625
+        },
+        "run": {
+          "rate": 1.6666666666666667
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "accepts",
+      "nameWithOwner": "jshttp/accepts",
+      "hasTestScript": "1",
+      "npms_score": "0.8671300293289466"
+    },
+    "data_": {
+      "success": {
+        "count": 33,
+        "total": {
+          "rate": 0.9428571428571428
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 2,
+        "total": {
+          "rate": 0.05714285714285714
+        },
+        "run": {
+          "rate": 0.06060606060606061
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "eslint-plugin-jsx-a11y",
+      "nameWithOwner": "evcohen/eslint-plugin-jsx-a11y",
+      "hasTestScript": "1",
+      "npms_score": "0.8657027249560622"
+    },
+    "data_": {
+      "success": {
+        "count": 60,
+        "total": {
+          "rate": 0.8108108108108109
+        },
+        "run": {
+          "rate": 0.9090909090909091
+        }
+      },
+      "failure": {
+        "count": 6,
+        "total": {
+          "rate": 0.08108108108108109
+        },
+        "run": {
+          "rate": 0.09090909090909091
+        }
+      },
+      "pending": {
+        "count": 8,
+        "total": {
+          "rate": 0.10810810810810811
+        },
+        "run": {
+          "rate": 0.12121212121212122
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "xmlbuilder",
+      "nameWithOwner": "oozcitak/xmlbuilder-js",
+      "hasTestScript": "1",
+      "npms_score": "0.8652061471566209"
+    },
+    "data_": {
+      "success": {
+        "count": 62,
+        "total": {
+          "rate": 0.6526315789473685
+        },
+        "run": {
+          "rate": 0.8985507246376812
+        }
+      },
+      "failure": {
+        "count": 7,
+        "total": {
+          "rate": 0.07368421052631578
+        },
+        "run": {
+          "rate": 0.10144927536231885
+        }
+      },
+      "pending": {
+        "count": 26,
+        "total": {
+          "rate": 0.2736842105263158
+        },
+        "run": {
+          "rate": 0.37681159420289856
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "vinyl-fs",
+      "nameWithOwner": "gulpjs/vinyl-fs",
+      "hasTestScript": "1",
+      "npms_score": "0.8646337000914308"
+    },
+    "data_": {
+      "success": {
+        "count": 4,
+        "total": {
+          "rate": 0.08888888888888889
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 41,
+        "total": {
+          "rate": 0.9111111111111111
+        },
+        "run": {
+          "rate": 10.25
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "tar",
+      "nameWithOwner": "npm/node-tar",
+      "hasTestScript": "1",
+      "npms_score": "0.8646039969603493"
+    },
+    "data_": {
+      "success": {
+        "count": 51,
+        "total": {
+          "rate": 0.5730337078651685
+        },
+        "run": {
+          "rate": 0.6986301369863014
+        }
+      },
+      "failure": {
+        "count": 22,
+        "total": {
+          "rate": 0.24719101123595505
+        },
+        "run": {
+          "rate": 0.3013698630136986
+        }
+      },
+      "pending": {
+        "count": 16,
+        "total": {
+          "rate": 0.1797752808988764
+        },
+        "run": {
+          "rate": 0.2191780821917808
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "micromatch",
+      "nameWithOwner": "micromatch/micromatch",
+      "hasTestScript": "1",
+      "npms_score": "0.864368865108242"
+    },
+    "data_": {
+      "success": {
+        "count": 39,
+        "total": {
+          "rate": 0.5909090909090909
+        },
+        "run": {
+          "rate": 0.75
+        }
+      },
+      "failure": {
+        "count": 13,
+        "total": {
+          "rate": 0.19696969696969696
+        },
+        "run": {
+          "rate": 0.25
+        }
+      },
+      "pending": {
+        "count": 14,
+        "total": {
+          "rate": 0.21212121212121213
+        },
+        "run": {
+          "rate": 0.2692307692307692
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "parseurl",
+      "nameWithOwner": "pillarjs/parseurl",
+      "hasTestScript": "1",
+      "npms_score": "0.8641799525919962"
+    },
+    "data_": {
+      "success": {
+        "count": 5,
+        "total": {
+          "rate": 0.45454545454545453
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 6,
+        "total": {
+          "rate": 0.5454545454545454
+        },
+        "run": {
+          "rate": 1.2
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "type-is",
+      "nameWithOwner": "jshttp/type-is",
+      "hasTestScript": "1",
+      "npms_score": "0.862608929021603"
+    },
+    "data_": {
+      "success": {
+        "count": 37,
+        "total": {
+          "rate": 0.9736842105263158
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.02631578947368421
+        },
+        "run": {
+          "rate": 0.02702702702702703
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "methods",
+      "nameWithOwner": "jshttp/methods",
+      "hasTestScript": "1",
+      "npms_score": "0.862533074604311"
+    },
+    "data_": {
+      "success": {
+        "count": 2,
+        "total": {
+          "rate": 0.2857142857142857
+        },
+        "run": {
+          "rate": 0.2857142857142857
+        }
+      },
+      "failure": {
+        "count": 5,
+        "total": {
+          "rate": 0.7142857142857143
+        },
+        "run": {
+          "rate": 0.7142857142857143
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "hawk",
+      "nameWithOwner": "hueniverse/hawk",
+      "hasTestScript": "1",
+      "npms_score": "0.8619059847504746"
+    },
+    "data_": {
+      "success": {
+        "count": 64,
+        "total": {
+          "rate": 0.7529411764705882
+        },
+        "run": {
+          "rate": 0.9014084507042254
+        }
+      },
+      "failure": {
+        "count": 7,
+        "total": {
+          "rate": 0.08235294117647059
+        },
+        "run": {
+          "rate": 0.09859154929577464
+        }
+      },
+      "pending": {
+        "count": 14,
+        "total": {
+          "rate": 0.16470588235294117
+        },
+        "run": {
+          "rate": 0.19718309859154928
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "strip-json-comments",
+      "nameWithOwner": "sindresorhus/strip-json-comments",
+      "hasTestScript": "1",
+      "npms_score": "0.8605610568422339"
+    },
+    "data_": {
+      "success": {
+        "count": 13,
+        "total": {
+          "rate": 0.8125
+        },
+        "run": {
+          "rate": 0.9285714285714286
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.0625
+        },
+        "run": {
+          "rate": 0.07142857142857142
+        }
+      },
+      "pending": {
+        "count": 2,
+        "total": {
+          "rate": 0.125
+        },
+        "run": {
+          "rate": 0.14285714285714285
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "etag",
+      "nameWithOwner": "jshttp/etag",
+      "hasTestScript": "1",
+      "npms_score": "0.8585522387199909"
+    },
+    "data_": {
+      "success": {
+        "count": 14,
+        "total": {
+          "rate": 1
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "supports-color",
+      "nameWithOwner": "chalk/supports-color",
+      "hasTestScript": "1",
+      "npms_score": "0.858348421849523"
+    },
+    "data_": {
+      "success": {
+        "count": 42,
+        "total": {
+          "rate": 0.8571428571428571
+        },
+        "run": {
+          "rate": 0.9767441860465116
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.02040816326530612
+        },
+        "run": {
+          "rate": 0.023255813953488372
+        }
+      },
+      "pending": {
+        "count": 6,
+        "total": {
+          "rate": 0.12244897959183673
+        },
+        "run": {
+          "rate": 0.13953488372093023
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "find-up",
+      "nameWithOwner": "sindresorhus/find-up",
+      "hasTestScript": "1",
+      "npms_score": "0.8578343371895973"
+    },
+    "data_": {
+      "success": {
+        "count": 9,
+        "total": {
+          "rate": 0.8181818181818182
+        },
+        "run": {
+          "rate": 0.9
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.09090909090909091
+        },
+        "run": {
+          "rate": 0.1
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.09090909090909091
+        },
+        "run": {
+          "rate": 0.1
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "camelcase",
+      "nameWithOwner": "sindresorhus/camelcase",
+      "hasTestScript": "1",
+      "npms_score": "0.8575807041386336"
+    },
+    "data_": {
+      "success": {
+        "count": 19,
+        "total": {
+          "rate": 0.8636363636363636
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 3,
+        "total": {
+          "rate": 0.13636363636363635
+        },
+        "run": {
+          "rate": 0.15789473684210525
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "serve-favicon",
+      "nameWithOwner": "expressjs/serve-favicon",
+      "hasTestScript": "1",
+      "npms_score": "0.8574633200129496"
+    },
+    "data_": {
+      "success": {
+        "count": 24,
+        "total": {
+          "rate": 0.8888888888888888
+        },
+        "run": {
+          "rate": 0.9230769230769231
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.07407407407407407
+        },
+        "run": {
+          "rate": 0.07692307692307693
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.037037037037037035
+        },
+        "run": {
+          "rate": 0.038461538461538464
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "js-base64",
+      "nameWithOwner": "dankogai/js-base64",
+      "hasTestScript": "1",
+      "npms_score": "0.8568974855486036"
+    },
+    "data_": {
+      "success": {
+        "count": 40,
+        "total": {
+          "rate": 0.6451612903225806
+        },
+        "run": {
+          "rate": 0.975609756097561
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.016129032258064516
+        },
+        "run": {
+          "rate": 0.024390243902439025
+        }
+      },
+      "pending": {
+        "count": 21,
+        "total": {
+          "rate": 0.3387096774193548
+        },
+        "run": {
+          "rate": 0.5121951219512195
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "content-type",
+      "nameWithOwner": "jshttp/content-type",
+      "hasTestScript": "1",
+      "npms_score": "0.8565409175032326"
+    },
+    "data_": {
+      "success": {
+        "count": 4,
+        "total": {
+          "rate": 0.8
+        },
+        "run": {
+          "rate": 0.8
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.2
+        },
+        "run": {
+          "rate": 0.2
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "utils-merge",
+      "nameWithOwner": "jaredhanson/utils-merge",
+      "hasTestScript": "1",
+      "npms_score": "0.8562436933993569"
+    },
+    "data_": {
+      "success": {
+        "count": 1,
+        "total": {
+          "rate": 0.5
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.5
+        },
+        "run": {
+          "rate": 1
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "ansi-styles",
+      "nameWithOwner": "chalk/ansi-styles",
+      "hasTestScript": "1",
+      "npms_score": "0.8555746135609408"
+    },
+    "data_": {
+      "success": {
+        "count": 17,
+        "total": {
+          "rate": 0.7083333333333334
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 7,
+        "total": {
+          "rate": 0.2916666666666667
+        },
+        "run": {
+          "rate": 0.4117647058823529
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "gulp-rename",
+      "nameWithOwner": "hparra/gulp-rename",
+      "hasTestScript": "1",
+      "npms_score": "0.8554983437282213"
+    },
+    "data_": {
+      "success": {
+        "count": 7,
+        "total": {
+          "rate": 0.5833333333333334
+        },
+        "run": {
+          "rate": 0.875
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.08333333333333333
+        },
+        "run": {
+          "rate": 0.125
+        }
+      },
+      "pending": {
+        "count": 4,
+        "total": {
+          "rate": 0.3333333333333333
+        },
+        "run": {
+          "rate": 0.5
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "statuses",
+      "nameWithOwner": "jshttp/statuses",
+      "hasTestScript": "1",
+      "npms_score": "0.8554349417451135"
+    },
+    "data_": {
+      "success": {
+        "count": 9,
+        "total": {
+          "rate": 0.6
+        },
+        "run": {
+          "rate": 0.75
+        }
+      },
+      "failure": {
+        "count": 3,
+        "total": {
+          "rate": 0.2
+        },
+        "run": {
+          "rate": 0.25
+        }
+      },
+      "pending": {
+        "count": 3,
+        "total": {
+          "rate": 0.2
+        },
+        "run": {
+          "rate": 0.25
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "figures",
+      "nameWithOwner": "sindresorhus/figures",
+      "hasTestScript": "1",
+      "npms_score": "0.8548945928699503"
+    },
+    "data_": {
+      "success": {
+        "count": 18,
+        "total": {
+          "rate": 0.9
+        },
+        "run": {
+          "rate": 0.9
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.1
+        },
+        "run": {
+          "rate": 0.1
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "inherits",
+      "nameWithOwner": "isaacs/inherits",
+      "hasTestScript": "1",
+      "npms_score": "0.8543907397422148"
+    },
+    "data_": {
+      "success": {
+        "count": 1,
+        "total": {
+          "rate": 0.16666666666666666
+        },
+        "run": {
+          "rate": 0.3333333333333333
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.3333333333333333
+        },
+        "run": {
+          "rate": 0.6666666666666666
+        }
+      },
+      "pending": {
+        "count": 3,
+        "total": {
+          "rate": 0.5
+        },
+        "run": {
+          "rate": 1
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "basic-auth",
+      "nameWithOwner": "jshttp/basic-auth",
+      "hasTestScript": "1",
+      "npms_score": "0.8539016937870461"
+    },
+    "data_": {
+      "success": {
+        "count": 7,
+        "total": {
+          "rate": 0.7777777777777778
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 2,
+        "total": {
+          "rate": 0.2222222222222222
+        },
+        "run": {
+          "rate": 0.2857142857142857
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "get-stdin",
+      "nameWithOwner": "sindresorhus/get-stdin",
+      "hasTestScript": "1",
+      "npms_score": "0.8530350561945828"
+    },
+    "data_": {
+      "success": {
+        "count": 12,
+        "total": {
+          "rate": 0.8
+        },
+        "run": {
+          "rate": 0.9230769230769231
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.06666666666666667
+        },
+        "run": {
+          "rate": 0.07692307692307693
+        }
+      },
+      "pending": {
+        "count": 2,
+        "total": {
+          "rate": 0.13333333333333333
+        },
+        "run": {
+          "rate": 0.15384615384615385
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "safe-buffer",
+      "nameWithOwner": "feross/safe-buffer",
+      "hasTestScript": "1",
+      "npms_score": "0.852616171657411"
+    },
+    "data_": {
+      "success": {
+        "count": 10,
+        "total": {
+          "rate": 0.8333333333333334
+        },
+        "run": {
+          "rate": 0.9090909090909091
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.08333333333333333
+        },
+        "run": {
+          "rate": 0.09090909090909091
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.08333333333333333
+        },
+        "run": {
+          "rate": 0.09090909090909091
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "range-parser",
+      "nameWithOwner": "jshttp/range-parser",
+      "hasTestScript": "1",
+      "npms_score": "0.8521890892195152"
+    },
+    "data_": {
+      "success": {
+        "count": 5,
+        "total": {
+          "rate": 0.45454545454545453
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 6,
+        "total": {
+          "rate": 0.5454545454545454
+        },
+        "run": {
+          "rate": 1.2
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "webpack-bundle-analyzer",
+      "nameWithOwner": "webpack-contrib/webpack-bundle-analyzer",
+      "hasTestScript": "1",
+      "npms_score": "0.8511453642399709"
+    },
+    "data_": {
+      "success": {
+        "count": 51,
+        "total": {
+          "rate": 0.6891891891891891
+        },
+        "run": {
+          "rate": 0.9622641509433962
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.02702702702702703
+        },
+        "run": {
+          "rate": 0.03773584905660377
+        }
+      },
+      "pending": {
+        "count": 21,
+        "total": {
+          "rate": 0.28378378378378377
+        },
+        "run": {
+          "rate": 0.39622641509433965
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "require-directory",
+      "nameWithOwner": "troygoode/node-require-directory",
+      "hasTestScript": "1",
+      "npms_score": "0.8509829573673163"
+    },
+    "data_": {
+      "success": {
+        "count": 6,
+        "total": {
+          "rate": 0.46153846153846156
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 7,
+        "total": {
+          "rate": 0.5384615384615384
+        },
+        "run": {
+          "rate": 1.1666666666666667
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "json-stable-stringify",
+      "nameWithOwner": "substack/json-stable-stringify",
+      "hasTestScript": "1",
+      "npms_score": "0.8506699491334956"
+    },
+    "data_": {
+      "success": {
+        "count": 6,
+        "total": {
+          "rate": 0.75
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 2,
+        "total": {
+          "rate": 0.25
+        },
+        "run": {
+          "rate": 0.3333333333333333
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "browserslist",
+      "nameWithOwner": "ai/browserslist",
+      "hasTestScript": "1",
+      "npms_score": "0.8504157752151086"
+    },
+    "data_": {
+      "success": {
+        "count": 137,
+        "total": {
+          "rate": 0.9013157894736842
+        },
+        "run": {
+          "rate": 0.9785714285714285
+        }
+      },
+      "failure": {
+        "count": 3,
+        "total": {
+          "rate": 0.019736842105263157
+        },
+        "run": {
+          "rate": 0.02142857142857143
+        }
+      },
+      "pending": {
+        "count": 12,
+        "total": {
+          "rate": 0.07894736842105263
+        },
+        "run": {
+          "rate": 0.08571428571428572
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "mobx",
+      "nameWithOwner": "mobxjs/mobx",
+      "hasTestScript": "1",
+      "npms_score": "0.8503073663379563"
+    },
+    "data_": {
+      "success": {
+        "count": 167,
+        "total": {
+          "rate": 0.7198275862068966
+        },
+        "run": {
+          "rate": 0.8434343434343434
+        }
+      },
+      "failure": {
+        "count": 31,
+        "total": {
+          "rate": 0.1336206896551724
+        },
+        "run": {
+          "rate": 0.15656565656565657
+        }
+      },
+      "pending": {
+        "count": 34,
+        "total": {
+          "rate": 0.14655172413793102
+        },
+        "run": {
+          "rate": 0.1717171717171717
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "base64-js",
+      "nameWithOwner": "beatgammit/base64-js",
+      "hasTestScript": "1",
+      "npms_score": "0.8501261658093029"
+    },
+    "data_": {
+      "success": {
+        "count": 20,
+        "total": {
+          "rate": 0.8333333333333334
+        },
+        "run": {
+          "rate": 0.9523809523809523
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.041666666666666664
+        },
+        "run": {
+          "rate": 0.047619047619047616
+        }
+      },
+      "pending": {
+        "count": 3,
+        "total": {
+          "rate": 0.125
+        },
+        "run": {
+          "rate": 0.14285714285714285
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "extend-shallow",
+      "nameWithOwner": "jonschlinkert/extend-shallow",
+      "hasTestScript": "1",
+      "npms_score": "0.850004314771792"
+    },
+    "data_": {
+      "success": {
+        "count": 7,
+        "total": {
+          "rate": 0.5
+        },
+        "run": {
+          "rate": 0.7777777777777778
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.14285714285714285
+        },
+        "run": {
+          "rate": 0.2222222222222222
+        }
+      },
+      "pending": {
+        "count": 5,
+        "total": {
+          "rate": 0.35714285714285715
+        },
+        "run": {
+          "rate": 0.5555555555555556
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "cosmiconfig",
+      "nameWithOwner": "davidtheclark/cosmiconfig",
+      "hasTestScript": "1",
+      "npms_score": "0.8493508312078792"
+    },
+    "data_": {
+      "success": {
+        "count": 33,
+        "total": {
+          "rate": 0.8918918918918919
+        },
+        "run": {
+          "rate": 0.9428571428571428
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.05405405405405406
+        },
+        "run": {
+          "rate": 0.05714285714285714
+        }
+      },
+      "pending": {
+        "count": 2,
+        "total": {
+          "rate": 0.05405405405405406
+        },
+        "run": {
+          "rate": 0.05714285714285714
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "finalhandler",
+      "nameWithOwner": "pillarjs/finalhandler",
+      "hasTestScript": "1",
+      "npms_score": "0.849277954693014"
+    },
+    "data_": {
+      "success": {
+        "count": 27,
+        "total": {
+          "rate": 1
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "array-flatten",
+      "nameWithOwner": "blakeembrey/array-flatten",
+      "hasTestScript": "1",
+      "npms_score": "0.8491759068335724"
+    },
+    "data_": {
+      "success": {
+        "count": 11,
+        "total": {
+          "rate": 0.7857142857142857
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 3,
+        "total": {
+          "rate": 0.21428571428571427
+        },
+        "run": {
+          "rate": 0.2727272727272727
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "make-dir",
+      "nameWithOwner": "sindresorhus/make-dir",
+      "hasTestScript": "1",
+      "npms_score": "0.8484832714767236"
+    },
+    "data_": {
+      "success": {
+        "count": 8,
+        "total": {
+          "rate": 0.7272727272727273
+        },
+        "run": {
+          "rate": 0.7272727272727273
+        }
+      },
+      "failure": {
+        "count": 3,
+        "total": {
+          "rate": 0.2727272727272727
+        },
+        "run": {
+          "rate": 0.2727272727272727
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "proxy-addr",
+      "nameWithOwner": "jshttp/proxy-addr",
+      "hasTestScript": "1",
+      "npms_score": "0.8483711400711644"
+    },
+    "data_": {
+      "success": {
+        "count": 26,
+        "total": {
+          "rate": 1
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "kind-of",
+      "nameWithOwner": "jonschlinkert/kind-of",
+      "hasTestScript": "1",
+      "npms_score": "0.8481636444431349"
+    },
+    "data_": {
+      "success": {
+        "count": 10,
+        "total": {
+          "rate": 0.37037037037037035
+        },
+        "run": {
+          "rate": 0.5
+        }
+      },
+      "failure": {
+        "count": 10,
+        "total": {
+          "rate": 0.37037037037037035
+        },
+        "run": {
+          "rate": 0.5
+        }
+      },
+      "pending": {
+        "count": 7,
+        "total": {
+          "rate": 0.25925925925925924
+        },
+        "run": {
+          "rate": 0.35
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "read-pkg-up",
+      "nameWithOwner": "sindresorhus/read-pkg-up",
+      "hasTestScript": "1",
+      "npms_score": "0.8479591983023882"
+    },
+    "data_": {
+      "success": {
+        "count": 8,
+        "total": {
+          "rate": 0.8
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 2,
+        "total": {
+          "rate": 0.2
+        },
+        "run": {
+          "rate": 0.25
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "anymatch",
+      "nameWithOwner": "micromatch/anymatch",
+      "hasTestScript": "1",
+      "npms_score": "0.8478321209596654"
+    },
+    "data_": {
+      "success": {
+        "count": 15,
+        "total": {
+          "rate": 0.7894736842105263
+        },
+        "run": {
+          "rate": 0.9375
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.05263157894736842
+        },
+        "run": {
+          "rate": 0.0625
+        }
+      },
+      "pending": {
+        "count": 3,
+        "total": {
+          "rate": 0.15789473684210525
+        },
+        "run": {
+          "rate": 0.1875
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "convert-source-map",
+      "nameWithOwner": "thlorenz/convert-source-map",
+      "hasTestScript": "1",
+      "npms_score": "0.8476346611683496"
+    },
+    "data_": {
+      "success": {
+        "count": 25,
+        "total": {
+          "rate": 0.7352941176470589
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 9,
+        "total": {
+          "rate": 0.2647058823529412
+        },
+        "run": {
+          "rate": 0.36
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "bl",
+      "nameWithOwner": "rvagg/bl",
+      "hasTestScript": "1",
+      "npms_score": "0.8476279151951446"
+    },
+    "data_": {
+      "success": {
+        "count": 27,
+        "total": {
+          "rate": 0.627906976744186
+        },
+        "run": {
+          "rate": 0.75
+        }
+      },
+      "failure": {
+        "count": 9,
+        "total": {
+          "rate": 0.20930232558139536
+        },
+        "run": {
+          "rate": 0.25
+        }
+      },
+      "pending": {
+        "count": 7,
+        "total": {
+          "rate": 0.16279069767441862
+        },
+        "run": {
+          "rate": 0.19444444444444445
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "lazy-cache",
+      "nameWithOwner": "jonschlinkert/lazy-cache",
+      "hasTestScript": "1",
+      "npms_score": "0.8474343252925634"
+    },
+    "data_": {
+      "success": {
+        "count": 12,
+        "total": {
+          "rate": 0.7058823529411765
+        },
+        "run": {
+          "rate": 0.8
+        }
+      },
+      "failure": {
+        "count": 3,
+        "total": {
+          "rate": 0.17647058823529413
+        },
+        "run": {
+          "rate": 0.2
+        }
+      },
+      "pending": {
+        "count": 2,
+        "total": {
+          "rate": 0.11764705882352941
+        },
+        "run": {
+          "rate": 0.13333333333333333
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "color-convert",
+      "nameWithOwner": "Qix-/color-convert",
+      "hasTestScript": "1",
+      "npms_score": "0.8473598298923533"
+    },
+    "data_": {
+      "success": {
+        "count": 21,
+        "total": {
+          "rate": 0.5833333333333334
+        },
+        "run": {
+          "rate": 0.875
+        }
+      },
+      "failure": {
+        "count": 3,
+        "total": {
+          "rate": 0.08333333333333333
+        },
+        "run": {
+          "rate": 0.125
+        }
+      },
+      "pending": {
+        "count": 12,
+        "total": {
+          "rate": 0.3333333333333333
+        },
+        "run": {
+          "rate": 0.5
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "chokidar",
+      "nameWithOwner": "paulmillr/chokidar",
+      "hasTestScript": "1",
+      "npms_score": "0.8473502942025755"
+    },
+    "data_": {
+      "success": {
+        "count": 17,
+        "total": {
+          "rate": 0.16346153846153846
+        },
+        "run": {
+          "rate": 0.4473684210526316
+        }
+      },
+      "failure": {
+        "count": 21,
+        "total": {
+          "rate": 0.20192307692307693
+        },
+        "run": {
+          "rate": 0.5526315789473685
+        }
+      },
+      "pending": {
+        "count": 66,
+        "total": {
+          "rate": 0.6346153846153846
+        },
+        "run": {
+          "rate": 1.736842105263158
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "path-exists",
+      "nameWithOwner": "sindresorhus/path-exists",
+      "hasTestScript": "1",
+      "npms_score": "0.8469092825273679"
+    },
+    "data_": {
+      "success": {
+        "count": 6,
+        "total": {
+          "rate": 1
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "liftoff",
+      "nameWithOwner": "js-cli/js-liftoff",
+      "hasTestScript": "1",
+      "npms_score": "0.8466980536378743"
+    },
+    "data_": {
+      "success": {
+        "count": 44,
+        "total": {
+          "rate": 0.7719298245614035
+        },
+        "run": {
+          "rate": 0.8148148148148148
+        }
+      },
+      "failure": {
+        "count": 10,
+        "total": {
+          "rate": 0.17543859649122806
+        },
+        "run": {
+          "rate": 0.18518518518518517
+        }
+      },
+      "pending": {
+        "count": 3,
+        "total": {
+          "rate": 0.05263157894736842
+        },
+        "run": {
+          "rate": 0.05555555555555555
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "ejs",
+      "nameWithOwner": "mde/ejs",
+      "hasTestScript": "1",
+      "npms_score": "0.8464750445518052"
+    },
+    "data_": {
+      "success": {
+        "count": 47,
+        "total": {
+          "rate": 0.2088888888888889
+        },
+        "run": {
+          "rate": 0.9791666666666666
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.0044444444444444444
+        },
+        "run": {
+          "rate": 0.020833333333333332
+        }
+      },
+      "pending": {
+        "count": 177,
+        "total": {
+          "rate": 0.7866666666666666
+        },
+        "run": {
+          "rate": 3.6875
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "merge-descriptors",
+      "nameWithOwner": "component/merge-descriptors",
+      "hasTestScript": "1",
+      "npms_score": "0.8458305642668486"
+    },
+    "data_": {
+      "success": {
+        "count": 1,
+        "total": {
+          "rate": 0.25
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 3,
+        "total": {
+          "rate": 0.75
+        },
+        "run": {
+          "rate": 3
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "escape-string-regexp",
+      "nameWithOwner": "sindresorhus/escape-string-regexp",
+      "hasTestScript": "1",
+      "npms_score": "0.8456652100255281"
+    },
+    "data_": {
+      "success": {
+        "count": 8,
+        "total": {
+          "rate": 0.7272727272727273
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 3,
+        "total": {
+          "rate": 0.2727272727272727
+        },
+        "run": {
+          "rate": 0.375
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "webpack-manifest-plugin",
+      "nameWithOwner": "danethurber/webpack-manifest-plugin",
+      "hasTestScript": "1",
+      "npms_score": "0.8455557656334105"
+    },
+    "data_": {
+      "success": {
+        "count": 23,
+        "total": {
+          "rate": 0.71875
+        },
+        "run": {
+          "rate": 0.8214285714285714
+        }
+      },
+      "failure": {
+        "count": 5,
+        "total": {
+          "rate": 0.15625
+        },
+        "run": {
+          "rate": 0.17857142857142858
+        }
+      },
+      "pending": {
+        "count": 4,
+        "total": {
+          "rate": 0.125
+        },
+        "run": {
+          "rate": 0.14285714285714285
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "vary",
+      "nameWithOwner": "jshttp/vary",
+      "hasTestScript": "1",
+      "npms_score": "0.8454026140326387"
+    },
+    "data_": {
+      "success": {
+        "count": 7,
+        "total": {
+          "rate": 1
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "string-width",
+      "nameWithOwner": "sindresorhus/string-width",
+      "hasTestScript": "1",
+      "npms_score": "0.8449098292974412"
+    },
+    "data_": {
+      "success": {
+        "count": 12,
+        "total": {
+          "rate": 0.8
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 3,
+        "total": {
+          "rate": 0.2
+        },
+        "run": {
+          "rate": 0.25
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "cliui",
+      "nameWithOwner": "yargs/cliui",
+      "hasTestScript": "1",
+      "npms_score": "0.844189321701569"
+    },
+    "data_": {
+      "success": {
+        "count": 15,
+        "total": {
+          "rate": 0.625
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 9,
+        "total": {
+          "rate": 0.375
+        },
+        "run": {
+          "rate": 0.6
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "ansi-regex",
+      "nameWithOwner": "chalk/ansi-regex",
+      "hasTestScript": "1",
+      "npms_score": "0.8439454888468545"
+    },
+    "data_": {
+      "success": {
+        "count": 13,
+        "total": {
+          "rate": 0.9285714285714286
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.07142857142857142
+        },
+        "run": {
+          "rate": 0.07692307692307693
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "webpack-merge",
+      "nameWithOwner": "survivejs/webpack-merge",
+      "hasTestScript": "1",
+      "npms_score": "0.8436116588518652"
+    },
+    "data_": {
+      "success": {
+        "count": 82,
+        "total": {
+          "rate": 0.9111111111111111
+        },
+        "run": {
+          "rate": 0.9213483146067416
+        }
+      },
+      "failure": {
+        "count": 7,
+        "total": {
+          "rate": 0.07777777777777778
+        },
+        "run": {
+          "rate": 0.07865168539325842
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.011111111111111112
+        },
+        "run": {
+          "rate": 0.011235955056179775
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "xtend",
+      "nameWithOwner": "Raynos/xtend",
+      "hasTestScript": "1",
+      "npms_score": "0.8433741587211352"
+    },
+    "data_": {
+      "success": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": null
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": null
+        }
+      },
+      "pending": {
+        "count": 18,
+        "total": {
+          "rate": 1
+        },
+        "run": {
+          "rate": null
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "ajv-keywords",
+      "nameWithOwner": "epoberezkin/ajv-keywords",
+      "hasTestScript": "1",
+      "npms_score": "0.8432657000448233"
+    },
+    "data_": {
+      "success": {
+        "count": 38,
+        "total": {
+          "rate": 0.9047619047619048
+        },
+        "run": {
+          "rate": 0.9743589743589743
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.023809523809523808
+        },
+        "run": {
+          "rate": 0.02564102564102564
+        }
+      },
+      "pending": {
+        "count": 3,
+        "total": {
+          "rate": 0.07142857142857142
+        },
+        "run": {
+          "rate": 0.07692307692307693
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "html-entities",
+      "nameWithOwner": "mdevils/node-html-entities",
+      "hasTestScript": "1",
+      "npms_score": "0.8429721151047715"
+    },
+    "data_": {
+      "success": {
+        "count": 5,
+        "total": {
+          "rate": 0.14285714285714285
+        },
+        "run": {
+          "rate": 0.8333333333333334
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.02857142857142857
+        },
+        "run": {
+          "rate": 0.16666666666666666
+        }
+      },
+      "pending": {
+        "count": 29,
+        "total": {
+          "rate": 0.8285714285714286
+        },
+        "run": {
+          "rate": 4.833333333333333
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "on-headers",
+      "nameWithOwner": "jshttp/on-headers",
+      "hasTestScript": "1",
+      "npms_score": "0.8426368020318564"
+    },
+    "data_": {
+      "success": {
+        "count": 3,
+        "total": {
+          "rate": 0.75
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.25
+        },
+        "run": {
+          "rate": 0.3333333333333333
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "slash",
+      "nameWithOwner": "sindresorhus/slash",
+      "hasTestScript": "1",
+      "npms_score": "0.8425335444649682"
+    },
+    "data_": {
+      "success": {
+        "count": 7,
+        "total": {
+          "rate": 0.7777777777777778
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 2,
+        "total": {
+          "rate": 0.2222222222222222
+        },
+        "run": {
+          "rate": 0.2857142857142857
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "request-promise",
+      "nameWithOwner": "request/request-promise",
+      "hasTestScript": "1",
+      "npms_score": "0.8425286092758096"
+    },
+    "data_": {
+      "success": {
+        "count": 25,
+        "total": {
+          "rate": 0.625
+        },
+        "run": {
+          "rate": 0.9259259259259259
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.05
+        },
+        "run": {
+          "rate": 0.07407407407407407
+        }
+      },
+      "pending": {
+        "count": 13,
+        "total": {
+          "rate": 0.325
+        },
+        "run": {
+          "rate": 0.48148148148148145
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "follow-redirects",
+      "nameWithOwner": "olalonde/follow-redirects",
+      "hasTestScript": "1",
+      "npms_score": "0.8424582859939201"
+    },
+    "data_": {
+      "success": {
+        "count": 39,
+        "total": {
+          "rate": 0.8125
+        },
+        "run": {
+          "rate": 0.9512195121951219
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.041666666666666664
+        },
+        "run": {
+          "rate": 0.04878048780487805
+        }
+      },
+      "pending": {
+        "count": 7,
+        "total": {
+          "rate": 0.14583333333333334
+        },
+        "run": {
+          "rate": 0.17073170731707318
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "assert",
+      "nameWithOwner": "defunctzombie/commonjs-assert",
+      "hasTestScript": "1",
+      "npms_score": "0.841895741959301"
+    },
+    "data_": {
+      "success": {
+        "count": 11,
+        "total": {
+          "rate": 0.7333333333333333
+        },
+        "run": {
+          "rate": 0.8461538461538461
+        }
+      },
+      "failure": {
+        "count": 2,
+        "total": {
+          "rate": 0.13333333333333333
+        },
+        "run": {
+          "rate": 0.15384615384615385
+        }
+      },
+      "pending": {
+        "count": 2,
+        "total": {
+          "rate": 0.13333333333333333
+        },
+        "run": {
+          "rate": 0.15384615384615385
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "serialize-javascript",
+      "nameWithOwner": "yahoo/serialize-javascript",
+      "hasTestScript": "1",
+      "npms_score": "0.8417660454174409"
+    },
+    "data_": {
+      "success": {
+        "count": 22,
+        "total": {
+          "rate": 0.9565217391304348
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.043478260869565216
+        },
+        "run": {
+          "rate": 0.045454545454545456
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "read-pkg",
+      "nameWithOwner": "sindresorhus/read-pkg",
+      "hasTestScript": "1",
+      "npms_score": "0.8416478047462406"
+    },
+    "data_": {
+      "success": {
+        "count": 10,
+        "total": {
+          "rate": 0.8333333333333334
+        },
+        "run": {
+          "rate": 0.9090909090909091
+        }
+      },
+      "failure": {
+        "count": 1,
+        "total": {
+          "rate": 0.08333333333333333
+        },
+        "run": {
+          "rate": 0.09090909090909091
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.08333333333333333
+        },
+        "run": {
+          "rate": 0.09090909090909091
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "ignore",
+      "nameWithOwner": "kaelzhang/node-ignore",
+      "hasTestScript": "1",
+      "npms_score": "0.8416457666349196"
+    },
+    "data_": {
+      "success": {
+        "count": 57,
+        "total": {
+          "rate": 0.6867469879518072
+        },
+        "run": {
+          "rate": 0.7916666666666666
+        }
+      },
+      "failure": {
+        "count": 15,
+        "total": {
+          "rate": 0.18072289156626506
+        },
+        "run": {
+          "rate": 0.20833333333333334
+        }
+      },
+      "pending": {
+        "count": 11,
+        "total": {
+          "rate": 0.13253012048192772
+        },
+        "run": {
+          "rate": 0.1527777777777778
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "common-tags",
+      "nameWithOwner": "declandewet/common-tags",
+      "hasTestScript": "1",
+      "npms_score": "0.8416297447235993"
+    },
+    "data_": {
+      "success": {
+        "count": 19,
+        "total": {
+          "rate": 0.76
+        },
+        "run": {
+          "rate": 0.7916666666666666
+        }
+      },
+      "failure": {
+        "count": 5,
+        "total": {
+          "rate": 0.2
+        },
+        "run": {
+          "rate": 0.20833333333333334
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.04
+        },
+        "run": {
+          "rate": 0.041666666666666664
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "signal-exit",
+      "nameWithOwner": "tapjs/signal-exit",
+      "hasTestScript": "1",
+      "npms_score": "0.8413963800938801"
+    },
+    "data_": {
+      "success": {
+        "count": 6,
+        "total": {
+          "rate": 0.42857142857142855
+        },
+        "run": {
+          "rate": 0.6666666666666666
+        }
+      },
+      "failure": {
+        "count": 3,
+        "total": {
+          "rate": 0.21428571428571427
+        },
+        "run": {
+          "rate": 0.3333333333333333
+        }
+      },
+      "pending": {
+        "count": 5,
+        "total": {
+          "rate": 0.35714285714285715
+        },
+        "run": {
+          "rate": 0.5555555555555556
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "strip-bom",
+      "nameWithOwner": "sindresorhus/strip-bom",
+      "hasTestScript": "1",
+      "npms_score": "0.8410455322719641"
+    },
+    "data_": {
+      "success": {
+        "count": 10,
+        "total": {
+          "rate": 0.9090909090909091
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 1,
+        "total": {
+          "rate": 0.09090909090909091
+        },
+        "run": {
+          "rate": 0.1
+        }
+      }
+    }
+  },
+  {
+    "repo_": {
+      "npm_pkg": "mz",
+      "nameWithOwner": "normalize/mz",
+      "hasTestScript": "1",
+      "npms_score": "0.8409205450203346"
+    },
+    "data_": {
+      "success": {
+        "count": 19,
+        "total": {
+          "rate": 0.7916666666666666
+        },
+        "run": {
+          "rate": 1
+        }
+      },
+      "failure": {
+        "count": 0,
+        "total": {
+          "rate": 0
+        },
+        "run": {
+          "rate": 0
+        }
+      },
+      "pending": {
+        "count": 5,
+        "total": {
+          "rate": 0.20833333333333334
+        },
+        "run": {
+          "rate": 0.2631578947368421
+        }
+      }
+    }
+  }
+]
