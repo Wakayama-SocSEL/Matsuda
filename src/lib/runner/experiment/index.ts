@@ -1,3 +1,3 @@
-import { getVersions } from "./getVersions";
+import { getDependencies } from "./getDependencies";
 
-export { getVersions };
+export { getDependencies };
