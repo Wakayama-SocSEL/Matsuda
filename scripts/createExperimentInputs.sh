@@ -2,4 +2,4 @@
 
 sqlite3 ./dataset/dataset.db -json \
   < ./scripts/sql/experimentInputs.sql \
-  > ./runner/experimentInputs.json
+  > ./runner-experiment/inputs.json

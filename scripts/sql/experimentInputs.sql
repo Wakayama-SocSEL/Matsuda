@@ -5,6 +5,7 @@ SELECT
   pr.hasTestScript S__hasTestScript,
   pr.testsSize S__testsSize,
   pd.dependency L__npm_pkg,
+  pd.commit_version L__commit_version,
   ar.repo__nameWithOwner L__nameWithOwner,
   ar.repo__npms_score L__npms_score
 FROM pkg_dependencies pd
@@ -14,4 +15,5 @@ FROM pkg_dependencies pd
   INNER JOIN pkg_repositories pr
     ON pd.nameWithOwner=pr.nameWithOwner
     AND pr.hasTestScript="1"
+WHERE pd.type="pro"
 GROUP BY S__nameWithOwner, L__npm_pkg
