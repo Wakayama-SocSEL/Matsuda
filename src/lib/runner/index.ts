@@ -1,3 +1,3 @@
 import * as analysis from "./analysis";
-
-export { analysis };
+import * as experiment from "./experiment";
+export { analysis, experiment };
