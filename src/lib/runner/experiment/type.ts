@@ -5,6 +5,7 @@ export type ExperimentInput = {
   S__hasTestScript: string;
   S__testsSize: string;
   L__npm_pkg: string;
+  L__commit_version: string;
   L__nameWithOwner: string;
   L__npms_score: string;
 };
