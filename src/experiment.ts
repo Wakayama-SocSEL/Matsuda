@@ -22,7 +22,7 @@ async function main() {
     total: inputs.length,
   });
   for (const input of inputs) {
-    runner.experiment.runTests(input, bar1, arg2);
+    await runner.experiment.runTests(input, bar1, arg2);
     bar1.tick({
       label: `${input.L__nameWithOwner} & ${input.S__npm_pkg} Done.`,
     });

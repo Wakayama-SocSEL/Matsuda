@@ -9,7 +9,7 @@ import {
   readJson,
   safeWriteFileSync,
 } from "../../utils";
-import { dockerRun } from "../analysis/repoInfo";
+import { dockerRun } from "./dockerRun";
 import { getPkgVersions } from "./getPkgVersions";
 import {
   ExperimentInput,
@@ -80,6 +80,6 @@ export async function runTests(
   });
   const statuses = await parallelPromiseAll<TestStatus>(tasks, concurrency);
   const testResult = { input, statuses };
-  safeWriteFileSync(filepath, JSON.stringify(testResult));
+  safeWriteFileSync(filepath, JSON.stringify(testResult, null, 2));
   return testResult;
 }
