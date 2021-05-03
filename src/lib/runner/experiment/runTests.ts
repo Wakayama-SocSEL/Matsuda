@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 
+import semver from "semver";
+
 import {
   outputDir,
   parallelPromiseAll,
@@ -8,7 +10,6 @@ import {
   safeWriteFileSync,
 } from "../../utils";
 import { dockerRun } from "../analysis/repoInfo";
-import { getDependencies } from "./getDependencies";
 import { getPkgVersions } from "./getPkgVersions";
 import {
   ExperimentInput,
@@ -18,29 +19,18 @@ import {
   TestSuccess,
 } from "./type";
 
-async function getLaterVersions(npm_pkg: string, currentVersion: string) {
-  const versions = await getPkgVersions(npm_pkg);
-  const itemIndex = versions.indexOf(currentVersion);
-  if (itemIndex == -1) {
-    throw new Error(`${npm_pkg}@${currentVersion}は存在しません`);
-  }
-  return versions.slice(itemIndex);
+function getCurrentVersion(range: string) {
+  return semver.minVersion(range)!.version;
 }
 
 async function getTestableVersions(input: ExperimentInput) {
-  const dependencies = await getDependencies(
-    input.S__nameWithOwner,
-    input.S__commit_id
-  );
-  if (!(input.L__nameWithOwner in dependencies)) {
-    throw new Error(
-      `${input.S__nameWithOwner}@${input.S__commit_id}は${input.L__nameWithOwner}に依存していません`
-    );
+  const versions = await getPkgVersions(input.L__npm_pkg);
+  const currentVersion = getCurrentVersion(input.L__commit_version);
+  const itemIndex = versions.indexOf(currentVersion);
+  if (itemIndex == -1) {
+    throw new Error(`${input.L__npm_pkg}@${currentVersion}は存在しません`);
   }
-  return getLaterVersions(
-    input.L__nameWithOwner,
-    dependencies[input.L__npm_pkg]
-  );
+  return versions.slice(itemIndex);
 }
 
 async function runTest(
@@ -82,7 +72,7 @@ export async function runTests(
     };
     return async () => {
       const result = await task();
-      bar.tick({
+      bar.tick(0, {
         label: `${input.L__nameWithOwner} & ${input.S__npm_pkg}@${version}`,
       });
       return result;

@@ -1,3 +1,3 @@
-import { getDependencies } from "./getDependencies";
+import { runTests } from "./runTests";
 
-export { getDependencies };
+export { runTests };
