@@ -1,5 +1,5 @@
 #!/bin/sh
 
 sqlite3 ./dataset/dataset.db -json \
-  < ./scripts/sql/experimentInputs.sql \
+  < ./scripts/sql/experiment.sql \
   > ./runner-experiment/inputs.json
