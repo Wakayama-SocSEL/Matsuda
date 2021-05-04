@@ -11,13 +11,7 @@ import {
 } from "../../utils";
 import { dockerRun } from "./dockerRun";
 import { getPkgVersions } from "./getPkgVersions";
-import {
-  ExperimentInput,
-  RunTestResult,
-  TestError,
-  TestStatus,
-  TestSuccess,
-} from "./type";
+import { ExperimentInput, TestError, TestResult, TestSuccess } from "./type";
 
 function getCurrentVersion(range: string) {
   return semver.minVersion(range)!.version;
@@ -45,14 +39,14 @@ export async function runTests(
   input: ExperimentInput,
   bar: ProgressBar,
   concurrency: number
-): Promise<RunTestResult> {
+): Promise<TestResult[]> {
   const filepath = path.join(
     outputDir,
     input.L__nameWithOwner,
     "testStatus.json"
   );
   if (fs.existsSync(filepath)) {
-    return readJson<RunTestResult>(filepath);
+    return readJson<TestResult[]>(filepath);
   }
   const versions = await getTestableVersions(input);
   const tasks = versions.map((version) => {
@@ -63,11 +57,11 @@ export async function runTests(
           input.S__commit_id,
           `${input.L__npm_pkg}@${version}`
         );
-        const result: TestSuccess = { state: "success", stdout };
-        return result;
+        const status: TestSuccess = { state: "success", stdout };
+        return { input, status };
       } catch (err) {
-        const result: TestError = { state: "failure", err: `${err}` };
-        return result;
+        const status: TestError = { state: "failure", err: `${err}` };
+        return { input, status };
       }
     };
     return async () => {
@@ -78,8 +72,7 @@ export async function runTests(
       return result;
     };
   });
-  const statuses = await parallelPromiseAll<TestStatus>(tasks, concurrency);
-  const testResult = { input, statuses };
-  safeWriteFileSync(filepath, JSON.stringify(testResult, null, 2));
-  return testResult;
+  const testResults = await parallelPromiseAll<TestResult>(tasks, concurrency);
+  safeWriteFileSync(filepath, JSON.stringify(testResults, null, 2));
+  return testResults;
 }

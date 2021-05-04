@@ -11,21 +11,39 @@ function parseArgv(argv: string[]) {
   };
 }
 
+type ExperiemntDataset = {
+  [L__nameWithOwner: string]: ExperimentInput[];
+};
+
+function groupByLNameWithOwner(inputs: ExperimentInput[]) {
+  return inputs.reduce<ExperiemntDataset>((result, item) => {
+    if (item.L__nameWithOwner in result) {
+      result[item.L__nameWithOwner].push(item);
+    } else {
+      result[item.L__nameWithOwner] = [item];
+    }
+    return result;
+  }, {});
+}
+
 async function main() {
   const { arg1, arg2 } = parseArgv(process.argv);
   const inputs = readJson<ExperimentInput[]>(
     "runner-experiment/inputs.json"
   ).slice(0, arg1);
+  const dataset = groupByLNameWithOwner(inputs);
 
   // 各リポジトリで並列実行
   const bar1 = createProgressBar("step1", {
     total: inputs.length,
   });
-  for (const input of inputs) {
-    await runner.experiment.runTests(input, bar1, arg2);
-    bar1.tick({
-      label: `${input.L__nameWithOwner} & ${input.S__npm_pkg} Done.`,
-    });
+  for (const [L__nameWithOwner, inputs] of Object.entries(dataset)) {
+    for (const input of inputs) {
+      await runner.experiment.runTests(input, bar1, arg2);
+      bar1.tick({
+        label: `${L__nameWithOwner} & ${input.S__npm_pkg} Done.`,
+      });
+    }
   }
 }
 
