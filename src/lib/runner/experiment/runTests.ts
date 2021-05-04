@@ -11,7 +11,13 @@ import {
 } from "../../utils";
 import { dockerRun } from "./dockerRun";
 import { getPkgVersions } from "./getPkgVersions";
-import { ExperimentInput, TestError, TestResult, TestSuccess } from "./type";
+import {
+  ExperimentInput,
+  TestError,
+  TestSuccess,
+  TestStatus,
+  TestResult,
+} from "./type";
 
 function getCurrentVersion(range: string) {
   return semver.minVersion(range)!.version;
@@ -31,48 +37,59 @@ async function runTest(
   repoName: string,
   hash: string,
   libName: string
-): Promise<string> {
-  return dockerRun(`./runTest.sh ${repoName} ${hash} ${libName}`);
+): Promise<TestStatus> {
+  try {
+    const stdout = await dockerRun(
+      `./runTest.sh ${repoName} ${hash} ${libName}`
+    );
+    const state: TestSuccess = { state: "success", stdout };
+    return state;
+  } catch (err) {
+    const state: TestError = { state: "failure", err: `${err}` };
+    return state;
+  }
 }
 
 export async function runTests(
-  input: ExperimentInput,
+  L__nameWithOwner: string,
+  inputs: ExperimentInput[],
   bar: ProgressBar,
   concurrency: number
 ): Promise<TestResult[]> {
-  const filepath = path.join(
-    outputDir,
-    input.L__nameWithOwner,
-    "testStatus.json"
-  );
+  const filepath = path.join(outputDir, L__nameWithOwner, "testInfo.json");
   if (fs.existsSync(filepath)) {
     return readJson<TestResult[]>(filepath);
   }
-  const versions = await getTestableVersions(input);
-  const tasks = versions.map((version) => {
+  const tasks = inputs.map((input) => {
     const task = async () => {
-      try {
-        const stdout = await runTest(
+      const versions = await getTestableVersions(input);
+      const results: TestResult[] = [];
+      for (const version of versions) {
+        const status = await runTest(
           input.S__nameWithOwner,
           input.S__commit_id,
           `${input.L__npm_pkg}@${version}`
         );
-        const status: TestSuccess = { state: "success", stdout };
-        return { input, status };
-      } catch (err) {
-        const status: TestError = { state: "failure", err: `${err}` };
-        return { input, status };
+        results.push({
+          input: { ...input, L__version: version },
+          status,
+        });
       }
+      return results;
     };
     return async () => {
       const result = await task();
-      bar.tick(0, {
-        label: `${input.L__nameWithOwner} & ${input.S__npm_pkg}@${version}`,
+      bar.tick({
+        label: `${input.L__nameWithOwner} & ${input.S__npm_pkg}`,
       });
       return result;
     };
   });
-  const testResults = await parallelPromiseAll<TestResult>(tasks, concurrency);
-  safeWriteFileSync(filepath, JSON.stringify(testResults, null, 2));
-  return testResults;
+  const testResults = await parallelPromiseAll<TestResult[]>(
+    tasks,
+    concurrency
+  );
+  const testInfo = testResults.flat();
+  safeWriteFileSync(filepath, JSON.stringify(testInfo, null, 2));
+  return testInfo;
 }

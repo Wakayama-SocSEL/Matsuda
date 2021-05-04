@@ -7,6 +7,10 @@ export type ExperimentInput = {
   L__commit_version: string;
 };
 
+export type ExperiemntDataset = {
+  [L__nameWithOwner: string]: ExperimentInput[];
+};
+
 export type DependenciesResult = {
   [npm_pkg: string]: string;
 };
@@ -21,7 +25,9 @@ export type TestError = {
   err: string;
 };
 
+export type TestStatus = TestSuccess | TestError;
+
 export type TestResult = {
-  input: ExperimentInput;
-  status: TestSuccess | TestError;
+  input: ExperimentInput & { L__version: string };
+  status: TestStatus;
 };

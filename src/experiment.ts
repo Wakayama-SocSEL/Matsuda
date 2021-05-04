@@ -1,4 +1,7 @@
-import { ExperimentInput } from "./lib/runner/experiment/type";
+import {
+  ExperiemntDataset,
+  ExperimentInput,
+} from "./lib/runner/experiment/type";
 
 import * as runner from "./lib/runner";
 import { readJson, createProgressBar } from "./lib/utils";
@@ -10,10 +13,6 @@ function parseArgv(argv: string[]) {
     arg2: parseInt(arg2) || 5,
   };
 }
-
-type ExperiemntDataset = {
-  [L__nameWithOwner: string]: ExperimentInput[];
-};
 
 function groupByLNameWithOwner(inputs: ExperimentInput[]) {
   return inputs.reduce<ExperiemntDataset>((result, item) => {
@@ -38,12 +37,7 @@ async function main() {
     total: inputs.length,
   });
   for (const [L__nameWithOwner, inputs] of Object.entries(dataset)) {
-    for (const input of inputs) {
-      await runner.experiment.runTests(input, bar1, arg2);
-      bar1.tick({
-        label: `${L__nameWithOwner} & ${input.S__npm_pkg} Done.`,
-      });
-    }
+    await runner.experiment.runTests(L__nameWithOwner, inputs, bar1, arg2);
   }
 }
 
