@@ -56,6 +56,7 @@ export async function runTests(
   bar: ProgressBar,
   concurrency: number
 ): Promise<TestResult[][]> {
+  bar.interrupt(`${L__nameWithOwner}`);
   const filepath = path.join(outputDir, L__nameWithOwner, "testResults.json");
   if (fs.existsSync(filepath)) {
     return readJson<TestResult[][]>(filepath);
@@ -64,6 +65,7 @@ export async function runTests(
     const task = async () => {
       const versions = await getTestableVersions(input);
       const results: TestResult[] = [];
+      bar.interrupt(`  ${input.S__nameWithOwner}`);
       for (const version of versions) {
         const libName = `${input.L__npm_pkg}@${version}`;
         const status = await runTest(
@@ -75,9 +77,7 @@ export async function runTests(
           input: { ...input, L__version: version },
           status,
         });
-        bar.interrupt(
-          `[${status.state}]${input.L__nameWithOwner}(${input.S__nameWithOwner}:${libName})`
-        );
+        bar.interrupt(`   - ${libName} ... ${status.state}`);
         if (status.state == "failure") {
           break;
         }
