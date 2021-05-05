@@ -55,10 +55,10 @@ export async function runTests(
   inputs: ExperimentInput[],
   bar: ProgressBar,
   concurrency: number
-): Promise<TestResult[]> {
-  const filepath = path.join(outputDir, L__nameWithOwner, "testInfo.json");
+): Promise<TestResult[][]> {
+  const filepath = path.join(outputDir, L__nameWithOwner, "testResults.json");
   if (fs.existsSync(filepath)) {
-    return readJson<TestResult[]>(filepath);
+    return readJson<TestResult[][]>(filepath);
   }
   const tasks = inputs.map((input) => {
     const task = async () => {
@@ -96,7 +96,6 @@ export async function runTests(
     tasks,
     concurrency
   );
-  const testInfo = testResults.flat();
-  safeWriteFileSync(filepath, JSON.stringify(testInfo, null, 2));
-  return testInfo;
+  safeWriteFileSync(filepath, JSON.stringify(testResults, null, 2));
+  return testResults;
 }
