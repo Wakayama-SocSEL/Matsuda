@@ -57,7 +57,7 @@ export const outputDir = path.join(process.cwd(), "output");
 
 export function createProgressBar(label: string, options: ProgressBarOptions) {
   const bar = new ProgressBar(
-    `${label} [:bar] :label :current/:total(:percent) :etas\n`,
+    `${label} [:bar] :label :current/:total(:percent) :etas`,
     {
       width: 20,
       stream: process.stdout,

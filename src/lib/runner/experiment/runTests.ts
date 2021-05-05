@@ -65,15 +65,22 @@ export async function runTests(
       const versions = await getTestableVersions(input);
       const results: TestResult[] = [];
       for (const version of versions) {
+        const libName = `${input.L__npm_pkg}@${version}`;
         const status = await runTest(
           input.S__nameWithOwner,
           input.S__commit_id,
-          `${input.L__npm_pkg}@${version}`
+          libName
         );
         results.push({
           input: { ...input, L__version: version },
           status,
         });
+        bar.interrupt(
+          `${libName} & ${input.L__nameWithOwner} ... ${status.state}`
+        );
+        if (status.state == "failure") {
+          break;
+        }
       }
       return results;
     };
