@@ -76,7 +76,7 @@ export async function runTests(
           status,
         });
         bar.interrupt(
-          `${libName} & ${input.S__nameWithOwner} ... ${status.state}`
+          `[${status.state}]${input.L__nameWithOwner}(${input.S__nameWithOwner}:${libName})`
         );
         if (status.state == "failure") {
           break;
