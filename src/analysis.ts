@@ -41,6 +41,7 @@ async function main() {
   const repoInfos = repoInfoResult.filter(
     (info): info is RepoInfo => !("err" in info)
   );
+  runner.analysis.outputVersions(repoInfos);
 
   const bar2 = createProgressBar("step2", {
     total: getTotalVersions(repoInfos),
@@ -53,7 +54,7 @@ async function main() {
   }
 
   console.log("step3 creating result files");
-  await runner.analysis.outputResult(results);
+  runner.analysis.outputResult(results);
 }
 
 main();

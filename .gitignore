@@ -2,6 +2,5 @@ node_modules
 *.log
 dataset/*.csv
 dataset/*.db
-output/*
-!analysis_result.*
+output/*/*/*.json
 .env

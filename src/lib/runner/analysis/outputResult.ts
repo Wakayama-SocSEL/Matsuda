@@ -29,7 +29,7 @@ function createData(stateCounts: { [state in State]: number }, state: State) {
   };
 }
 
-export async function outputResult(repoResults: RepoResult[]) {
+export function outputResult(repoResults: RepoResult[]) {
   const results: Result[] = [];
   for (const repoResult of repoResults) {
     const { repo, apiResponses } = repoResult;
