@@ -3,7 +3,7 @@ RUN apt update && apt install -y git jq
 WORKDIR /workdir
 
 COPY ./inputs.json .
-ARG repos=10
+ARG repos
 RUN jq -r ".[0:$repos] | .[].nameWithOwner" ./inputs.json |\
   xargs -i bash -c "git clone https://github.com/{}.git repos/{} && echo wait 1s && sleep 1";\
   exit 0
