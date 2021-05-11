@@ -1,3 +1,4 @@
+WITH input AS (
 SELECT
   ar.repo__nameWithOwner L__nameWithOwner,
   pd.dependency L__npm_pkg,
@@ -14,4 +15,15 @@ FROM pkg_dependencies pd
     AND pr.hasTestScript="1"
 WHERE pd.type="pro"
 GROUP BY S__nameWithOwner, L__nameWithOwner
-ORDER BY L__nameWithOwner
+)
+SELECT a.*, b.S__count
+FROM input a
+INNER JOIN (
+  SELECT L__nameWithOwner, COUNT(S__nameWithOwner) S__count
+  FROM input
+  GROUP BY L__nameWithOwner
+  ORDER BY S__count
+  LIMIT 10
+) b
+  ON a.L__nameWithOwner=b.L__nameWithOwner
+ORDER BY S__count
