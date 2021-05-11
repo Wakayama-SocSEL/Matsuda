@@ -1,3 +1,4 @@
+import { outputResult } from "./outputResult";
 import { runTests } from "./runTests";
 
-export { runTests };
+export { runTests, outputResult };

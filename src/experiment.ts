@@ -1,6 +1,7 @@
 import {
   ExperiemntDataset,
   ExperimentInput,
+  TestResult,
 } from "./lib/runner/experiment/type";
 
 import * as runner from "./lib/runner";
@@ -36,9 +37,18 @@ async function main() {
   const bar1 = createProgressBar("step1", {
     total: inputs.length,
   });
+  const results: TestResult[][][] = [];
   for (const [L__nameWithOwner, inputs] of Object.entries(dataset)) {
-    await runner.experiment.runTests(L__nameWithOwner, inputs, bar1, arg2);
+    const result = await runner.experiment.runTests(
+      L__nameWithOwner,
+      inputs,
+      bar1,
+      arg2
+    );
+    results.push(result);
   }
+
+  runner.experiment.outputResult(results);
 }
 
 main();
