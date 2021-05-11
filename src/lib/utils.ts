@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import childProcess from "child_process";
 
-import { Parser, transforms } from "json2csv";
+import json2csv, { Parser, transforms } from "json2csv";
 import ProgressBar, { ProgressBarOptions } from "progress";
 
 export async function run(command: string, cwd: string = "."): Promise<string> {
@@ -68,11 +68,14 @@ export function createProgressBar(label: string, options: ProgressBarOptions) {
   return bar;
 }
 
-export function convertJsonToCSV(json: any) {
-  transforms.flatten;
+export function convertJsonToCSV(
+  json: any,
+  options: json2csv.Options<unknown> = {}
+) {
   const parser = new Parser({
     quote: "",
     transforms: [transforms.flatten({ separator: "_" })],
+    ...options,
   });
   return parser.parse(json);
 }

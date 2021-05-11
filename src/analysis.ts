@@ -57,4 +57,7 @@ async function main() {
   runner.analysis.outputResult(results);
 }
 
-main();
+main().catch((err) => {
+  console.log();
+  console.error(err);
+});

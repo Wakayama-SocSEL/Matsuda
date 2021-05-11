@@ -9,26 +9,24 @@ type Result = {
 
 export function outputResult(testResults: TestResult[][][]) {
   const results: Result = [];
-  // Lを使うテスト全て
-  for (const uniqueResults of testResults) {
-    // L-Sの一意な組み合わせのテスト全て
-    for (const uniqueResult of uniqueResults) {
-      if (
-        uniqueResult[0].status.state == "success" &&
-        uniqueResult[uniqueResult.length - 1].status.state == "failure"
-      ) {
-        // errまたはstdoutを除去
-        const { input } = uniqueResult[uniqueResult.length - 1];
-        results.push(input);
+  // ライブラリごとのテスト結果
+  for (const libraryResults of testResults) {
+    // ライブラリとソフトウェアの組み合わせごとのテスト結果
+    for (const uniqueResults of libraryResults) {
+      for (const { input, status } of uniqueResults) {
+        results.push({
+          ...input,
+          ...status,
+        });
       }
     }
   }
   safeWriteFileSync(
-    path.join(outputDir, "experiment_result.json"),
+    path.join(outputDir, "test_result.json"),
     JSON.stringify(results, null, 2)
   );
   safeWriteFileSync(
-    path.join(outputDir, "experiment_result.csv"),
-    convertJsonToCSV(results)
+    path.join(outputDir, "test_result.csv"),
+    convertJsonToCSV(results, { quote: '"' })
   );
 }

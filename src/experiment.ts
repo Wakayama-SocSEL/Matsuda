@@ -51,4 +51,7 @@ async function main() {
   runner.experiment.outputResult(results);
 }
 
-main();
+main().catch((err) => {
+  console.log();
+  console.error(err);
+});
