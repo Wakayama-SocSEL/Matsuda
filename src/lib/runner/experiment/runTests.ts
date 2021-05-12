@@ -34,10 +34,7 @@ async function getTestableVersions(input: ExperimentInput) {
 }
 
 function dockerRun(command: string): Promise<string> {
-  return run(`docker run --rm kazuki-m/runner-experiment ${command}`, {
-    timeout: 150 * 1000,
-    killSignal: "SIGKILL",
-  });
+  return run(`docker run --rm kazuki-m/runner-experiment ${command}`);
 }
 
 async function runTest(
@@ -47,7 +44,7 @@ async function runTest(
 ): Promise<TestStatus> {
   try {
     const stdout = await dockerRun(
-      `./runTest.sh ${repoName} ${hash} ${libName}`
+      `timeout 150s ./runTest.sh ${repoName} ${hash} ${libName}`
     );
     const state: TestSuccess = { state: "success", stdout };
     return state;
