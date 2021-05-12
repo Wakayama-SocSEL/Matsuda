@@ -5,9 +5,12 @@ import childProcess from "child_process";
 import json2csv, { Parser, transforms } from "json2csv";
 import ProgressBar, { ProgressBarOptions } from "progress";
 
-export async function run(command: string, cwd: string = "."): Promise<string> {
+export async function run(
+  command: string,
+  options: childProcess.ExecOptions = {}
+): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    childProcess.exec(`bash -c "${command}" 2>&1`, { cwd }, (error, stdout) => {
+    childProcess.exec(`bash -c "${command}" 2>&1`, options, (error, stdout) => {
       if (error) reject(stdout.toString());
       else resolve(stdout.toString());
     });

@@ -7,9 +7,9 @@ import {
   outputDir,
   parallelPromiseAll,
   readJson,
+  run,
   safeWriteFileSync,
 } from "../../utils";
-import { dockerRun } from "./dockerRun";
 import { getPkgVersions } from "./getPkgVersions";
 import {
   ExperimentInput,
@@ -31,6 +31,12 @@ async function getTestableVersions(input: ExperimentInput) {
     throw new Error(`${input.L__npm_pkg}@${currentVersion}は存在しません`);
   }
   return versions.slice(itemIndex);
+}
+
+function dockerRun(command: string): Promise<string> {
+  return run(`docker run --rm kazuki-m/runner-experiment ${command}`, {
+    timeout: 150 * 1000,
+  });
 }
 
 async function runTest(
