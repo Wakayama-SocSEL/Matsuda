@@ -36,6 +36,7 @@ async function getTestableVersions(input: ExperimentInput) {
 function dockerRun(command: string): Promise<string> {
   return run(`docker run --rm kazuki-m/runner-experiment ${command}`, {
     timeout: 150 * 1000,
+    killSignal: "SIGKILL",
   });
 }
 
