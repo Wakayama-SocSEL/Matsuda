@@ -20,15 +20,22 @@ import {
 } from "./type";
 
 function getCurrentVersion(range: string) {
-  return semver.minVersion(range)!.version;
+  try {
+    return semver.minVersion(range)?.version || null;
+  } catch (e) {
+    return null;
+  }
 }
 
 async function getTestableVersions(input: ExperimentInput) {
   const versions = await getPkgVersions(input.L__npm_pkg);
   const currentVersion = getCurrentVersion(input.L__commit_version);
+  if (currentVersion == null) {
+    return [];
+  }
   const itemIndex = versions.indexOf(currentVersion);
   if (itemIndex == -1) {
-    throw new Error(`${input.L__npm_pkg}@${currentVersion}は存在しません`);
+    return [];
   }
   return versions.slice(itemIndex);
 }
