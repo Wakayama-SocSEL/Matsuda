@@ -7,15 +7,7 @@ import {
   DatasetRepository,
   RepoResult,
 } from "./lib/runner/analysis/types";
-import { createProgressBar, readJson } from "./lib/utils";
-
-function parseArgv(argv: string[]) {
-  const [_, __, arg1, arg2] = argv;
-  return {
-    arg1: parseInt(arg1) || 5,
-    arg2: parseInt(arg2) || 5,
-  };
-}
+import { createProgressBar, readJson, useArgv } from "./lib/utils";
 
 function getTotalVersions(repoInfos: RepoInfo[]) {
   return repoInfos
@@ -24,9 +16,9 @@ function getTotalVersions(repoInfos: RepoInfo[]) {
 }
 
 async function main() {
-  const { arg1, arg2 } = parseArgv(process.argv);
+  const argv = useArgv();
   const inputs = readJson<DatasetRepository[]>("runner-analysis/inputs.json");
-  const repositories = inputs.slice(0, arg1);
+  const repositories = argv.c != null ? inputs.slice(0, argv.c) : inputs;
 
   // 各リポジトリで並列実行
   const bar1 = createProgressBar("step1", {
@@ -35,7 +27,7 @@ async function main() {
   const repoInfoResult = await runner.analysis.getRepoInfos(
     repositories,
     bar1,
-    arg2
+    argv.p
   );
   // RepoErrorを除去してRepoInfo[]にキャストする
   const repoInfos = repoInfoResult.filter(

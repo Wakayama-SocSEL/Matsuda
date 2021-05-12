@@ -5,15 +5,7 @@ import {
 } from "./lib/runner/experiment/type";
 
 import * as runner from "./lib/runner";
-import { readJson, createProgressBar } from "./lib/utils";
-
-function parseArgv(argv: string[]) {
-  const [_, __, arg1, arg2] = argv;
-  return {
-    arg1: parseInt(arg1) || 5,
-    arg2: parseInt(arg2) || 5,
-  };
-}
+import { readJson, createProgressBar, useArgv } from "./lib/utils";
 
 function groupByLNameWithOwner(inputs: ExperimentInput[]) {
   return inputs.reduce<ExperiemntDataset>((result, item) => {
@@ -27,10 +19,11 @@ function groupByLNameWithOwner(inputs: ExperimentInput[]) {
 }
 
 async function main() {
-  const { arg1, arg2 } = parseArgv(process.argv);
-  const inputs = readJson<ExperimentInput[]>(
+  const argv = useArgv();
+  const inputsAll = readJson<ExperimentInput[]>(
     "runner-experiment/inputs.json"
-  ).slice(0, arg1);
+  );
+  const inputs = argv.c != null ? inputsAll.slice(0, argv.c) : inputsAll;
   const dataset = groupByLNameWithOwner(inputs);
 
   // 各リポジトリで並列実行
@@ -43,7 +36,7 @@ async function main() {
       L__nameWithOwner,
       inputs,
       bar1,
-      arg2
+      argv.p
     );
     results.push(result);
   }

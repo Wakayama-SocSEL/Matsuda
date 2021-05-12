@@ -2,6 +2,8 @@ import fs from "fs";
 import path from "path";
 import childProcess from "child_process";
 
+import yargs from "yargs/yargs";
+import { hideBin } from "yargs/helpers";
 import json2csv, { Parser, transforms } from "json2csv";
 import ProgressBar, { ProgressBarOptions } from "progress";
 
@@ -81,4 +83,12 @@ export function convertJsonToCSV(
     ...options,
   });
   return parser.parse(json);
+}
+
+export function useArgv() {
+  const argv = yargs(hideBin(process.argv)).argv;
+  return {
+    c: "c" in argv ? (argv.c as number) : null,
+    p: "p" in argv ? (argv.p as number) : 1,
+  };
 }
