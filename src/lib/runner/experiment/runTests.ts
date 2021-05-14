@@ -41,7 +41,7 @@ async function getTestableVersions(input: ExperimentInput) {
 }
 
 function dockerRun(command: string): Promise<string> {
-  return run(`docker run --rm kazuki-m/runner-experiment ${command}`);
+  return run(`docker run --rm --cpus 1 kazuki-m/runner-experiment ${command}`);
 }
 
 async function runTest(
