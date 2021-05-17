@@ -28,6 +28,6 @@ export type TestError = {
 export type TestStatus = TestSuccess | TestError;
 
 export type TestResult = {
-  input: ExperimentInput & { L__version: string };
+  input: ExperimentInput & { L__version: string; L__hash: string };
   status: TestStatus;
 };

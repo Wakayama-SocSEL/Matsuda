@@ -33,7 +33,7 @@ async function getTestableVersions(input: ExperimentInput) {
   if (currentVersion == null) {
     return [];
   }
-  const itemIndex = versions.indexOf(currentVersion);
+  const itemIndex = versions.map((v) => v.version).indexOf(currentVersion);
   if (itemIndex == -1) {
     return [];
   }
@@ -76,7 +76,7 @@ export async function runTests(
     const task = async () => {
       const versions = await getTestableVersions(input);
       const results: TestResult[] = [];
-      for (const version of versions) {
+      for (const { version, hash } of versions) {
         const libName = `${input.L__npm_pkg}@${version}`;
         const status = await runTest(
           input.S__nameWithOwner,
@@ -84,7 +84,7 @@ export async function runTests(
           libName
         );
         results.push({
-          input: { ...input, L__version: version },
+          input: { ...input, L__version: version, L__hash: hash },
           status,
         });
         bar.interrupt(
