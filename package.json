@@ -6,6 +6,7 @@
   "scripts": {
     "docker:analysis": "docker build -t kazuki-m/runner-analysis --progress=plain ./runner-analysis",
     "docker:experiment": "docker build -t kazuki-m/runner-experiment --progress=plain ./runner-experiment",
+    "docker:proposal": "docker build -t kazuki-m/runner-proposal --progress=plain ./runner-proposal",
     "analysis": "yarn && ts-node src/analysis.ts",
     "experiment": "yarn && ts-node src/experiment.ts",
     "format": "prettier . -w"
