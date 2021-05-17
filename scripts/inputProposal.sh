@@ -1,6 +1,19 @@
 #!/bin/sh
 
-jq 'group_by(.L__nameWithOwner) |
+
+jq -r 'group_by(.L__nameWithOwner) |
  map(group_by(.S__nameWithOwner)) |
- map(map(select(.[0].state=="success" and .[-1].state=="failure")[-1])) |
- flatten' ./output/test_result.json 
+ map(map(select(.[0].state=="success" and .[-1].state=="failure")[-2:])) |
+ map(map({
+   nameWithOwner: .[1].L__nameWithOwner,
+   breaking: {
+     version: .[1].L__version,
+     hash: ""
+   },
+   prev: {
+     version: .[0].L__version,
+     hash: "",
+   }
+ })) |
+ flatten |
+ unique' ./output/test_result.json > ./runner-proposal/inputs.json
