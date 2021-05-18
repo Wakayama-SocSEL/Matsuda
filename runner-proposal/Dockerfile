@@ -8,5 +8,9 @@ RUN jq -r ".[0:$repos] | .[].nameWithOwner" ./inputs.json |\
   xargs -i bash -c "git clone https://github.com/{}.git repos/{} && echo wait 1s && sleep 1";\
   exit 0
 
-COPY . .
-RUN chmod +x ./*.sh
+COPY package.json /workdir/
+COPY yarn.lock /workdir/
+RUN yarn install
+
+COPY . /workdir/
+ENTRYPOINT ["yarn", "proposal"]

@@ -1,11 +1,3 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2020",
-    "lib": ["es2020", "dom"],
-    "strict": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "noEmit": true
-  }
+  "extends": "./runner-proposal/tsconfig.json"
 }
