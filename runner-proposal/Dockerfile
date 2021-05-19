@@ -13,4 +13,3 @@ COPY yarn.lock /workdir/
 RUN yarn install
 
 COPY . /workdir/
-ENTRYPOINT ["yarn", "proposal"]
