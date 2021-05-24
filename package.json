@@ -9,6 +9,7 @@
     "docker:proposal": "docker build -t kazuki-m/runner-proposal --progress=plain ./runner-proposal",
     "analysis": "yarn && ts-node src/analysis.ts",
     "experiment": "yarn && ts-node src/experiment.ts",
+    "proposal": "yarn && ts-node src/proposal.ts",
     "format": "prettier . -w"
   },
   "devDependencies": {
