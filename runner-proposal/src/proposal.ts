@@ -61,7 +61,11 @@ async function main() {
     const code = fs.readFileSync(file.path, { encoding: "utf-8" });
     const testCases = traverseTestCases(code, file.isTS);
     for (const testCase of testCases) {
-      result[testCase.label] = testCase.body;
+      const hash = testCases
+        .map((t) => t.label)
+        .filter((label) => label == testCase.label)
+        .indexOf(testCase.label);
+      result[`${testCase.label}#${hash}`] = testCase.body;
     }
   }
   console.log(JSON.stringify(result, null, 2));
