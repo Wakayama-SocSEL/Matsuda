@@ -5,9 +5,13 @@ import globby from "globby";
 import * as parser from "@babel/parser";
 import traverse from "@babel/traverse";
 
-async function getTestFilepaths(dir: string) {
+async function getTestFiles(dir: string) {
   const filepaths = await globby(`${dir}/**/*.{js,ts}`);
-  return filepaths.filter((path) => /(test|spec)/.test(path));
+  return filepaths
+    .map((path) => {
+      return { path, isTS: path.endsWith(".ts") };
+    })
+    .filter((file) => /(test|spec)/.test(file.path));
 }
 
 type TestCases = {
@@ -51,11 +55,11 @@ async function main() {
   const [nameWithOwner, hash] = process.argv.slice(2);
   const repoDir = `./repos/${nameWithOwner}`;
   execSync(`cd ${repoDir} && git reset ${hash} --hard`);
-  const testFilepaths = await getTestFilepaths(repoDir);
+  const testFiles = await getTestFiles(repoDir);
   const result: Result = {};
-  for (const path of testFilepaths) {
-    const code = fs.readFileSync(path, { encoding: "utf-8" });
-    const testCases = traverseTestCases(code, path.endsWith("ts"));
+  for (const file of testFiles) {
+    const code = fs.readFileSync(file.path, { encoding: "utf-8" });
+    const testCases = traverseTestCases(code, file.isTS);
     for (const testCase of testCases) {
       result[testCase.label] = testCase.body;
     }
