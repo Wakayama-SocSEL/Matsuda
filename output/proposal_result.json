@@ -1,0 +1,122 @@
+[
+  {
+    "nameWithOwner": "jshttp/etag",
+    "breaking": {
+      "version": "1.8.0",
+      "hash": "16979f788efa8c793c8d07543b4d6aef3d2bfff8"
+    },
+    "prev": {
+      "version": "1.7.0",
+      "hash": "a511f5c8c930fd9546dbd88acb080f96bc788cfc"
+    },
+    "tests": {
+      "prev": 15,
+      "breaking": 15
+    },
+    "change": 8,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 7,
+    "break": true
+  },
+  {
+    "nameWithOwner": "yahoo/serialize-javascript",
+    "breaking": {
+      "version": "2.1.1",
+      "hash": "16a68ab53d9626fc7c942b48a1163108fcd184c8"
+    },
+    "prev": {
+      "version": "2.1.0",
+      "hash": "31c98adc21a54f6900f9aa6a415731d1398637c1"
+    },
+    "tests": {
+      "prev": 59,
+      "breaking": 60
+    },
+    "change": 7,
+    "insert": 1,
+    "delete": 0,
+    "unchanged": 52,
+    "break": true
+  },
+  {
+    "nameWithOwner": "blakeembrey/array-flatten",
+    "breaking": {
+      "version": "3.0.0",
+      "hash": "66299a02d2ce6a9b6998be333581a87affbb8631"
+    },
+    "prev": {
+      "version": "2.1.2",
+      "hash": "04b45e7a5a9fb7e7946a1321287a09e84f1d352d"
+    },
+    "tests": {
+      "prev": 7,
+      "breaking": 6
+    },
+    "change": 1,
+    "insert": 5,
+    "delete": 6,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "chalk/ansi-regex",
+    "breaking": {
+      "version": "3.0.0",
+      "hash": "0a8cc19946c03c38520fe8c086b8adb66f9cce0b"
+    },
+    "prev": {
+      "version": "2.1.1",
+      "hash": "7c908e7b4eb6cd82bfe1295e33fdf6d166c7ed85"
+    },
+    "tests": {
+      "prev": 6,
+      "breaking": 6
+    },
+    "change": 6,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/string-width",
+    "breaking": {
+      "version": "5.0.0",
+      "hash": "89eb79aafd2b7db982dc1f5498424232d55dee53"
+    },
+    "prev": {
+      "version": "4.2.2",
+      "hash": "8158802b4c776b7d9fce2053aeb8583dfabe6349"
+    },
+    "tests": {
+      "prev": 3,
+      "breaking": 3
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 3,
+    "break": false
+  },
+  {
+    "nameWithOwner": "chalk/ansi-regex",
+    "breaking": {
+      "version": "6.0.0",
+      "hash": "c1b5e45f7c65a332ffb03ac8e5804ad37c579cdc"
+    },
+    "prev": {
+      "version": "5.0.0",
+      "hash": "2b56fb0c7a07108e5b54241e8faec160d393aedb"
+    },
+    "tests": {
+      "prev": 9,
+      "breaking": 9
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 9,
+    "break": false
+  }
+]

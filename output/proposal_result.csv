@@ -1,0 +1,7 @@
+nameWithOwner,breaking_version,breaking_hash,prev_version,prev_hash,tests_prev,tests_breaking,change,insert,delete,unchanged,break
+jshttp/etag,1.8.0,16979f788efa8c793c8d07543b4d6aef3d2bfff8,1.7.0,a511f5c8c930fd9546dbd88acb080f96bc788cfc,15,15,8,0,0,7,true
+yahoo/serialize-javascript,2.1.1,16a68ab53d9626fc7c942b48a1163108fcd184c8,2.1.0,31c98adc21a54f6900f9aa6a415731d1398637c1,59,60,7,1,0,52,true
+blakeembrey/array-flatten,3.0.0,66299a02d2ce6a9b6998be333581a87affbb8631,2.1.2,04b45e7a5a9fb7e7946a1321287a09e84f1d352d,7,6,1,5,6,0,true
+chalk/ansi-regex,3.0.0,0a8cc19946c03c38520fe8c086b8adb66f9cce0b,2.1.1,7c908e7b4eb6cd82bfe1295e33fdf6d166c7ed85,6,6,6,0,0,0,true
+sindresorhus/string-width,5.0.0,89eb79aafd2b7db982dc1f5498424232d55dee53,4.2.2,8158802b4c776b7d9fce2053aeb8583dfabe6349,3,3,0,0,0,3,false
+chalk/ansi-regex,6.0.0,c1b5e45f7c65a332ffb03ac8e5804ad37c579cdc,5.0.0,2b56fb0c7a07108e5b54241e8faec160d393aedb,9,9,0,0,0,9,false
