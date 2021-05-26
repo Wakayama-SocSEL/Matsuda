@@ -61,11 +61,20 @@ export function readJson<T>(filepath: string): T {
 export const outputDir = path.join(process.cwd(), "output");
 
 export function createProgressBar(label: string, options: ProgressBarOptions) {
+  // docker-compose run -d ... で実行すると`process.stderr.clearLine`などが未定義でエラーになる
+  // 代わりに`console.log`するだけの`stream`を渡す
+  const pseduStream = {
+    isTTY: true,
+    columns: 40,
+    cursorTo: () => {},
+    write: (data: string) => console.log(data),
+    clearLine: () => console.log(""),
+  };
   const bar = new ProgressBar(
     `${label} [:bar] :label :current/:total(:percent) :etas`,
     {
       width: 20,
-      stream: process.stdout,
+      stream: process.stderr.isTTY ? process.stderr : (pseduStream as any),
       ...options,
     }
   );
