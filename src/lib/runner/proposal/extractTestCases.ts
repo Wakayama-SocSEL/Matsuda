@@ -10,5 +10,9 @@ export type TestCases = {
 
 export async function extractTestCases(nameWithOwner: string, hash: string) {
   const result = await dockerRun(`yarn -s proposal ${nameWithOwner} ${hash}`);
-  return JSON.parse(result) as TestCases;
+  try {
+    return JSON.parse(result) as TestCases;
+  } catch (e) {
+    throw new Error(result);
+  }
 }
