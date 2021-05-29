@@ -7,6 +7,8 @@ import {
   convertJsonToCSV,
   outputDir,
   safeWriteFileSync,
+  parallelPromiseAll,
+  useArgv,
 } from "./lib/utils";
 
 type Revision = {
@@ -67,25 +69,44 @@ function getResult(
 
 async function main() {
   const inputs = readJson<Input[]>("runner-proposal/inputs.json");
+  const argv = useArgv();
 
   const bar = createProgressBar("step1", {
     total: inputs.length,
   });
-  const results: Result[] = [];
-  for (const input of inputs) {
-    const prevTestCases = await runner.proposal.extractTestCases(
-      input.nameWithOwner,
-      input.prev.hash
-    );
-    const breakingTestCases = await runner.proposal.extractTestCases(
-      input.nameWithOwner,
-      input.breaking.hash
-    );
-    const result = getResult(input, prevTestCases, breakingTestCases);
-    results.push(result);
-    bar.tick();
-  }
+  const tasks = inputs.map((input) => {
+    const task = async () => {
+      const prevTestCases = await runner.proposal.extractTestCases(
+        input.nameWithOwner,
+        input.prev.hash
+      );
+      const breakingTestCases = await runner.proposal.extractTestCases(
+        input.nameWithOwner,
+        input.breaking.hash
+      );
+      const result = getResult(input, prevTestCases, breakingTestCases);
+      bar.tick({
+        label: `${input.nameWithOwner}@${input.prev.version}...${input.breaking.version}`,
+      });
+      return result;
+    };
+    return async () => {
+      try {
+        return await task();
+      } catch (e) {
+        bar.interrupt(
+          `${input.nameWithOwner}@${input.prev.version}...${input.breaking.version}`
+        );
+        bar.interrupt(`${e}`);
+        throw new Error();
+      }
+    };
+  });
 
+  const results: Result[] = await parallelPromiseAll<Result>(
+    tasks,
+    argv.p || 3
+  );
   safeWriteFileSync(
     path.join(outputDir, "proposal_result.json"),
     JSON.stringify(results, null, 2)
