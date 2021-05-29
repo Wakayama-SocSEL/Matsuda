@@ -4,7 +4,7 @@ WORKDIR /workdir
 
 COPY ./inputs.json .
 ARG repos
-RUN jq -r ".[0:$repos] | .[].nameWithOwner" ./inputs.json |\
+RUN jq -r ".[0:$repos] | [.[].nameWithOwner] | unique | .[]" ./inputs.json |\
   xargs -i bash -c "git clone https://github.com/{}.git repos/{} && echo wait 1s && sleep 1";\
   exit 0
 

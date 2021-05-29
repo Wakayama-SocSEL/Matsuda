@@ -8,11 +8,11 @@ jq -r 'group_by(.L__nameWithOwner) |
    nameWithOwner: .[1].L__nameWithOwner,
    breaking: {
      version: .[1].L__version,
-     hash: ""
+     hash: .[1].L__hash
    },
    prev: {
      version: .[0].L__version,
-     hash: "",
+     hash: .[0].L__hash,
    }
  })) |
  flatten |
