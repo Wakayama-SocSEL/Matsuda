@@ -1,5 +1,65 @@
 [
   {
+    "nameWithOwner": "gulpjs/vinyl",
+    "breaking": {
+      "version": "2.2.0",
+      "hash": "09c5bf424cca072c2ee63a7d3c68d885923f173c"
+    },
+    "prev": {
+      "version": "2.1.0",
+      "hash": "d8aec6b8a168f061b68cb61574f3ee7334b188fa"
+    },
+    "tests": {
+      "prev": 122,
+      "breaking": 122
+    },
+    "change": 1,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 121,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/camelcase",
+    "breaking": {
+      "version": "4.1.0",
+      "hash": "0e6e4a2752aa013b8e9477145c7b8132c95a82ef"
+    },
+    "prev": {
+      "version": "4.0.0",
+      "hash": "b1f77b8185bc99f32ba6fcf7a9ffd87a802f1152"
+    },
+    "tests": {
+      "prev": 1,
+      "breaking": 1
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 1,
+    "break": false
+  },
+  {
+    "nameWithOwner": "zertosh/invariant",
+    "breaking": {
+      "version": "2.2.0",
+      "hash": "1660eab9f183183e71ef57a7765bb1121680fff9"
+    },
+    "prev": {
+      "version": "2.1.3",
+      "hash": "992a17c74d3f848eb40ea4938ed412a705871a20"
+    },
+    "tests": {
+      "prev": 2,
+      "breaking": 2
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 2,
+    "break": false
+  },
+  {
     "nameWithOwner": "jshttp/etag",
     "breaking": {
       "version": "1.8.0",
@@ -40,6 +100,486 @@
     "break": true
   },
   {
+    "nameWithOwner": "gulpjs/vinyl-fs",
+    "breaking": {
+      "version": "2.4.2",
+      "hash": "1ca379b889c7f2bb07e1635488c05505e5f8abd0"
+    },
+    "prev": {
+      "version": "2.4.1",
+      "hash": "08780945282dfddf8cedde8bb7b32e96ada922be"
+    },
+    "tests": {
+      "prev": 124,
+      "breaking": 124
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 124,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/escape-string-regexp",
+    "breaking": {
+      "version": "2.0.0",
+      "hash": "21c557c7f14a112eebe196abd98d085f5fcfcf5e"
+    },
+    "prev": {
+      "version": "1.0.5",
+      "hash": "db124a3e1aae9d692c4899e42a5c6c3e329eaa20"
+    },
+    "tests": {
+      "prev": 0,
+      "breaking": 2
+    },
+    "change": 0,
+    "insert": 2,
+    "delete": 0,
+    "unchanged": 0,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/ora",
+    "breaking": {
+      "version": "0.4.0",
+      "hash": "243079276dc3817a25012ebfd45bc01ce7f83dbb"
+    },
+    "prev": {
+      "version": "0.3.0",
+      "hash": "f03a53abde328a14dcff2d8087d02f0ef64699c0"
+    },
+    "tests": {
+      "prev": 9,
+      "breaking": 11
+    },
+    "change": 0,
+    "insert": 2,
+    "delete": 0,
+    "unchanged": 9,
+    "break": false
+  },
+  {
+    "nameWithOwner": "postcss/postcss-loader",
+    "breaking": {
+      "version": "2.1.4",
+      "hash": "2484275a616e218dea6cd49db2f278a373366dda"
+    },
+    "prev": {
+      "version": "2.1.3",
+      "hash": "ce2adca93d37bdd40676799b0edd8313b1167349"
+    },
+    "tests": {
+      "prev": 22,
+      "breaking": 23
+    },
+    "change": 0,
+    "insert": 1,
+    "delete": 0,
+    "unchanged": 22,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/path-exists",
+    "breaking": {
+      "version": "4.0.0",
+      "hash": "26b1adf80aa6761a7db35927a20cf59e0fd1a00d"
+    },
+    "prev": {
+      "version": "3.0.0",
+      "hash": "4696c60a8b2b9ac61902aa9eab7cb326ab6005c8"
+    },
+    "tests": {
+      "prev": 2,
+      "breaking": 2
+    },
+    "change": 2,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "dominictarr/through",
+    "breaking": {
+      "version": "0.1.0",
+      "hash": "2e04ec709c20593843fc0e21d2a5bdd76da5a875"
+    },
+    "prev": {
+      "version": "0.0.4",
+      "hash": "d9da1231b12b032a4efeb966f7a01fda0358f5b1"
+    },
+    "tests": {
+      "prev": 0,
+      "breaking": 0
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 0,
+    "break": false
+  },
+  {
+    "nameWithOwner": "gulpjs/vinyl",
+    "breaking": {
+      "version": "0.5.2",
+      "hash": "2e25ad8c6daefb951260930199c6c53103ef210d"
+    },
+    "prev": {
+      "version": "0.5.1",
+      "hash": "f72bfec93b9c315f2786b1c7d23a08e870f46834"
+    },
+    "tests": {
+      "prev": 76,
+      "breaking": 79
+    },
+    "change": 0,
+    "insert": 3,
+    "delete": 0,
+    "unchanged": 76,
+    "break": false
+  },
+  {
+    "nameWithOwner": "postcss/postcss-loader",
+    "breaking": {
+      "version": "2.0.7",
+      "hash": "30d8d514b50965aeeda952f59a64b3d134dc84c1"
+    },
+    "prev": {
+      "version": "2.0.6",
+      "hash": "b5b3188eddbddc9ff382939f430d2f2abeb104a6"
+    },
+    "tests": {
+      "prev": 13,
+      "breaking": 16
+    },
+    "change": 1,
+    "insert": 15,
+    "delete": 12,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/camelcase",
+    "breaking": {
+      "version": "2.1.1",
+      "hash": "35c9c8abce5b9cc9defe534ab25823dc6383180f"
+    },
+    "prev": {
+      "version": "2.1.0",
+      "hash": "9b73ccb3f48ab86eccb136c155f0eb2e67f40dc3"
+    },
+    "tests": {
+      "prev": 1,
+      "breaking": 1
+    },
+    "change": 1,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "postcss/postcss-loader",
+    "breaking": {
+      "version": "1.2.0",
+      "hash": "3b6e99136dd77491097d0341a123d1199247b8b2"
+    },
+    "prev": {
+      "version": "1.1.1",
+      "hash": "ae945eefee56a4deb4240cca5ff937596a27784d"
+    },
+    "tests": {
+      "prev": 11,
+      "breaking": 12
+    },
+    "change": 11,
+    "insert": 1,
+    "delete": 0,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/globby",
+    "breaking": {
+      "version": "3.0.0",
+      "hash": "3f0e82bc72a35ba54d052ff0edaad55228f4ee8e"
+    },
+    "prev": {
+      "version": "2.1.0",
+      "hash": "2b49f02ac7211b8de3eb570e0d81d8733b249a9b"
+    },
+    "tests": {
+      "prev": 7,
+      "breaking": 9
+    },
+    "change": 5,
+    "insert": 2,
+    "delete": 0,
+    "unchanged": 2,
+    "break": true
+  },
+  {
+    "nameWithOwner": "dominictarr/through",
+    "breaking": {
+      "version": "2.3.0",
+      "hash": "40a35aef4bab9dd87fdf01c7fd1494e07916a451"
+    },
+    "prev": {
+      "version": "2.2.7",
+      "hash": "25dfd5e15b8b0d46027a3a69d3bf89f52d39a056"
+    },
+    "tests": {
+      "prev": 6,
+      "breaking": 6
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 6,
+    "break": false
+  },
+  {
+    "nameWithOwner": "gulpjs/vinyl-fs",
+    "breaking": {
+      "version": "2.4.4",
+      "hash": "4180f6c3b5bf66a460ff07851f1ed5603e7f004b"
+    },
+    "prev": {
+      "version": "2.4.3",
+      "hash": "becd5fe915cd1977ccc329e6679b11b3194fe26d"
+    },
+    "tests": {
+      "prev": 124,
+      "breaking": 124
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 124,
+    "break": false
+  },
+  {
+    "nameWithOwner": "dominictarr/through",
+    "breaking": {
+      "version": "2.3.5",
+      "hash": "45c64bd6d0dd8e09a8d85a2a9afb3541cb72d08a"
+    },
+    "prev": {
+      "version": "2.3.4",
+      "hash": "25f9ecc913e8f85593146f7bee321a63bbddbb87"
+    },
+    "tests": {
+      "prev": 7,
+      "breaking": 7
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 7,
+    "break": false
+  },
+  {
+    "nameWithOwner": "kelektiv/node-uuid",
+    "breaking": {
+      "version": "3.3.0",
+      "hash": "48ef127e516be7fc39718686a4fe5837aa392783"
+    },
+    "prev": {
+      "version": "3.2.1",
+      "hash": "8561cc69be8c808c23fe81cd9796d332f4711476"
+    },
+    "tests": {
+      "prev": 15,
+      "breaking": 15
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 15,
+    "break": false
+  },
+  {
+    "nameWithOwner": "zertosh/invariant",
+    "breaking": {
+      "version": "2.2.2",
+      "hash": "49ae54d5a09c99a447e7dafa46bd3aa8f6923d98"
+    },
+    "prev": {
+      "version": "2.2.1",
+      "hash": "594d6cbcde933a7bd3ecd76a7c4f19892a95e0de"
+    },
+    "tests": {
+      "prev": 2,
+      "breaking": 3
+    },
+    "change": 0,
+    "insert": 1,
+    "delete": 0,
+    "unchanged": 2,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/ora",
+    "breaking": {
+      "version": "1.2.0",
+      "hash": "4a60987a95ecd53526a74ab62505d321a61220dd"
+    },
+    "prev": {
+      "version": "1.1.0",
+      "hash": "f62b052e74142b5d5bd7c658ffc1bbf9a8e22104"
+    },
+    "tests": {
+      "prev": 15,
+      "breaking": 6
+    },
+    "change": 1,
+    "insert": 2,
+    "delete": 11,
+    "unchanged": 3,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/ora",
+    "breaking": {
+      "version": "0.4.1",
+      "hash": "4ceeedd51795bb88a8033229d198e70cd8a2aff7"
+    },
+    "prev": {
+      "version": "0.4.0",
+      "hash": "243079276dc3817a25012ebfd45bc01ce7f83dbb"
+    },
+    "tests": {
+      "prev": 11,
+      "breaking": 11
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 11,
+    "break": false
+  },
+  {
+    "nameWithOwner": "gulpjs/vinyl-fs",
+    "breaking": {
+      "version": "3.0.0",
+      "hash": "4e9a3edfeb5ff1b7b788a079f2ef7999647f0a7e"
+    },
+    "prev": {
+      "version": "2.4.4",
+      "hash": "4180f6c3b5bf66a460ff07851f1ed5603e7f004b"
+    },
+    "tests": {
+      "prev": 124,
+      "breaking": 211
+    },
+    "change": 35,
+    "insert": 161,
+    "delete": 74,
+    "unchanged": 15,
+    "break": true
+  },
+  {
+    "nameWithOwner": "gulpjs/vinyl",
+    "breaking": {
+      "version": "2.2.1",
+      "hash": "50a775b5b8b22ada9dbecd87c0ca458803da83e0"
+    },
+    "prev": {
+      "version": "2.2.0",
+      "hash": "09c5bf424cca072c2ee63a7d3c68d885923f173c"
+    },
+    "tests": {
+      "prev": 122,
+      "breaking": 123
+    },
+    "change": 12,
+    "insert": 1,
+    "delete": 0,
+    "unchanged": 110,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/read-pkg-up",
+    "breaking": {
+      "version": "6.0.0",
+      "hash": "5267672e480d477fa727ac884dccfe8d29be5b54"
+    },
+    "prev": {
+      "version": "5.0.0",
+      "hash": "d8d5100d91f878b1c87c7726938b68fdc7fa9566"
+    },
+    "tests": {
+      "prev": 2,
+      "breaking": 2
+    },
+    "change": 2,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/camelcase",
+    "breaking": {
+      "version": "6.0.0",
+      "hash": "5a0d0919eb2228578e1670f42675d1acb5e5c317"
+    },
+    "prev": {
+      "version": "5.3.1",
+      "hash": "cbe5a519ec6745adbb5283d5ee8c5c9889050d74"
+    },
+    "tests": {
+      "prev": 3,
+      "breaking": 3
+    },
+    "change": 2,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 1,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/globby",
+    "breaking": {
+      "version": "8.0.0",
+      "hash": "5d3d4de8c3a17feaa6df962d2ba99a0937587c3c"
+    },
+    "prev": {
+      "version": "7.1.1",
+      "hash": "9bf9983bca42c2176657a2084608bd6fca417258"
+    },
+    "tests": {
+      "prev": 26,
+      "breaking": 28
+    },
+    "change": 6,
+    "insert": 2,
+    "delete": 0,
+    "unchanged": 20,
+    "break": true
+  },
+  {
+    "nameWithOwner": "postcss/postcss-loader",
+    "breaking": {
+      "version": "2.0.3",
+      "hash": "6388f0bd9b6982bdf9ffad2d9b2fdf95ca44cf8a"
+    },
+    "prev": {
+      "version": "2.0.2",
+      "hash": "fbef2383987ce8082b6b9d6809b06c8392218631"
+    },
+    "tests": {
+      "prev": 10,
+      "breaking": 10
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 10,
+    "break": false
+  },
+  {
     "nameWithOwner": "blakeembrey/array-flatten",
     "breaking": {
       "version": "3.0.0",
@@ -60,23 +600,264 @@
     "break": true
   },
   {
-    "nameWithOwner": "chalk/ansi-regex",
+    "nameWithOwner": "sindresorhus/ora",
     "breaking": {
-      "version": "3.0.0",
-      "hash": "0a8cc19946c03c38520fe8c086b8adb66f9cce0b"
+      "version": "2.0.0",
+      "hash": "6b953514c092f11c81dfbfd215bd63ad0f5c1762"
+    },
+    "prev": {
+      "version": "1.4.0",
+      "hash": "91dcdaae097ac4e81eeb6aac346e5512c8093440"
+    },
+    "tests": {
+      "prev": 7,
+      "breaking": 8
+    },
+    "change": 0,
+    "insert": 1,
+    "delete": 0,
+    "unchanged": 7,
+    "break": false
+  },
+  {
+    "nameWithOwner": "postcss/postcss-loader",
+    "breaking": {
+      "version": "4.0.4",
+      "hash": "6c9f6b5058158f5cbee81e410c94abb23b85bb56"
+    },
+    "prev": {
+      "version": "4.0.3",
+      "hash": "578073a24e21eef31dbb3d5bab748e282ce9fae1"
+    },
+    "tests": {
+      "prev": 73,
+      "breaking": 73
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 73,
+    "break": false
+  },
+  {
+    "nameWithOwner": "pillarjs/parseurl",
+    "breaking": {
+      "version": "1.3.1",
+      "hash": "6d22d376d75b927ab2b5347ce3a1d6735133dd43"
+    },
+    "prev": {
+      "version": "1.3.0",
+      "hash": "03b7ccca240e2bef5df6c25797e99175d28fb2cb"
+    },
+    "tests": {
+      "prev": 15,
+      "breaking": 15
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 15,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/globby",
+    "breaking": {
+      "version": "9.0.0",
+      "hash": "71b9c58f86b4625b58ae241360016f4418dac288"
+    },
+    "prev": {
+      "version": "8.0.1",
+      "hash": "c22e731c7c47c351b5f4d03e1195cbfa5f611fea"
+    },
+    "tests": {
+      "prev": 28,
+      "breaking": 31
+    },
+    "change": 1,
+    "insert": 3,
+    "delete": 0,
+    "unchanged": 27,
+    "break": true
+  },
+  {
+    "nameWithOwner": "zeit/ms",
+    "breaking": {
+      "version": "2.1.2",
+      "hash": "7920885eb232fbe7a5efdab956d3e7c507c92ddf"
     },
     "prev": {
       "version": "2.1.1",
-      "hash": "7c908e7b4eb6cd82bfe1295e33fdf6d166c7ed85"
+      "hash": "fe0bae301a6c41f68a01595658a4f4f0dcba0e84"
+    },
+    "tests": {
+      "prev": 34,
+      "breaking": 36
+    },
+    "change": 1,
+    "insert": 2,
+    "delete": 0,
+    "unchanged": 33,
+    "break": true
+  },
+  {
+    "nameWithOwner": "postcss/postcss-loader",
+    "breaking": {
+      "version": "4.0.0",
+      "hash": "792e2175e52cc4641a9f37e55451961a05441a10"
+    },
+    "prev": {
+      "version": "3.0.0",
+      "hash": "7647ac9051a17a3a6add7364828bf7bd9955b968"
+    },
+    "tests": {
+      "prev": 23,
+      "breaking": 71
+    },
+    "change": 0,
+    "insert": 71,
+    "delete": 23,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/strip-bom",
+    "breaking": {
+      "version": "3.0.0",
+      "hash": "8258d09a069a5d5eb3d787c1d5d29737df1c8bba"
+    },
+    "prev": {
+      "version": "2.0.0",
+      "hash": "851b9c126dba9561cc14ef3dc2634dcc11df4d11"
+    },
+    "tests": {
+      "prev": 4,
+      "breaking": 2
+    },
+    "change": 0,
+    "insert": 2,
+    "delete": 4,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "yahoo/serialize-javascript",
+    "breaking": {
+      "version": "1.1.0",
+      "hash": "826a981a0783b2f69ed02c4ab5217015872344da"
+    },
+    "prev": {
+      "version": "1.0.0",
+      "hash": "57cebada6738eb390fcbee81d3ca52ccf7ed89ba"
+    },
+    "tests": {
+      "prev": 0,
+      "breaking": 26
+    },
+    "change": 0,
+    "insert": 26,
+    "delete": 0,
+    "unchanged": 0,
+    "break": false
+  },
+  {
+    "nameWithOwner": "zeit/ms",
+    "breaking": {
+      "version": "2.1.0",
+      "hash": "845c302f155d955141d623a0276bbff3529ed626"
+    },
+    "prev": {
+      "version": "2.0.0",
+      "hash": "9b88d1568a52ec9bb67ecc8d2aa224fa38fd41f4"
+    },
+    "tests": {
+      "prev": 30,
+      "breaking": 32
+    },
+    "change": 0,
+    "insert": 2,
+    "delete": 0,
+    "unchanged": 30,
+    "break": false
+  },
+  {
+    "nameWithOwner": "yahoo/serialize-javascript",
+    "breaking": {
+      "version": "1.9.0",
+      "hash": "84ad59ba37afca17b074388964b641a2424fc089"
+    },
+    "prev": {
+      "version": "1.8.0",
+      "hash": "6eae8337d34099a7dde0d18f1584210a7768f14c"
+    },
+    "tests": {
+      "prev": 57,
+      "breaking": 58
+    },
+    "change": 0,
+    "insert": 1,
+    "delete": 0,
+    "unchanged": 57,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/strip-bom",
+    "breaking": {
+      "version": "2.0.0",
+      "hash": "851b9c126dba9561cc14ef3dc2634dcc11df4d11"
+    },
+    "prev": {
+      "version": "1.0.0",
+      "hash": "812aced6977857992e85a9e50ec6162328a3e1e4"
     },
     "tests": {
       "prev": 6,
-      "breaking": 6
+      "breaking": 4
     },
-    "change": 6,
+    "change": 0,
+    "insert": 0,
+    "delete": 2,
+    "unchanged": 4,
+    "break": true
+  },
+  {
+    "nameWithOwner": "kelektiv/node-uuid",
+    "breaking": {
+      "version": "3.2.1",
+      "hash": "8561cc69be8c808c23fe81cd9796d332f4711476"
+    },
+    "prev": {
+      "version": "3.2.0",
+      "hash": "c0d44fda8abeac5eb1444f03a135f8a6353854da"
+    },
+    "tests": {
+      "prev": 15,
+      "breaking": 15
+    },
+    "change": 0,
     "insert": 0,
     "delete": 0,
-    "unchanged": 0,
+    "unchanged": 15,
+    "break": false
+  },
+  null,
+  {
+    "nameWithOwner": "sindresorhus/globby",
+    "breaking": {
+      "version": "9.1.0",
+      "hash": "89cee24d7dd225279549f59023f905a9062c96b5"
+    },
+    "prev": {
+      "version": "9.0.0",
+      "hash": "71b9c58f86b4625b58ae241360016f4418dac288"
+    },
+    "tests": {
+      "prev": 31,
+      "breaking": 33
+    },
+    "change": 23,
+    "insert": 2,
+    "delete": 0,
+    "unchanged": 8,
     "break": true
   },
   {
@@ -100,6 +881,368 @@
     "break": false
   },
   {
+    "nameWithOwner": "yahoo/serialize-javascript",
+    "breaking": {
+      "version": "1.6.0",
+      "hash": "8c10244f7bdf31b6052d6d8ded0eb7788809cc20"
+    },
+    "prev": {
+      "version": "1.5.0",
+      "hash": "1812f25c6267c2f8e7e18639513f27e68e5b648f"
+    },
+    "tests": {
+      "prev": 34,
+      "breaking": 36
+    },
+    "change": 0,
+    "insert": 2,
+    "delete": 0,
+    "unchanged": 34,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/globby",
+    "breaking": {
+      "version": "7.0.0",
+      "hash": "90266787a476c4b1a0ae82f8c3b34ad00d07edee"
+    },
+    "prev": {
+      "version": "6.1.0",
+      "hash": "5c647384e349e90a13658778029b96b28112a972"
+    },
+    "tests": {
+      "prev": 9,
+      "breaking": 24
+    },
+    "change": 1,
+    "insert": 15,
+    "delete": 0,
+    "unchanged": 8,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/ora",
+    "breaking": {
+      "version": "1.4.0",
+      "hash": "91dcdaae097ac4e81eeb6aac346e5512c8093440"
+    },
+    "prev": {
+      "version": "1.3.0",
+      "hash": "ead117684069c70d2aff5c7a9e2f466f81689920"
+    },
+    "tests": {
+      "prev": 6,
+      "breaking": 7
+    },
+    "change": 0,
+    "insert": 1,
+    "delete": 0,
+    "unchanged": 6,
+    "break": false
+  },
+  null,
+  {
+    "nameWithOwner": "dougwilson/nodejs-depd",
+    "breaking": {
+      "version": "1.1.2",
+      "hash": "9a789740084d4f07a3a611432435ae4671f722ff"
+    },
+    "prev": {
+      "version": "1.1.1",
+      "hash": "15c5604aaab7befd413506e86670168d7481043a"
+    },
+    "tests": {
+      "prev": 68,
+      "breaking": 68
+    },
+    "change": 2,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 66,
+    "break": true
+  },
+  {
+    "nameWithOwner": "gulpjs/vinyl",
+    "breaking": {
+      "version": "2.0.0",
+      "hash": "a2b320cc5c6d3d398659d799a38a47a2f6740720"
+    },
+    "prev": {
+      "version": "1.2.0",
+      "hash": "aeae0979b9eedb54dc3203ae94cc85a0036b7304"
+    },
+    "tests": {
+      "prev": 83,
+      "breaking": 124
+    },
+    "change": 0,
+    "insert": 124,
+    "delete": 83,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/camelcase",
+    "breaking": {
+      "version": "5.0.0",
+      "hash": "a526ef0399f9a1310eaacafa0ae4a69da4a2f1ad"
+    },
+    "prev": {
+      "version": "4.1.0",
+      "hash": "0e6e4a2752aa013b8e9477145c7b8132c95a82ef"
+    },
+    "tests": {
+      "prev": 1,
+      "breaking": 2
+    },
+    "change": 1,
+    "insert": 1,
+    "delete": 0,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "chalk/ansi-styles",
+    "breaking": {
+      "version": "3.0.0",
+      "hash": "a80f4c8d155dc6d2c90c0a790ce2dc2e60e6defb"
+    },
+    "prev": {
+      "version": "2.1.0",
+      "hash": "18421cbe4a2d93359ec2599a894f704be126d066"
+    },
+    "tests": {
+      "prev": 4,
+      "breaking": 8
+    },
+    "change": 1,
+    "insert": 7,
+    "delete": 3,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "zeit/ms",
+    "breaking": {
+      "version": "0.7.2",
+      "hash": "ac92a7e0790ba2622a74d9d60690ca0d2c070a45"
+    },
+    "prev": {
+      "version": "0.7.1",
+      "hash": "713dcf26d9e6fd9dbc95affe7eff9783b7f1b909"
+    },
+    "tests": {
+      "prev": 23,
+      "breaking": 30
+    },
+    "change": 23,
+    "insert": 7,
+    "delete": 0,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/camelcase",
+    "breaking": {
+      "version": "4.0.0",
+      "hash": "b1f77b8185bc99f32ba6fcf7a9ffd87a802f1152"
+    },
+    "prev": {
+      "version": "3.0.0",
+      "hash": "d4de0e37b625e38a880efc6517194917a5beda01"
+    },
+    "tests": {
+      "prev": 1,
+      "breaking": 1
+    },
+    "change": 1,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/ora",
+    "breaking": {
+      "version": "4.0.0",
+      "hash": "b4ed2e8711e4c67ac74c519e672b00299674a70d"
+    },
+    "prev": {
+      "version": "3.4.0",
+      "hash": "042de2bc3a0cae6fad77659d20dfe173cab0a031"
+    },
+    "tests": {
+      "prev": 11,
+      "breaking": 12
+    },
+    "change": 2,
+    "insert": 1,
+    "delete": 0,
+    "unchanged": 9,
+    "break": true
+  },
+  {
+    "nameWithOwner": "chalk/ansi-styles",
+    "breaking": {
+      "version": "6.0.0",
+      "hash": "b566b5ba72df29dc2896db5b4f9bcd1e40789eb2"
+    },
+    "prev": {
+      "version": "5.2.0",
+      "hash": "4d30b90085fb5a971d7cb0f4dca0920ff4dbc955"
+    },
+    "tests": {
+      "prev": 9,
+      "breaking": 8
+    },
+    "change": 7,
+    "insert": 1,
+    "delete": 2,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/slash",
+    "breaking": {
+      "version": "4.0.0",
+      "hash": "b5cdd12272f94cfc37c01ac9c2b4e22973e258e5"
+    },
+    "prev": {
+      "version": "3.0.0",
+      "hash": "262981c1fca19193a20657ac99690214d9483d0e"
+    },
+    "tests": {
+      "prev": 3,
+      "breaking": 3
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 3,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/slash",
+    "breaking": {
+      "version": "0.1.2",
+      "hash": "b5dca313380f4bd0cbd32be1faf321369059c9ef"
+    },
+    "prev": {
+      "version": "0.1.1",
+      "hash": "09b74fc9a25167525fd23ad8034cc3fe7d447c51"
+    },
+    "tests": {
+      "prev": 3,
+      "breaking": 3
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 3,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/strip-bom",
+    "breaking": {
+      "version": "5.0.0",
+      "hash": "b80d7bc94e79b4744d92a2dc6328c91d9afe9775"
+    },
+    "prev": {
+      "version": "4.0.0",
+      "hash": "9aef0f38ffefca91d3852c82cd6366e5d36d6dd1"
+    },
+    "tests": {
+      "prev": 2,
+      "breaking": 2
+    },
+    "change": 2,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "postcss/postcss-loader",
+    "breaking": {
+      "version": "5.2.0",
+      "hash": "b8266d1b723054d15bba4a9a5884c61a8cd6c261"
+    },
+    "prev": {
+      "version": "5.1.0",
+      "hash": "55630b8ae5a4fa2547cc6b8c4f54b001c1e24b1a"
+    },
+    "tests": {
+      "prev": 77,
+      "breaking": 77
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 77,
+    "break": false
+  },
+  null,
+  {
+    "nameWithOwner": "sindresorhus/escape-string-regexp",
+    "breaking": {
+      "version": "5.0.0",
+      "hash": "ba9a4473850cb367936417e97f1f2191b7cc67dd"
+    },
+    "prev": {
+      "version": "4.0.0",
+      "hash": "71083e89129bcf72a10656508de5442d3f97966d"
+    },
+    "tests": {
+      "prev": 3,
+      "breaking": 3
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 3,
+    "break": false
+  },
+  {
+    "nameWithOwner": "dominictarr/through",
+    "breaking": {
+      "version": "2.2.3",
+      "hash": "bf5c807ad04b4b92c0fe16bc553167532d651d07"
+    },
+    "prev": {
+      "version": "2.2.2",
+      "hash": "382a7231c705fcb3ef8911e8d6ad2efa8bc8ea44"
+    },
+    "tests": {
+      "prev": 6,
+      "breaking": 6
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 6,
+    "break": false
+  },
+  {
+    "nameWithOwner": "kelektiv/node-uuid",
+    "breaking": {
+      "version": "3.2.0",
+      "hash": "c0d44fda8abeac5eb1444f03a135f8a6353854da"
+    },
+    "prev": {
+      "version": "3.1.0",
+      "hash": "c50ac88f098ecfbff9a940816c8e6825ffd7e05a"
+    },
+    "tests": {
+      "prev": 9,
+      "breaking": 15
+    },
+    "change": 4,
+    "insert": 6,
+    "delete": 0,
+    "unchanged": 5,
+    "break": true
+  },
+  {
     "nameWithOwner": "chalk/ansi-regex",
     "breaking": {
       "version": "6.0.0",
@@ -117,6 +1260,466 @@
     "insert": 0,
     "delete": 0,
     "unchanged": 9,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/globby",
+    "breaking": {
+      "version": "8.0.1",
+      "hash": "c22e731c7c47c351b5f4d03e1195cbfa5f611fea"
+    },
+    "prev": {
+      "version": "8.0.0",
+      "hash": "5d3d4de8c3a17feaa6df962d2ba99a0937587c3c"
+    },
+    "tests": {
+      "prev": 28,
+      "breaking": 28
+    },
+    "change": 3,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 25,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/read-pkg-up",
+    "breaking": {
+      "version": "8.0.0",
+      "hash": "c4f8985c36dacac551e72580c8571d88feffe3c9"
+    },
+    "prev": {
+      "version": "7.0.1",
+      "hash": "c92040fcf5f4080cf7a0668184771de52e37a10e"
+    },
+    "tests": {
+      "prev": 2,
+      "breaking": 2
+    },
+    "change": 2,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "kelektiv/node-uuid",
+    "breaking": {
+      "version": "3.1.0",
+      "hash": "c50ac88f098ecfbff9a940816c8e6825ffd7e05a"
+    },
+    "prev": {
+      "version": "3.0.1",
+      "hash": "374de826de71d8997f71b4641f65552e48956ced"
+    },
+    "tests": {
+      "prev": 6,
+      "breaking": 9
+    },
+    "change": 1,
+    "insert": 3,
+    "delete": 0,
+    "unchanged": 5,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/read-pkg-up",
+    "breaking": {
+      "version": "3.0.0",
+      "hash": "c6d9ab4c5a8b230c5aa9a12a24780b60909f6551"
+    },
+    "prev": {
+      "version": "2.0.0",
+      "hash": "3b8a594ab581f000f705e43e8abdb1a23e8822f2"
+    },
+    "tests": {
+      "prev": 2,
+      "breaking": 2
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 2,
+    "break": false
+  },
+  {
+    "nameWithOwner": "visionmedia/bytes.js",
+    "breaking": {
+      "version": "2.3.0",
+      "hash": "c8be41b24b04e04992d5918356d5a4dd35fbf805"
+    },
+    "prev": {
+      "version": "2.2.0",
+      "hash": "509a01a5472b9163ae5a7db41e2d6bd986fdf595"
+    },
+    "tests": {
+      "prev": 23,
+      "breaking": 24
+    },
+    "change": 1,
+    "insert": 1,
+    "delete": 0,
+    "unchanged": 22,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/ora",
+    "breaking": {
+      "version": "3.0.0",
+      "hash": "cb64942769cacd832694c09fe671e815675e616c"
+    },
+    "prev": {
+      "version": "2.1.0",
+      "hash": "fa2f07dd4fb757df4698a4b69f66bc01cfd5be5d"
+    },
+    "tests": {
+      "prev": 8,
+      "breaking": 7
+    },
+    "change": 6,
+    "insert": 0,
+    "delete": 1,
+    "unchanged": 1,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/camelcase",
+    "breaking": {
+      "version": "5.3.1",
+      "hash": "cbe5a519ec6745adbb5283d5ee8c5c9889050d74"
+    },
+    "prev": {
+      "version": "5.3.0",
+      "hash": "75014061a127d6e2c35503059605c4f655fe66db"
+    },
+    "tests": {
+      "prev": 3,
+      "breaking": 3
+    },
+    "change": 2,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 1,
+    "break": true
+  },
+  {
+    "nameWithOwner": "zertosh/invariant",
+    "breaking": {
+      "version": "2.2.4",
+      "hash": "ce95a9badeee1c97daff1bca0d1f6cec5dda4fe8"
+    },
+    "prev": {
+      "version": "2.2.3",
+      "hash": "d95f37254e5d284623964678f8318968f2f701de"
+    },
+    "tests": {
+      "prev": 3,
+      "breaking": 3
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 3,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/escape-string-regexp",
+    "breaking": {
+      "version": "3.0.0",
+      "hash": "d248d827a72f75d7bafbe58097b9a5971c560df7"
+    },
+    "prev": {
+      "version": "2.0.0",
+      "hash": "21c557c7f14a112eebe196abd98d085f5fcfcf5e"
+    },
+    "tests": {
+      "prev": 2,
+      "breaking": 3
+    },
+    "change": 1,
+    "insert": 1,
+    "delete": 0,
+    "unchanged": 1,
+    "break": true
+  },
+  {
+    "nameWithOwner": "gulpjs/vinyl",
+    "breaking": {
+      "version": "0.3.1",
+      "hash": "d6c5b59a07b3d534723813d75850139cf1ad93fe"
+    },
+    "prev": {
+      "version": "0.3.0",
+      "hash": "4cbaf8c3ce80d7a52d26f0e8d675c85fcc410d61"
+    },
+    "tests": {
+      "prev": 59,
+      "breaking": 59
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 59,
+    "break": false
+  },
+  {
+    "nameWithOwner": "zertosh/invariant",
+    "breaking": {
+      "version": "2.2.3",
+      "hash": "d95f37254e5d284623964678f8318968f2f701de"
+    },
+    "prev": {
+      "version": "2.2.2",
+      "hash": "49ae54d5a09c99a447e7dafa46bd3aa8f6923d98"
+    },
+    "tests": {
+      "prev": 3,
+      "breaking": 3
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 3,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/escape-string-regexp",
+    "breaking": {
+      "version": "1.0.5",
+      "hash": "db124a3e1aae9d692c4899e42a5c6c3e329eaa20"
+    },
+    "prev": {
+      "version": "1.0.4",
+      "hash": "e9ca6832a9506ca26402cb0e6dc95efcf35b0b97"
+    },
+    "tests": {
+      "prev": 0,
+      "breaking": 0
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 0,
+    "break": false
+  },
+  {
+    "nameWithOwner": "visionmedia/bytes.js",
+    "breaking": {
+      "version": "2.0.0",
+      "hash": "dca2529c45f365f432ec8da03d4a31bde98114c5"
+    },
+    "prev": {
+      "version": "1.0.0",
+      "hash": "14223f60e998ef0cdfbba25914dfeda88bb6cef2"
+    },
+    "tests": {
+      "prev": 11,
+      "breaking": 20
+    },
+    "change": 0,
+    "insert": 20,
+    "delete": 11,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "kelektiv/node-uuid",
+    "breaking": {
+      "version": "3.3.1",
+      "hash": "e134f0dcbde976d5f69d3db143bee8e2fa8a9f2c"
+    },
+    "prev": {
+      "version": "3.3.0",
+      "hash": "48ef127e516be7fc39718686a4fe5837aa392783"
+    },
+    "tests": {
+      "prev": 15,
+      "breaking": 15
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 15,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/ora",
+    "breaking": {
+      "version": "3.2.0",
+      "hash": "f33e6dcfc3172d2fb537d6543e30171f4d056a5a"
+    },
+    "prev": {
+      "version": "3.1.0",
+      "hash": "3f5ae20d8036dfa545608910aa59c66325145260"
+    },
+    "tests": {
+      "prev": 11,
+      "breaking": 11
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 11,
+    "break": false
+  },
+  {
+    "nameWithOwner": "jshttp/accepts",
+    "breaking": {
+      "version": "1.3.0",
+      "hash": "f4a54dfbc147808b2ed89428a52db858be0838d5"
+    },
+    "prev": {
+      "version": "1.2.13",
+      "hash": "b7e15ecb25dacc0b2133ed0553d64f8a79537e01"
+    },
+    "tests": {
+      "prev": 13,
+      "breaking": 13
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 13,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/ora",
+    "breaking": {
+      "version": "1.1.0",
+      "hash": "f62b052e74142b5d5bd7c658ffc1bbf9a8e22104"
+    },
+    "prev": {
+      "version": "1.0.0",
+      "hash": "05ec2e38c16c88438b8606f3c1785e60247d9feb"
+    },
+    "tests": {
+      "prev": 11,
+      "breaking": 15
+    },
+    "change": 0,
+    "insert": 4,
+    "delete": 0,
+    "unchanged": 11,
+    "break": false
+  },
+  {
+    "nameWithOwner": "gulpjs/vinyl",
+    "breaking": {
+      "version": "0.5.1",
+      "hash": "f72bfec93b9c315f2786b1c7d23a08e870f46834"
+    },
+    "prev": {
+      "version": "0.5.0",
+      "hash": "f90657f8f80eea7eab61a9e254eb8861f7aec4ca"
+    },
+    "tests": {
+      "prev": 76,
+      "breaking": 76
+    },
+    "change": 1,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 75,
+    "break": true
+  },
+  {
+    "nameWithOwner": "postcss/postcss-loader",
+    "breaking": {
+      "version": "1.1.0",
+      "hash": "f7fdbd29a9bac2c522369c8dbfc1ac4eb855e240"
+    },
+    "prev": {
+      "version": "1.0.0",
+      "hash": "d6428001be679dc24f7509ca5e6ad55116b86599"
+    },
+    "tests": {
+      "prev": 9,
+      "breaking": 11
+    },
+    "change": 9,
+    "insert": 2,
+    "delete": 0,
+    "unchanged": 0,
+    "break": true
+  },
+  {
+    "nameWithOwner": "sindresorhus/ora",
+    "breaking": {
+      "version": "2.1.0",
+      "hash": "fa2f07dd4fb757df4698a4b69f66bc01cfd5be5d"
+    },
+    "prev": {
+      "version": "2.0.0",
+      "hash": "6b953514c092f11c81dfbfd215bd63ad0f5c1762"
+    },
+    "tests": {
+      "prev": 8,
+      "breaking": 8
+    },
+    "change": 2,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 6,
+    "break": true
+  },
+  {
+    "nameWithOwner": "thlorenz/convert-source-map",
+    "breaking": {
+      "version": "1.4.0",
+      "hash": "fbd66527ab7972eff199a712d8e14ebb07957865"
+    },
+    "prev": {
+      "version": "1.3.0",
+      "hash": "5c47421526c0bce727ed158773a4e97b979b7d64"
+    },
+    "tests": {
+      "prev": 22,
+      "breaking": 22
+    },
+    "change": 2,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 20,
+    "break": true
+  },
+  {
+    "nameWithOwner": "jshttp/type-is",
+    "breaking": {
+      "version": "1.6.19",
+      "hash": "ff74a48df140b4569121f9df67ff8315fc957e19"
+    },
+    "prev": {
+      "version": "1.6.18",
+      "hash": "bfebe3d4ac312debccb7dbbc79242e2581dea5f0"
+    },
+    "tests": {
+      "prev": 24,
+      "breaking": 24
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 24,
+    "break": false
+  },
+  {
+    "nameWithOwner": "sindresorhus/ora",
+    "breaking": {
+      "version": "4.0.5",
+      "hash": "ffcf7e365d3c9df73a4efc0adceda7a6eb4763a9"
+    },
+    "prev": {
+      "version": "4.0.4",
+      "hash": "132315d83a9f32a0d83704d7187b6b24a98e3717"
+    },
+    "tests": {
+      "prev": 13,
+      "breaking": 13
+    },
+    "change": 0,
+    "insert": 0,
+    "delete": 0,
+    "unchanged": 13,
     "break": false
   }
 ]
