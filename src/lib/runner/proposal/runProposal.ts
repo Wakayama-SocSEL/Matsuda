@@ -1,7 +1,7 @@
 import { run } from "../../utils";
 
 function dockerRun(command: string): Promise<string> {
-  return run(`docker run --rm kazuki-m/runner-proposal ${command}`);
+  return run(`docker run --rm --cpus 1 kazuki-m/runner-proposal ${command}`);
 }
 
 export type ProposalResult = {
