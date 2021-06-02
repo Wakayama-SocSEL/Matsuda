@@ -1,6 +1,6 @@
 version: "3"
 
-volume:
+volumes:
   node_modules:
 
 services:

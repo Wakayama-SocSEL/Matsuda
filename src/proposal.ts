@@ -1,4 +1,6 @@
+import fs from "fs";
 import path from "path";
+
 import * as runner from "./lib/runner";
 import { ProposalResult } from "./lib/runner/proposal/runProposal";
 import {
@@ -89,6 +91,14 @@ async function main() {
   });
   const tasks = inputs.map((input) => {
     const task = async () => {
+      const filepath = path.join(
+        outputDir,
+        input.nameWithOwner,
+        "proposalResult.json"
+      );
+      if (fs.existsSync(filepath)) {
+        return readJson<Result>(filepath);
+      }
       const prevTestCases = await runner.proposal.runProposal(
         input.nameWithOwner,
         input.prev.hash
@@ -98,6 +108,7 @@ async function main() {
         input.breaking.hash
       );
       const result = getResult(input, prevTestCases, breakingTestCases);
+      safeWriteFileSync(filepath, JSON.stringify(result, null, 2));
       bar.tick({
         label: `${input.nameWithOwner}@${input.prev.version}...${input.breaking.version}`,
       });
