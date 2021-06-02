@@ -1,3 +1,3 @@
-import { extractTestCases } from "./extractTestCases";
+import { runProposal } from "./runProposal";
 
-export { extractTestCases };
+export { runProposal };

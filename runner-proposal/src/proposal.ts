@@ -1,6 +1,6 @@
 import fs from "fs";
-import { execSync } from "child_process";
 
+import execa from "execa";
 import globby from "globby";
 import * as parser from "@babel/parser";
 import traverse from "@babel/traverse";
@@ -48,15 +48,35 @@ function traverseTestCases(code: string, typescript = false) {
 }
 
 type Result = {
-  [label: string]: string;
+  coverage: any;
+  testCases: {
+    [label: string]: string;
+  };
 };
+
+async function runTest(repoDir: string) {
+  await execa("npm", ["install"], { cwd: repoDir });
+  try {
+    await execa("npx", ["nyc", "--reporter", "json-summary", "npm", "test"], {
+      cwd: repoDir,
+    });
+  } catch {}
+  const result = await execa(
+    "jq",
+    [".total", "./coverage/coverage-summary.json"],
+    { cwd: repoDir }
+  );
+  return JSON.parse(result.stdout);
+}
 
 async function main() {
   const [nameWithOwner, hash] = process.argv.slice(2);
   const repoDir = `./repos/${nameWithOwner}`;
-  execSync(`cd ${repoDir} && git reset ${hash} --hard`);
+  await execa("git", ["reset", hash, "--hard"], { cwd: repoDir });
+
   const testFiles = await getTestFiles(repoDir);
-  const result: Result = {};
+  const coverage = await runTest(repoDir);
+  const result: Result = { coverage, testCases: {} };
   for (const file of testFiles) {
     const code = fs.readFileSync(file.path, { encoding: "utf-8" });
     const testCases = traverseTestCases(code, file.isTS);
@@ -65,7 +85,7 @@ async function main() {
         .map((t) => t.label)
         .filter((label) => label == testCase.label)
         .indexOf(testCase.label);
-      result[`${testCase.label}#${hash}`] = testCase.body;
+      result.testCases[`${testCase.label}#${hash}`] = testCase.body;
     }
   }
   console.log(JSON.stringify(result, null, 2));

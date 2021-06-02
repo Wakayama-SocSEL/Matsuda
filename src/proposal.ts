@@ -1,6 +1,6 @@
 import path from "path";
 import * as runner from "./lib/runner";
-import { TestCases } from "./lib/runner/proposal/extractTestCases";
+import { ProposalResult } from "./lib/runner/proposal/runProposal";
 import {
   readJson,
   createProgressBar,
@@ -22,10 +22,15 @@ type Input = {
   prev: Revision;
 };
 
-type Result = Input & {
-  tests: {
-    prev: number;
-    breaking: number;
+type Result = {
+  nameWithOwner: string;
+  prev: Revision & {
+    tests: number;
+    coverage: any;
+  };
+  breaking: Revision & {
+    tests: number;
+    coverage: any;
   };
   change: number;
   insert: number;
@@ -36,14 +41,20 @@ type Result = Input & {
 
 function getResult(
   input: Input,
-  prevTestCases: TestCases,
-  breakingTestCases: TestCases
+  prevProposal: ProposalResult,
+  breakingProposal: ProposalResult
 ) {
   const result: Result = {
-    ...input,
-    tests: {
-      prev: Object.keys(prevTestCases).length,
-      breaking: Object.keys(breakingTestCases).length,
+    nameWithOwner: input.nameWithOwner,
+    prev: {
+      ...input.prev,
+      coverage: prevProposal.coverage,
+      tests: Object.keys(prevProposal.testCases).length,
+    },
+    breaking: {
+      ...input.breaking,
+      coverage: breakingProposal.coverage,
+      tests: Object.keys(breakingProposal.testCases).length,
     },
     change: 0,
     insert: 0,
@@ -51,17 +62,19 @@ function getResult(
     unchanged: 0,
     break: false,
   };
-  for (const [prevLabel, prevBody] of Object.entries(prevTestCases)) {
-    if (prevLabel in breakingTestCases) {
+  for (const [prevLabel, prevBody] of Object.entries(prevProposal.testCases)) {
+    if (prevLabel in breakingProposal) {
       const key =
-        prevBody == breakingTestCases[prevLabel] ? "unchanged" : "change";
+        prevBody == breakingProposal.testCases[prevLabel]
+          ? "unchanged"
+          : "change";
       result[key] += 1;
     } else {
       result.delete += 1;
     }
   }
-  for (const breakingLabel of Object.keys(breakingTestCases)) {
-    if (!(breakingLabel in prevTestCases)) result.insert += 1;
+  for (const breakingLabel of Object.keys(breakingProposal.testCases)) {
+    if (!(breakingLabel in prevProposal)) result.insert += 1;
   }
   result.break = result.change >= 1 || result.delete >= 1;
   return result;
@@ -76,11 +89,11 @@ async function main() {
   });
   const tasks = inputs.map((input) => {
     const task = async () => {
-      const prevTestCases = await runner.proposal.extractTestCases(
+      const prevTestCases = await runner.proposal.runProposal(
         input.nameWithOwner,
         input.prev.hash
       );
-      const breakingTestCases = await runner.proposal.extractTestCases(
+      const breakingTestCases = await runner.proposal.runProposal(
         input.nameWithOwner,
         input.breaking.hash
       );
