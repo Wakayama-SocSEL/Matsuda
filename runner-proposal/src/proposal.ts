@@ -55,18 +55,22 @@ type Result = {
 };
 
 async function runTest(repoDir: string) {
-  await execa("npm", ["install"], { cwd: repoDir });
   try {
+    await execa("npm", ["install"], { cwd: repoDir });
     await execa("npx", ["nyc", "--reporter", "json-summary", "npm", "test"], {
       cwd: repoDir,
     });
   } catch {}
-  const result = await execa(
-    "jq",
-    [".total", "./coverage/coverage-summary.json"],
-    { cwd: repoDir }
-  );
-  return JSON.parse(result.stdout);
+  try {
+    const result = await execa(
+      "jq",
+      [".total", "./coverage/coverage-summary.json"],
+      { cwd: repoDir }
+    );
+    return JSON.parse(result.stdout);
+  } catch {
+    return {};
+  }
 }
 
 async function main() {
