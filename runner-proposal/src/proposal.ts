@@ -64,7 +64,10 @@ async function runTest(repoDir: string) {
   try {
     const result = await execa(
       "jq",
-      [".total", "./coverage/coverage-summary.json"],
+      [
+        "'.total | {lines:.lines, statements:.statements}'",
+        "./coverage/coverage-summary.json",
+      ],
       { cwd: repoDir }
     );
     return JSON.parse(result.stdout);
