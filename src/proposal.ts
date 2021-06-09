@@ -110,14 +110,15 @@ async function main() {
       );
       const result = getResult(input, prevTestCases, breakingTestCases);
       safeWriteFileSync(filepath, JSON.stringify(result, null, 2));
-      bar.tick({
-        label: `${input.nameWithOwner}@${input.prev.version}...${input.breaking.version}`,
-      });
       return result;
     };
     return async () => {
       try {
-        return await task();
+        const result = await task();
+        bar.tick({
+          label: `${input.nameWithOwner}@${input.prev.version}...${input.breaking.version}`,
+        });
+        return result;
       } catch (e) {
         bar.interrupt(
           `${input.nameWithOwner}@${input.prev.version}...${input.breaking.version}`
