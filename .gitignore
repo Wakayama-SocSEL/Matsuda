@@ -3,4 +3,5 @@ node_modules
 dataset/*.csv
 dataset/*.db
 output/*/*/*.json
+output/.cache-*
 .env

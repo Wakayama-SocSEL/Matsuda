@@ -93,6 +93,7 @@ async function main() {
     const task = async () => {
       const filepath = path.join(
         outputDir,
+        ".cache-proposal",
         input.nameWithOwner,
         "proposalResult.json"
       );
