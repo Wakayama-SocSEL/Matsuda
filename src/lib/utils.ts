@@ -58,7 +58,7 @@ export function readJson<T>(filepath: string): T {
   return JSON.parse(content);
 }
 
-export const outputDir = path.join(process.cwd(), "output");
+export const outputDir = path.join(process.cwd(), "output", ".cache");
 
 export function createProgressBar(label: string, options: ProgressBarOptions) {
   // docker-compose run -d ... で実行すると`process.stderr.clearLine`などが未定義でエラーになる
