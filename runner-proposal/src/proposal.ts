@@ -60,7 +60,9 @@ async function runTest(repoDir: string) {
     await execa("npx", ["nyc", "--reporter", "json-summary", "npm", "test"], {
       cwd: repoDir,
     });
-  } catch {}
+  } catch {
+    return null;
+  }
   try {
     const result = await execa(
       "jq",
@@ -72,7 +74,7 @@ async function runTest(repoDir: string) {
     );
     return JSON.parse(result.stdout);
   } catch {
-    return {};
+    return null;
   }
 }
 
