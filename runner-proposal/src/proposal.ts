@@ -25,25 +25,27 @@ function traverseTestCases(code: string, typescript = false) {
     sourceType: "module",
     plugins: typescript ? ["typescript"] : [],
   };
-  const ast = parser.parse(code, options);
-  traverse(ast, {
-    CallExpression(path) {
-      const [arg1, arg2] = path.node.arguments;
-      if (
-        path.node.arguments.length >= 2 &&
-        path.node.callee.type == "Identifier" &&
-        /^(test|it)$/.test(path.node.callee.name) &&
-        arg1.type == "StringLiteral" &&
-        (arg2.type == "FunctionExpression" ||
-          arg2.type == "ArrowFunctionExpression")
-      ) {
-        testCases.push({
-          label: arg1.value,
-          body: code.slice(arg2.body.start!, arg2.body.end!),
-        });
-      }
-    },
-  });
+  try {
+    const ast = parser.parse(code, options);
+    traverse(ast, {
+      CallExpression(path) {
+        const [arg1, arg2] = path.node.arguments;
+        if (
+          path.node.arguments.length >= 2 &&
+          path.node.callee.type == "Identifier" &&
+          /^(test|it)$/.test(path.node.callee.name) &&
+          arg1.type == "StringLiteral" &&
+          (arg2.type == "FunctionExpression" ||
+            arg2.type == "ArrowFunctionExpression")
+        ) {
+          testCases.push({
+            label: arg1.value,
+            body: code.slice(arg2.body.start!, arg2.body.end!),
+          });
+        }
+      },
+    });
+  } catch (e) {}
   return testCases;
 }
 
@@ -60,20 +62,20 @@ async function runTest(repoDir: string) {
     await execa("npx", ["nyc", "--reporter", "json-summary", "npm", "test"], {
       cwd: repoDir,
     });
-  } catch {
+  } catch (e) {
     return null;
   }
   try {
     const result = await execa(
       "jq",
       [
-        "'.total | {lines:.lines, statements:.statements}'",
+        ".total | {lines:.lines, statements:.statements}",
         "./coverage/coverage-summary.json",
       ],
       { cwd: repoDir }
     );
     return JSON.parse(result.stdout);
-  } catch {
+  } catch (e) {
     return null;
   }
 }
