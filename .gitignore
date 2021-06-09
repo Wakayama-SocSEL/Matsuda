@@ -2,5 +2,5 @@ node_modules
 *.log
 dataset/*.csv
 dataset/*.db
-output/.cache
+output/*/*/*.json
 .env
