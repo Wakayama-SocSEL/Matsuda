@@ -11,6 +11,7 @@ function getUpdates(results) {
     ) {
       updates.push({
         nameWithOwner: prev.L__nameWithOwner,
+        npm_pkg: prev.L__npm_pkg,
         state: updated.state,
         updated: {
           version: updated.L__version,
@@ -40,7 +41,7 @@ function aggregateUpdates(updates) {
     } else {
       sameUpdate.count += 1;
       if (update.state == "failure") {
-        sameUpdate.state == "failure";
+        sameUpdate.state = "failure";
       }
     }
   }
@@ -48,6 +49,5 @@ function aggregateUpdates(updates) {
 }
 
 const updates = getUpdates(testResults);
-console.log(
-  aggregateUpdates(updates).filter((a) => a.state == "success").length
-);
+const output = aggregateUpdates(updates);
+console.log(JSON.stringify(output, null, 2));
