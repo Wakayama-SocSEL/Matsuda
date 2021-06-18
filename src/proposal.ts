@@ -108,7 +108,7 @@ async function main() {
         outputDir,
         ".cache-proposal",
         input.nameWithOwner,
-        "proposalResult.json"
+        `${input.updated.version}.json`
       );
       if (fs.existsSync(filepath)) {
         return readJson<Result>(filepath);

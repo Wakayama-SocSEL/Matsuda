@@ -59,9 +59,13 @@ type Result = {
 async function runTest(repoDir: string) {
   try {
     await execa("npm", ["install"], { cwd: repoDir });
-    await execa("npx", ["nyc", "--reporter", "json-summary", "npm", "test"], {
-      cwd: repoDir,
-    });
+    await execa(
+      "npx",
+      ["nyc", "--reporter", "json-summary", "timeout", "150s", "npm", "test"],
+      {
+        cwd: repoDir,
+      }
+    );
   } catch (e) {
     return null;
   }
