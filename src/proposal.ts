@@ -39,11 +39,13 @@ type Result = Input & {
     tests: number;
     coverage: any;
   };
-  change: number;
-  insert: number;
-  delete: number;
-  unchanged: number;
-  break: boolean;
+  testCases: {
+    change: number;
+    insert: number;
+    delete: number;
+    unchanged: number;
+  };
+  isBreaking: boolean;
 };
 
 function getResult(
@@ -63,27 +65,32 @@ function getResult(
       coverage: updatedProposal.coverage,
       tests: Object.keys(updatedProposal.testCases).length,
     },
-    change: 0,
-    insert: 0,
-    delete: 0,
-    unchanged: 0,
-    break: false,
+    testCases: {
+      change: 0,
+      insert: 0,
+      delete: 0,
+      unchanged: 0,
+    },
+    isBreaking: false,
   };
   for (const [prevLabel, prevBody] of Object.entries(prevProposal.testCases)) {
-    if (prevLabel in updatedProposal) {
+    if (prevLabel in updatedProposal.testCases) {
       const key =
         prevBody == updatedProposal.testCases[prevLabel]
           ? "unchanged"
           : "change";
-      result[key] += 1;
+      result.testCases[key] += 1;
     } else {
-      result.delete += 1;
+      result.testCases.delete += 1;
     }
   }
   for (const breakingLabel of Object.keys(updatedProposal.testCases)) {
-    if (!(breakingLabel in prevProposal)) result.insert += 1;
+    if (!(breakingLabel in prevProposal.testCases)) {
+      result.testCases.insert += 1;
+    }
   }
-  result.break = result.change >= 1 || result.delete >= 1;
+  result.isBreaking =
+    result.testCases.change >= 1 || result.testCases.delete >= 1;
   return result;
 }
 
