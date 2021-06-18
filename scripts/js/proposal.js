@@ -39,13 +39,16 @@ function aggregateUpdates(updates) {
     if (!sameUpdate) {
       results.push({
         ...update,
-        state: {
+        stats: {
           failure: update.state == "failure" ? 1 : 0,
           success: update.state == "success" ? 1 : 0,
         },
       });
     } else {
-      sameUpdate.state[update.state] += 1;
+      sameUpdate.stats[update.state] += 1;
+      if (update.state == "failure") {
+        sameUpdate.state = "failure";
+      }
     }
   }
   return results;

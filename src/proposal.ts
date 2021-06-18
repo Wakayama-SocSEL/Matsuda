@@ -20,17 +20,22 @@ type Revision = {
 
 type Input = {
   nameWithOwner: string;
-  breaking: Revision;
+  npm_pkg: string;
+  state: string;
+  stats: {
+    failure: number;
+    success: number;
+  };
+  updated: Revision;
   prev: Revision;
 };
 
-type Result = {
-  nameWithOwner: string;
+type Result = Input & {
   prev: Revision & {
     tests: number;
     coverage: any;
   };
-  breaking: Revision & {
+  updated: Revision & {
     tests: number;
     coverage: any;
   };
@@ -44,19 +49,19 @@ type Result = {
 function getResult(
   input: Input,
   prevProposal: ProposalResult,
-  breakingProposal: ProposalResult
+  updatedProposal: ProposalResult
 ) {
   const result: Result = {
-    nameWithOwner: input.nameWithOwner,
+    ...input,
     prev: {
       ...input.prev,
       coverage: prevProposal.coverage,
       tests: Object.keys(prevProposal.testCases).length,
     },
-    breaking: {
-      ...input.breaking,
-      coverage: breakingProposal.coverage,
-      tests: Object.keys(breakingProposal.testCases).length,
+    updated: {
+      ...input.updated,
+      coverage: updatedProposal.coverage,
+      tests: Object.keys(updatedProposal.testCases).length,
     },
     change: 0,
     insert: 0,
@@ -65,9 +70,9 @@ function getResult(
     break: false,
   };
   for (const [prevLabel, prevBody] of Object.entries(prevProposal.testCases)) {
-    if (prevLabel in breakingProposal) {
+    if (prevLabel in updatedProposal) {
       const key =
-        prevBody == breakingProposal.testCases[prevLabel]
+        prevBody == updatedProposal.testCases[prevLabel]
           ? "unchanged"
           : "change";
       result[key] += 1;
@@ -75,7 +80,7 @@ function getResult(
       result.delete += 1;
     }
   }
-  for (const breakingLabel of Object.keys(breakingProposal.testCases)) {
+  for (const breakingLabel of Object.keys(updatedProposal.testCases)) {
     if (!(breakingLabel in prevProposal)) result.insert += 1;
   }
   result.break = result.change >= 1 || result.delete >= 1;
@@ -83,8 +88,9 @@ function getResult(
 }
 
 async function main() {
-  const inputs = readJson<Input[]>("runner-proposal/inputs.json");
   const argv = useArgv();
+  const inputsAll = readJson<Input[]>("runner-proposal/inputs.json");
+  const inputs = argv.c != null ? inputsAll.slice(0, argv.c) : inputsAll;
 
   const bar = createProgressBar("step1", {
     total: inputs.length,
@@ -104,11 +110,11 @@ async function main() {
         input.nameWithOwner,
         input.prev.hash
       );
-      const breakingTestCases = await runner.proposal.runProposal(
+      const updatedTestCases = await runner.proposal.runProposal(
         input.nameWithOwner,
-        input.breaking.hash
+        input.updated.hash
       );
-      const result = getResult(input, prevTestCases, breakingTestCases);
+      const result = getResult(input, prevTestCases, updatedTestCases);
       safeWriteFileSync(filepath, JSON.stringify(result, null, 2));
       return result;
     };
@@ -116,12 +122,12 @@ async function main() {
       try {
         const result = await task();
         bar.tick({
-          label: `${input.nameWithOwner}@${input.prev.version}...${input.breaking.version}`,
+          label: `${input.nameWithOwner}@${input.prev.version}...${input.updated.version}`,
         });
         return result;
       } catch (e) {
         bar.interrupt(
-          `${input.nameWithOwner}@${input.prev.version}...${input.breaking.version}`
+          `${input.nameWithOwner}@${input.prev.version}...${input.updated.version}`
         );
         bar.interrupt(`${e}`);
         throw new Error();
