@@ -37,12 +37,15 @@ function aggregateUpdates(updates) {
         result.prev.version == update.prev.version
     );
     if (!sameUpdate) {
-      results.push({ ...update, count: 1 });
+      results.push({
+        ...update,
+        state: {
+          failure: update.state == "failure" ? 1 : 0,
+          success: update.state == "success" ? 1 : 0,
+        },
+      });
     } else {
-      sameUpdate.count += 1;
-      if (update.state == "failure") {
-        sameUpdate.state = "failure";
-      }
+      sameUpdate.state[update.state] += 1;
     }
   }
   return results;
