@@ -154,6 +154,15 @@ async function main() {
         result.updated.coverage = cache.updated.coverage;
         result.prev.coverage = cache.prev.coverage;
       }
+      // json2csvで空列が出来てしまうので、nullにならないようにする
+      result.updated.coverage = {
+        ...result.updated.coverage,
+        state: result.updated.coverage != null ? "success" : "failure",
+      };
+      result.prev.coverage = {
+        ...result.prev.coverage,
+        state: result.prev.coverage != null ? "success" : "failure",
+      };
       safeWriteFileSync(filepath, JSON.stringify(result, null, 2));
       return result;
     };
