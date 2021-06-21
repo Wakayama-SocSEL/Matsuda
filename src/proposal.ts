@@ -110,18 +110,24 @@ async function main() {
         input.nameWithOwner,
         `${input.updated.version}.json`
       );
-      if (fs.existsSync(filepath)) {
-        return readJson<Result>(filepath);
-      }
+      // キャッシュがあればカバレッジ計測は実行しない
+      const cache = fs.existsSync(filepath) ? readJson<Result>(filepath) : null;
       const prevTestCases = await runner.proposal.runProposal(
         input.nameWithOwner,
-        input.prev.hash
+        input.prev.hash,
+        cache != null
       );
       const updatedTestCases = await runner.proposal.runProposal(
         input.nameWithOwner,
-        input.updated.hash
+        input.updated.hash,
+        cache != null
       );
       const result = getResult(input, prevTestCases, updatedTestCases);
+      // キャッシュがあればカバレッジ結果はキャッシュされた値を使う
+      if (cache != null) {
+        result.updated.coverage = cache.updated.coverage;
+        result.prev.coverage = cache.prev.coverage;
+      }
       safeWriteFileSync(filepath, JSON.stringify(result, null, 2));
       return result;
     };

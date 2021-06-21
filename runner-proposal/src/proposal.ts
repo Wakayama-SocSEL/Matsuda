@@ -85,12 +85,12 @@ async function runTest(repoDir: string) {
 }
 
 async function main() {
-  const [nameWithOwner, hash] = process.argv.slice(2);
+  const [nameWithOwner, hash, skipCoverage] = process.argv.slice(2);
   const repoDir = `./repos/${nameWithOwner}`;
   await execa("git", ["reset", hash, "--hard"], { cwd: repoDir });
 
   const testFiles = await getTestFiles(repoDir);
-  const coverage = await runTest(repoDir);
+  const coverage = skipCoverage ? null : await runTest(repoDir);
   const result: Result = { coverage, testCases: {} };
   for (const file of testFiles) {
     const code = fs.readFileSync(file.path, { encoding: "utf-8" });

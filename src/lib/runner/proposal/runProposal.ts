@@ -11,8 +11,14 @@ export type ProposalResult = {
   };
 };
 
-export async function runProposal(nameWithOwner: string, hash: string) {
-  const result = await dockerRun(`yarn -s proposal ${nameWithOwner} ${hash}`);
+export async function runProposal(
+  nameWithOwner: string,
+  hash: string,
+  skipCoverage: boolean
+) {
+  const result = await dockerRun(
+    `yarn -s proposal ${nameWithOwner} ${hash}` + (skipCoverage ? " true" : "")
+  );
   try {
     return JSON.parse(result) as ProposalResult;
   } catch (e) {
