@@ -9,6 +9,9 @@ export type ProposalResult = {
   testCases: {
     [label: string]: string;
   };
+  otherCodes: {
+    [path: string]: string;
+  };
 };
 
 export async function runProposal(

@@ -19,12 +19,13 @@ type TestCases = {
   body: string;
 };
 
-function traverseTestCases(code: string, typescript = false) {
+function traverseTest(code: string, typescript = false) {
   const testCases: TestCases[] = [];
   const options: parser.ParserOptions = {
     sourceType: "module",
     plugins: typescript ? ["typescript"] : [],
   };
+  let otherCode = `${code}`;
   try {
     const ast = parser.parse(code, options);
     traverse(ast, {
@@ -38,21 +39,23 @@ function traverseTestCases(code: string, typescript = false) {
           (arg2.type == "FunctionExpression" ||
             arg2.type == "ArrowFunctionExpression")
         ) {
-          testCases.push({
-            label: arg1.value,
-            body: code.slice(path.node.start!, path.node.end!),
-          });
+          const body = code.slice(path.node.start!, path.node.end!);
+          testCases.push({ label: arg1.value, body });
+          otherCode = otherCode.replace(body, "");
         }
       },
     });
   } catch (e) {}
-  return testCases;
+  return { testCases, otherCode };
 }
 
 type Result = {
   coverage: any;
   testCases: {
     [label: string]: string;
+  };
+  otherCodes: {
+    [path: string]: string;
   };
 };
 
@@ -91,15 +94,16 @@ async function main() {
 
   const testFiles = await getTestFiles(repoDir);
   const coverage = skipCoverage ? null : await runTest(repoDir);
-  const result: Result = { coverage, testCases: {} };
+  const result: Result = { coverage, testCases: {}, otherCodes: {} };
   for (const file of testFiles) {
     const code = fs.readFileSync(file.path, { encoding: "utf-8" });
-    const testCases = traverseTestCases(code, file.isTS);
+    const traversed = traverseTest(code, file.isTS);
     const addedKeys: string[] = [];
-    for (const testCase of testCases) {
+    for (const testCase of traversed.testCases) {
       const hash = addedKeys.filter((key) => key == testCase.label).length;
-      result.testCases[`${testCase.label}#${hash}`] = testCase.body;
       addedKeys.push(testCase.label);
+      result.testCases[`${testCase.label}#${hash}`] = testCase.body;
+      result.otherCodes[file.path] = traversed.otherCode;
     }
   }
   console.log(JSON.stringify(result, null, 2));

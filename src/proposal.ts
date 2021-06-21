@@ -45,6 +45,11 @@ type Result = Input & {
     delete: number;
     unchanged: number;
   };
+  otherCodes: {
+    change: number;
+    delete: number;
+    unchanged: number;
+  };
   isBreaking: boolean;
 };
 
@@ -71,6 +76,11 @@ function getResult(
       delete: 0,
       unchanged: 0,
     },
+    otherCodes: {
+      change: 0,
+      delete: 0,
+      unchanged: 0,
+    },
     isBreaking: false,
   };
   for (const [prevLabel, prevBody] of Object.entries(prevProposal.testCases)) {
@@ -89,8 +99,24 @@ function getResult(
       result.testCases.insert += 1;
     }
   }
+  for (const [prevPath, prevOtherCode] of Object.entries(
+    prevProposal.otherCodes
+  )) {
+    if (prevPath in updatedProposal.otherCodes) {
+      const key =
+        prevOtherCode == updatedProposal.otherCodes[prevPath]
+          ? "unchanged"
+          : "change";
+      result.otherCodes[key] = 1;
+    } else {
+      result.otherCodes.delete += 1;
+    }
+  }
   result.isBreaking =
-    result.testCases.change >= 1 || result.testCases.delete >= 1;
+    result.otherCodes.change >= 1 ||
+    result.otherCodes.delete >= 1 ||
+    result.testCases.change >= 1 ||
+    result.testCases.delete >= 1;
   return result;
 }
 
