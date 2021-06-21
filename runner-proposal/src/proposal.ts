@@ -40,7 +40,7 @@ function traverseTestCases(code: string, typescript = false) {
         ) {
           testCases.push({
             label: arg1.value,
-            body: code.slice(arg2.body.start!, arg2.body.end!),
+            body: code.slice(path.node.start!, path.node.end!),
           });
         }
       },
@@ -95,12 +95,11 @@ async function main() {
   for (const file of testFiles) {
     const code = fs.readFileSync(file.path, { encoding: "utf-8" });
     const testCases = traverseTestCases(code, file.isTS);
+    const addedKeys: string[] = [];
     for (const testCase of testCases) {
-      const hash = testCases
-        .map((t) => t.label)
-        .filter((label) => label == testCase.label)
-        .indexOf(testCase.label);
+      const hash = addedKeys.filter((key) => key == testCase.label).length;
       result.testCases[`${testCase.label}#${hash}`] = testCase.body;
+      addedKeys.push(testCase.label);
     }
   }
   console.log(JSON.stringify(result, null, 2));
