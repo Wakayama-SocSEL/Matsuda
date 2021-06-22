@@ -4,6 +4,7 @@ import execa from "execa";
 import globby from "globby";
 import * as parser from "@babel/parser";
 import traverse from "@babel/traverse";
+import generate from "@babel/generator";
 
 async function getTestFiles(dir: string) {
   const filepaths = await globby(`${dir}/**/*.{js,ts}`);
@@ -18,6 +19,12 @@ type TestCases = {
   label: string;
   body: string;
 };
+
+function parseAndGenerate(code: string, options: parser.ParserOptions) {
+  const ast = parser.parse(code, options);
+  // @ts-ignore
+  return generate(ast).code;
+}
 
 function traverseTest(code: string, typescript = false) {
   const testCases: TestCases[] = [];
@@ -39,14 +46,17 @@ function traverseTest(code: string, typescript = false) {
           (arg2.type == "FunctionExpression" ||
             arg2.type == "ArrowFunctionExpression")
         ) {
-          const body = code.slice(path.node.start!, path.node.end!);
+          const body = code.slice(path.node.start!, path.node.end! + 1);
           testCases.push({ label: arg1.value, body });
           otherCode = otherCode.replace(body, "");
         }
       },
     });
   } catch (e) {}
-  return { testCases, otherCode };
+  // テスト外の変更を取得するにあたって、空白行の追加などを無視するために
+  // テスト外のコードを一度パースしてから元に戻す処理を追加
+  // 空白行追加の例: https://github.com/vercel/ms/compare/2.0.0..2.1.0
+  return { testCases, otherCode: parseAndGenerate(otherCode, options) };
 }
 
 type Result = {
