@@ -22,6 +22,11 @@ async function getRepoInfo(repoName: RepoName): Promise<string[][]> {
     .map((raw) => raw.split(" "));
 }
 
+async function getPublishedVersions(pkgName: string): Promise<string[]> {
+  const result = await run(`npm show ${pkgName} versions --json`);
+  return JSON.parse(result);
+}
+
 export type GetRepoInfoResult = RepoInfo | RepoError;
 
 export async function getRepoInfos(
@@ -42,10 +47,16 @@ export async function getRepoInfos(
         return readJson<RepoInfo | RepoError>(filepath);
       }
       try {
+        const publishedVersions = await getPublishedVersions(repo.npm_pkg);
         const results = await getRepoInfo(repo.nameWithOwner);
         const repoInfo: RepoInfo = { repo, versions: {} };
         for (const [name, hash] of results) {
-          if (!(name in repoInfo.versions)) {
+          if (
+            // getRepoInfo.shが連続するハッシュから、バージョン名が変化したものだけを収集
+            !(name in repoInfo.versions) &&
+            // npmに公開されていないバージョンは必ず更新に失敗するので使用しない
+            publishedVersions.includes(name)
+          ) {
             repoInfo.versions[name] = hash;
           }
         }
