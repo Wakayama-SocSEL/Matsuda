@@ -34,6 +34,7 @@ export async function getRepoInfos(
       // repoInfo.jsonが取得済みであれば読み込んで返す
       const filepath = path.join(
         outputDir,
+        ".cache-analysis",
         repo.nameWithOwner,
         "repoInfo.json"
       );

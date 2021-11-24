@@ -22,6 +22,7 @@ export async function getRepoResult(
   // repoStatus.jsonが取得済みであれば読み込んで返す
   const filepath = path.join(
     outputDir,
+    ".cache-analysis",
     repoInfo.repo.nameWithOwner,
     "repoResult.json"
   );
