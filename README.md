@@ -1,45 +1,42 @@
 # 研究用リポジトリ
 
 ## 実行手順
-### 1. 準備
+### 0. 準備
 ```console
 $ git clone https://github.com/mzdkzk/survey.git
 $ docker-compose build
-$ docker-compose run --rm main yarn docker:analysis
-$ docker-compose run --rm main yarn docker:experiment
-```
-
-### 2. 分析
-#### 準備(省略可能)
-```console
 $ mv path/to/dataset ./dataset
-$ docker-compose run --rm main ./scripts/initDB.sh
-$ docker-compose run --rm main ./scripts/inputAnalysis.sh
 ```
 
-#### 実行
-
-* 第一引数 ... 実行する`runner-analysis/input.json`の最大数
-* 第二引数 ... 並列実行するコンテナ数
-
+### 1. analysis
+`repository_versions`、`analysis_result`を生成
 ```console
-$ docker-compose run --rm main yarn analysis 10 3
+$ docker-compose run --rm main yarn docker:analysis --build-arg repos=リポジトリ数
+$ docker-compose run --rm main yarn analysis -c 個数 -p コンテナ数
 ```
 
-### 3. 実験
-#### 準備(省略可能)
+### 2. experiment
+`test_result`を生成
 ```console
+# 1. の結果から runner-experiment/input.json を生成
 $ docker-compose run --rm main ./scripts/loadAnalysisResult.sh
 $ docker-compose run --rm main ./scripts/inputExperiment.sh
+
+# 実行
+$ docker-compose run --rm main yarn docker:experiment --build-arg repos=リポジトリ数
+$ docker-compose run --rm main yarn experiment -c 個数 -p コンテナ数
 ```
 
-#### 実行
-
-* 第一引数 ... 実行する`runner-experiment/input.json`の最大数
-* 第二引数 ... 並列実行するコンテナ数
-
+### 3. proposal
+`proposal_result`を生成
 ```console
-$ docker-compose run --rm main yarn experiment 10 3
+# 2. の結果から runner-proposal/input.json を生成
+$ docker-compose run --rm main ./scripts/loadExperimentResult.sh
+$ docker-compose run --rm main ./scripts/inputProposal.sh
+
+# 実行
+$ docker-compose run --rm main yarn docker:proposal --build-arg repos=リポジトリ数
+$ docker-compose run --rm main yarn proposal -c 個数 -p コンテナ数
 ```
 
 ## データセット
