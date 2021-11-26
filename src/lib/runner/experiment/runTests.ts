@@ -1,6 +1,5 @@
 import fs from "fs";
 import path from "path";
-
 import semver from "semver";
 
 import {
@@ -68,7 +67,12 @@ export async function runTests(
   concurrency: number
 ): Promise<TestResult[][]> {
   bar.interrupt(`${L__nameWithOwner}`);
-  const filepath = path.join(outputDir, L__nameWithOwner, "testResults.json");
+  const filepath = path.join(
+    outputDir,
+    ".cache-experiment",
+    L__nameWithOwner,
+    "testResults.json"
+  );
   if (fs.existsSync(filepath)) {
     return readJson<TestResult[][]>(filepath);
   }
@@ -78,19 +82,31 @@ export async function runTests(
       const results: TestResult[] = [];
       for (const { version, hash } of versions) {
         const libName = `${input.L__npm_pkg}@${version}`;
-        const status = await runTest(
+
+        // 出力情報は後から確認するだけなので、別で保存
+        // test_result.jsonのファイルサイズ削減のため
+        const { state, ...errOrStdout } = await runTest(
           input.S__nameWithOwner,
           input.S__commit_id,
           libName
         );
         results.push({
           input: { ...input, L__version: version, L__hash: hash },
-          status,
+          status: { state },
         });
-        bar.interrupt(
-          `  ${input.S__nameWithOwner} -> ${libName} ... ${status.state}`
+        bar.interrupt(`  ${input.S__nameWithOwner} -> ${libName} ... ${state}`);
+
+        // 出力情報の保存
+        const logpath = path.join(
+          outputDir,
+          ".cache-experiment",
+          L__nameWithOwner,
+          "logs",
+          `${input.S__nameWithOwner.replace("/", "$")}.json`
         );
-        if (status.state == "failure") {
+        safeWriteFileSync(logpath, JSON.stringify(errOrStdout, null, 2));
+
+        if (state == "failure") {
           break;
         }
       }
