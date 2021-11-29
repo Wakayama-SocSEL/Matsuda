@@ -31,13 +31,8 @@ async function main() {
     total: inputs.length,
   });
   const results: TestResult[][][] = [];
-  for (const [L__nameWithOwner, inputs] of Object.entries(dataset)) {
-    const result = await runner.experiment.runTests(
-      L__nameWithOwner,
-      inputs,
-      bar1,
-      argv.p
-    );
+  for (const [_, inputs] of Object.entries(dataset)) {
+    const result = await runner.experiment.runTests(inputs, bar1, argv.p);
     results.push(result);
   }
 

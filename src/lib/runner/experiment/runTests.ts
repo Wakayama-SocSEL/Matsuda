@@ -55,27 +55,35 @@ async function runTest(
 }
 
 export async function runTests(
-  L__nameWithOwner: string,
   inputs: ExperimentInput[],
   bar: ProgressBar,
   concurrency: number
 ): Promise<TestResult[][]> {
-  bar.interrupt(`${L__nameWithOwner}`);
-  const filepath = path.join(
-    outputDir,
-    ".cache-experiment",
-    L__nameWithOwner,
-    "testResults.json"
-  );
-  if (fs.existsSync(filepath)) {
-    return readJson<TestResult[][]>(filepath);
-  }
+  bar.interrupt(`${inputs[0].L__nameWithOwner}`);
   const tasks = inputs.map((input) => {
     const task = async () => {
       const versions = await getTestableVersions(input);
       const results: TestResult[] = [];
       for (const { version, hash } of versions) {
         const libName = `${input.L__npm_pkg}@${version}`;
+
+        // キャッシュ処理
+        const filepath = path.join(
+          outputDir,
+          ".cache-experiment",
+          libName,
+          `${input.S__npm_pkg}@${input.S__commit_id.slice(0, 7)}`,
+          "testResult.json"
+        );
+        if (fs.existsSync(filepath)) {
+          const result = readJson<TestResult>(filepath);
+          results.push(result);
+          // 失敗以降はテストを実行しない
+          if (result.status.state == "failure") {
+            break;
+          }
+          continue;
+        }
 
         // 出力情報は後から確認するだけなので、別で保存
         // test_result.jsonのファイルサイズ削減のため
@@ -84,22 +92,19 @@ export async function runTests(
           input.S__commit_id,
           libName
         );
-        results.push({
+        const result = {
           input: { ...input, L__version: version, L__hash: hash },
           status: { state },
-        });
+        };
+        results.push(result);
         bar.interrupt(`  ${input.S__nameWithOwner} -> ${libName} ... ${state}`);
+        safeWriteFileSync(filepath, JSON.stringify(result, null, 2));
 
-        // 出力情報の保存
-        const logpath = path.join(
-          outputDir,
-          ".cache-experiment",
-          L__nameWithOwner,
-          version,
-          `${input.S__nameWithOwner.replace("/", "$")}.${state}.log`
-        );
+        // 出力情報を別途保存
+        const logpath = path.join(filepath, "..", `${+new Date()}.log`);
         safeWriteFileSync(logpath, log);
 
+        // 失敗以降はテストを実行しない
         if (state == "failure") {
           break;
         }
@@ -114,10 +119,5 @@ export async function runTests(
       return result;
     };
   });
-  const testResults = await parallelPromiseAll<TestResult[]>(
-    tasks,
-    concurrency
-  );
-  safeWriteFileSync(filepath, JSON.stringify(testResults, null, 2));
-  return testResults;
+  return parallelPromiseAll<TestResult[]>(tasks, concurrency);
 }
