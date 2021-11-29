@@ -59,7 +59,6 @@ export async function runTests(
   bar: ProgressBar,
   concurrency: number
 ): Promise<TestResult[][]> {
-  bar.interrupt(`${inputs[0].L__nameWithOwner}`);
   const tasks = inputs.map((input) => {
     const task = async () => {
       const versions = await getTestableVersions(input);
