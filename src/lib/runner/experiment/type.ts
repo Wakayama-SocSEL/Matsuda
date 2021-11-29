@@ -15,17 +15,10 @@ export type DependenciesResult = {
   [npm_pkg: string]: string;
 };
 
-export type TestSuccess = {
-  state: "success";
-  stdout: string;
+export type TestStatus = {
+  state: "success" | "failure";
+  log: string;
 };
-
-export type TestError = {
-  state: "failure";
-  err: string;
-};
-
-export type TestStatus = TestSuccess | TestError;
 
 export type TestResult = {
   input: ExperimentInput & { L__version: string; L__hash: string };

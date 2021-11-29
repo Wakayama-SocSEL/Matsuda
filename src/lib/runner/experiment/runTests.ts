@@ -10,13 +10,7 @@ import {
   safeWriteFileSync,
 } from "../../utils";
 import { getPkgVersions } from "./getPkgVersions";
-import {
-  ExperimentInput,
-  TestError,
-  TestSuccess,
-  TestStatus,
-  TestResult,
-} from "./type";
+import { ExperimentInput, TestStatus, TestResult } from "./type";
 
 function getCurrentVersion(range: string) {
   try {
@@ -52,10 +46,10 @@ async function runTest(
     const stdout = await dockerRun(
       `timeout 150s ./runTest.sh ${repoName} ${hash} ${libName}`
     );
-    const state: TestSuccess = { state: "success", stdout };
+    const state: TestStatus = { state: "success", log: stdout };
     return state;
   } catch (err) {
-    const state: TestError = { state: "failure", err: `${err}` };
+    const state: TestStatus = { state: "failure", log: `${err}` };
     return state;
   }
 }
@@ -85,7 +79,7 @@ export async function runTests(
 
         // 出力情報は後から確認するだけなので、別で保存
         // test_result.jsonのファイルサイズ削減のため
-        const { state, ...errOrStdout } = await runTest(
+        const { state, log } = await runTest(
           input.S__nameWithOwner,
           input.S__commit_id,
           libName
@@ -101,10 +95,10 @@ export async function runTests(
           outputDir,
           ".cache-experiment",
           L__nameWithOwner,
-          "logs",
-          `${input.S__nameWithOwner.replace("/", "$")}.json`
+          version,
+          `${input.S__nameWithOwner.replace("/", "$")}.${state}.log`
         );
-        safeWriteFileSync(logpath, JSON.stringify(errOrStdout, null, 2));
+        safeWriteFileSync(logpath, log);
 
         if (state == "failure") {
           break;
