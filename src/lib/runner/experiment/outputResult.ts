@@ -7,18 +7,16 @@ type Result = {
   [key: string]: any;
 };
 
-export function outputResult(testResults: TestResult[][][]) {
+export function outputResult(testResults: TestResult[][]) {
   const results: Result = [];
-  // ライブラリごとのテスト結果
+  // ライブラリごとの結果
   for (const libraryResults of testResults) {
-    // ライブラリとソフトウェアの組み合わせごとのテスト結果
-    for (const uniqueResults of libraryResults) {
-      for (const { input, status } of uniqueResults) {
-        results.push({
-          ...input,
-          ...status,
-        });
-      }
+    // 各ライブラリと各ソフトウェアの結果
+    for (const { input, status } of libraryResults) {
+      results.push({
+        ...input,
+        ...status,
+      });
     }
   }
   safeWriteFileSync(
