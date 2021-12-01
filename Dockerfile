@@ -1,6 +1,6 @@
 FROM node:14-slim
 
-RUN apt update && apt install -y curl jq unzip gcc
+RUN apt update && apt install -y curl jq unzip gcc git
 RUN curl -fsSL https://test.docker.com/ | sh
 
 # https://sqlite.org/howtocompile.html
