@@ -33,19 +33,18 @@ async function getTestableVersions(input: ExperimentInput) {
   return versions.slice(itemIndex);
 }
 
-function dockerRun(command: string): Promise<string> {
-  return run(`docker run --rm --cpus 1 kazuki-m/runner-experiment ${command}`);
-}
-
 async function runTest(
   repoName: string,
   hash: string,
   libName: string
 ): Promise<TestStatus> {
   try {
-    const stdout = await dockerRun(
-      `timeout 150s ./runTest.sh ${repoName} ${hash} ${libName}`
-    );
+    const cmd =
+      `docker run --rm --cpus 1 ` +
+      `-v $PWD/runner-experiment/repos/${repoName}:/mnt-repos/${repoName} ` +
+      `kazuki-m/runner-experiment ` +
+      `timeout 150s ./runTest.sh ${repoName} ${hash} ${libName}`;
+    const stdout = await run(cmd);
     const state: TestStatus = { state: "success", log: stdout };
     return state;
   } catch (err) {
