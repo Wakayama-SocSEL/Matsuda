@@ -4,4 +4,5 @@ dataset/*.csv
 dataset/*.db
 output/*/*/*.json
 output/.cache-*
+runner-experiment/repos
 .env
