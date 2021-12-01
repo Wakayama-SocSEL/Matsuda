@@ -41,7 +41,7 @@ async function runTest(
   try {
     const cmd =
       `docker run --rm --cpus 1 ` +
-      `-v $PWD/runner-experiment/repos/${repoName}:/mnt-repos/${repoName} ` +
+      `-v $HOST_PWD/runner-experiment/repos/${repoName}:/mnt-repos/${repoName} ` +
       `kazuki-m/runner-experiment ` +
       `timeout 150s ./runTest.sh ${repoName} ${hash} ${libName}`;
     const stdout = await run(cmd);

@@ -24,7 +24,7 @@ $ docker-compose run --rm main ./scripts/inputExperiment.sh
 
 # 実行
 $ docker-compose run --rm main yarn docker:experiment --build-arg repos=リポジトリ数
-$ docker-compose run --rm main yarn experiment -c 個数 -p コンテナ数
+$ docker-compose run --rm -e HOST_PWD=$PWD main yarn experiment -c 個数 -p コンテナ数
 ```
 
 ### 3. proposal
