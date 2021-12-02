@@ -36,11 +36,12 @@ async function getTestableVersions(input: ExperimentInput) {
 async function runTest(
   repoName: string,
   hash: string,
-  libName: string
+  libName: string,
+  taskIndex?: number
 ): Promise<TestStatus> {
   try {
     const cmd =
-      `docker run --rm --cpus 1 ` +
+      `docker run --rm --cpus 1 --name runner-${taskIndex} ` +
       `-v $HOST_PWD/runner-experiment/repos/${repoName}:/mnt-repos/${repoName} ` +
       `kazuki-m/runner-experiment ` +
       `timeout 150s ./runTest.sh ${repoName} ${hash} ${libName}`;
@@ -59,7 +60,7 @@ export async function runTests(
   concurrency: number
 ): Promise<TestResult[][]> {
   const tasks = inputs.map((input) => {
-    const task = async () => {
+    const task = async (index?: number) => {
       const versions = await getTestableVersions(input);
       const results: TestResult[] = [];
       for (const { version, hash } of versions) {
@@ -88,7 +89,8 @@ export async function runTests(
         const { state, log } = await runTest(
           input.S__nameWithOwner,
           input.S__commit_id,
-          libName
+          libName,
+          index
         );
         const result = {
           input: { ...input, L__version: version, L__hash: hash },
@@ -109,8 +111,8 @@ export async function runTests(
       }
       return results;
     };
-    return async () => {
-      const result = await task();
+    return async (index?: number) => {
+      const result = await task(index);
       bar.tick({
         label: `${input.L__nameWithOwner} & ${input.S__npm_pkg}`,
       });

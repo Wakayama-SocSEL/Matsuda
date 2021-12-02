@@ -29,7 +29,7 @@ export function sleep(seconds: number) {
 
 // https://qiita.com/rithmety/items/9bc7111c14033fe491f2
 export async function parallelPromiseAll<T>(
-  tasks: (() => Promise<T>)[],
+  tasks: ((index?: number) => Promise<T>)[],
   concurrency: number
 ): Promise<T[]> {
   const results: T[] = [];
@@ -38,7 +38,7 @@ export async function parallelPromiseAll<T>(
     while (true) {
       const index = cursor++;
       if (index >= tasks.length) return;
-      results[index] = await tasks[index]();
+      results[index] = await tasks[index](index);
     }
   });
   await Promise.all(processes);
