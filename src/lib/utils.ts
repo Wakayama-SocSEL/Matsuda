@@ -13,7 +13,7 @@ export async function run(
 ): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     childProcess.exec(`bash -c "${command}" 2>&1`, options, (error, stdout) => {
-      if (error) reject(stdout.toString());
+      if (error) reject(error);
       else resolve(stdout.toString());
     });
   });

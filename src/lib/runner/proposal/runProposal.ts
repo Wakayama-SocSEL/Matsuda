@@ -11,7 +11,10 @@ import {
 import { ProposalInput, ProposalResult, ProposalResultItem } from "./type";
 
 function dockerRun(command: string): Promise<string> {
-  return run(`docker run --rm --cpus 1 kazuki-m/runner-proposal ${command}`);
+  return run(`docker run --rm --cpus 1 kazuki-m/runner-proposal ${command}`, {
+    //　"stdout maxBuffer length exceeded" エラー対策
+    maxBuffer: 50 * 1024 * 1024,
+  });
 }
 
 async function runProposal(nameWithOwner: string, hash: string) {
@@ -55,19 +58,11 @@ export async function runProposals(
       return result;
     };
     return async () => {
-      try {
-        const result = await task();
-        bar.tick({
-          label: `${input.nameWithOwner}@${input.prev.version}...${input.updated.version}`,
-        });
-        return result;
-      } catch (e) {
-        bar.interrupt(
-          `${input.nameWithOwner}@${input.prev.version}...${input.updated.version}`
-        );
-        bar.interrupt(`${e}`);
-        throw new Error();
-      }
+      const result = await task();
+      bar.tick({
+        label: `${input.nameWithOwner}@${input.prev.version}...${input.updated.version}`,
+      });
+      return result;
     };
   });
   return parallelPromiseAll<ProposalResult>(tasks, concurrency);
