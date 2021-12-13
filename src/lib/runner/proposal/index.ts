@@ -1,3 +1,2 @@
-import { runProposal } from "./runProposal";
-
-export { runProposal };
+export { runProposals } from "./runProposal";
+export { outputProposal } from "./outputProposal";

@@ -6,6 +6,8 @@ import * as parser from "@babel/parser";
 import traverse from "@babel/traverse";
 import generate from "@babel/generator";
 
+import { ProposalResult } from "./type";
+
 async function getTestFiles(dir: string) {
   const filepaths = await globby(`${dir}/**/*.{js,ts}`);
   return filepaths
@@ -64,19 +66,6 @@ function traverseTest(code: string, typescript = false) {
   return { testCases, otherCode: parseAndGenerate(otherCode, options), error };
 }
 
-type Result = {
-  coverage: any;
-  testCases: {
-    [label: string]: string;
-  };
-  otherCodes: {
-    [path: string]: string;
-  };
-  errors: {
-    [path: string]: boolean;
-  };
-};
-
 async function runTest(repoDir: string) {
   try {
     await execa("npm", ["install"], { cwd: repoDir });
@@ -112,7 +101,7 @@ async function main() {
 
   const testFiles = await getTestFiles(repoDir);
   const coverage = skipCoverage ? null : await runTest(repoDir);
-  const result: Result = {
+  const result: ProposalResult = {
     coverage,
     testCases: {},
     otherCodes: {},
