@@ -21,9 +21,11 @@ type TestCases = {
 };
 
 function parseAndGenerate(code: string, options: parser.ParserOptions) {
-  const ast = parser.parse(code, options);
-  // @ts-ignore
-  return generate(ast).code;
+  try {
+    const ast = parser.parse(code, options);
+    return generate(ast).code;
+  } catch (e) {}
+  return "";
 }
 
 function traverseTest(code: string, typescript = false) {
@@ -33,6 +35,7 @@ function traverseTest(code: string, typescript = false) {
     plugins: typescript ? ["typescript"] : [],
   };
   let otherCode = `${code}`;
+  let error = false;
   try {
     const ast = parser.parse(code, options);
     traverse(ast, {
@@ -52,11 +55,13 @@ function traverseTest(code: string, typescript = false) {
         }
       },
     });
-  } catch (e) {}
+  } catch (e) {
+    error = true;
+  }
   // テスト外の変更を取得するにあたって、空白行の追加などを無視するために
   // テスト外のコードを一度パースしてから元に戻す処理を追加
   // 空白行追加の例: https://github.com/vercel/ms/compare/2.0.0..2.1.0
-  return { testCases, otherCode: parseAndGenerate(otherCode, options) };
+  return { testCases, otherCode: parseAndGenerate(otherCode, options), error };
 }
 
 type Result = {
@@ -66,6 +71,9 @@ type Result = {
   };
   otherCodes: {
     [path: string]: string;
+  };
+  errors: {
+    [path: string]: boolean;
   };
 };
 
@@ -104,16 +112,25 @@ async function main() {
 
   const testFiles = await getTestFiles(repoDir);
   const coverage = skipCoverage ? null : await runTest(repoDir);
-  const result: Result = { coverage, testCases: {}, otherCodes: {} };
+  const result: Result = {
+    coverage,
+    testCases: {},
+    otherCodes: {},
+    errors: {},
+  };
   for (const file of testFiles) {
     const code = fs.readFileSync(file.path, { encoding: "utf-8" });
     const traversed = traverseTest(code, file.isTS);
-    const addedKeys: string[] = [];
+    result.otherCodes[file.path] = traversed.otherCode;
+    result.errors[file.path] = traversed.error;
+
+    const addedLabels: string[] = [];
     for (const testCase of traversed.testCases) {
-      const hash = addedKeys.filter((key) => key == testCase.label).length;
-      addedKeys.push(testCase.label);
+      // 重複したキー(ラベル)のテストケースがあれば、発見した順で番号をつける
+      const hash = addedLabels.filter((l) => l == testCase.label).length;
+      addedLabels.push(testCase.label);
+      // 結果にテストコードを追加
       result.testCases[`${testCase.label}#${hash}`] = testCase.body;
-      result.otherCodes[file.path] = traversed.otherCode;
     }
   }
   console.log(JSON.stringify(result, null, 2));

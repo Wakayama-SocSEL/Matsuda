@@ -12,6 +12,9 @@ export type ProposalResult = {
   otherCodes: {
     [path: string]: string;
   };
+  errors: {
+    [path: string]: boolean;
+  };
 };
 
 export async function runProposal(
