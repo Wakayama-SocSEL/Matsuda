@@ -1,22 +1,34 @@
 # 研究用リポジトリ
 
-## 実行手順
-### 0. 準備
+## 作成者
+
+松田
+
+## 作成期間
+
+2020 年 6 月 ～ 2022 年 7 月
+
+## 使用手順
+
+### 準備
+
 ```console
 $ git clone https://github.com/mzdkzk/survey.git
 $ docker-compose build
 $ mv path/to/dataset ./dataset
 ```
 
-### 1. analysis
-`repository_versions`、`analysis_result`を生成
+### 手順 1
+
 ```console
 $ docker-compose run --rm main yarn docker:analysis --build-arg repos=リポジトリ数
 $ docker-compose run --rm main yarn analysis -c 個数 -p コンテナ数
 ```
 
-### 2. experiment
-`test_result`を生成
+`output/repository_versions`、`output/analysis_result`が生成されます。
+
+### 手順 2
+
 ```console
 # 1. の結果から runner-experiment/input.json を生成
 $ docker-compose run --rm main ./scripts/loadAnalysisResult.sh
@@ -27,8 +39,10 @@ $ docker-compose run --rm main yarn docker:experiment --build-arg repos=リポ�
 $ docker-compose run --rm -e HOST_PWD=$PWD main yarn experiment -c 個数 -p コンテナ数
 ```
 
-### 3. proposal
-`proposal_result`を生成
+`output/test_result`が生成されます。
+
+### 手順 3
+
 ```console
 # 2. の結果から runner-proposal/input.json を生成
 $ docker-compose run --rm main ./scripts/loadExperimentResult.sh
@@ -38,6 +52,8 @@ $ docker-compose run --rm main ./scripts/inputProposal.sh
 $ docker-compose run --rm main yarn docker:proposal --build-arg repos=リポジトリ数
 $ docker-compose run --rm main yarn proposal -c 個数 -p コンテナ数
 ```
+
+`output/proposal_result`が生成されます。
 
 ## データセット
 
