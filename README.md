@@ -8,9 +8,27 @@
 
 2020 年 12 月 ～ 2022 年 7 月
 
-## 使用手順
+## ディレクトリ構成
 
-### 準備
+```
+├── dataset # Mujahidらのデータセットを置く
+├── output # 各分析結果
+├── runner-* # 分析を実行するプログラム
+├── scripts # 分析の準備と集計に必要なプログラム
+└── src # runnerを実行するプログラム
+```
+
+## output 以下のファイル
+
+- analysis_result ... 分析対象の 500 ライブラリのテスト結果
+- repository_versions 　... 分析対象の 500 ライブラリの各バージョンとコミットハッシュ値
+- test_result ... 500 ライブラリに対応するクライアントのテスト実行結果
+- proposal_result ... 提案手法の適用結果とテスト結果を集計した最終的なデータ
+
+<details>
+<summary>データの再現手順</summary>
+
+### Docker イメージ作成とデータセット配置
 
 ```console
 $ git clone https://github.com/mzdkzk/survey.git
@@ -54,6 +72,8 @@ $ docker-compose run --rm main yarn proposal -c 個数 -p コンテナ数
 ```
 
 `output/proposal_result`が生成されます。
+
+</details>
 
 ## データセット
 
